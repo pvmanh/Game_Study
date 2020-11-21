@@ -1,19 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ObjectClick : MonoBehaviour
+public class ObjectClick : MonoBehaviour, IPointerClickHandler
 {
-    public ObjectModel objectData;
-    // Start is called before the first frame update
+    public int idObject;
+    public GameObject image;
+    public bool isSelected = false;
+    Animator Flip;
     void Start()
     {
-        
+        Flip = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        Object.RandomObjectPosition(objectData);
+        if(isSelected == false)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                {
+                    GetComponentInParent<ObjectArea>().IDSelected.Add(gameObject);
+                    Flip.SetTrigger("isFlip");
+                }
+                if (GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
+                {
+                    GetComponentInParent<ObjectArea>().isCheckSelected = true;
+                }
+            }
+            isSelected = true;
+        } 
     }
 }
