@@ -5,13 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectModel
 {
-    [Header("Object Click Position Setting")]
-    public Transform Object_Area;
-    public float xMin;
-    public float xMax;
-    public float yMin;
-    public float yMax;
-    [HideInInspector] public RectTransform Object_Rect;
-    [HideInInspector] public float x;
-    [HideInInspector] public float y;
+    [Header("Object Setting")]
+    public int Level = 1;
+    public float Width;
+    public float Height;
+    [HideInInspector] public float xMin = 0f;
+    [HideInInspector] public float xMax = 0f;
+    [HideInInspector] public float yMin = 1f;
+    [HideInInspector] public float yMax = 1f;
+    [HideInInspector] public float WidthValue = 0f;
+    [HideInInspector] public float HeightValue = 0f;
 }
