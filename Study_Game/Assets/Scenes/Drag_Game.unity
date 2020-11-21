@@ -1709,6 +1709,7 @@ MonoBehaviour:
     ZoomIn_menu_drag: {fileID: 1824688700}
     ZoomIn_alert_end: {fileID: 266604212}
     timeDelay: 1
+    isMenuActive: 0
 --- !u!1 &586638387
 GameObject:
   m_ObjectHideFlags: 0

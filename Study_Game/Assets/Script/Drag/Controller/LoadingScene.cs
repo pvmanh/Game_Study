@@ -13,6 +13,7 @@ public class LoadingScene : MonoBehaviour
     public void LoadLevel (int sceneIndex)
     {
         StartCoroutine(Menu.LoadAsynchronously(sceneIndex, loadinggScreen, slider, progressText));
+        Time.timeScale=1;
     }
     public void ButtonSaveRankOK(int sceneIndex)
     {

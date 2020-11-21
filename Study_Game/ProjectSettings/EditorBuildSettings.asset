@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Drag_Game.unity
     guid: 6028c12db435d3c429c22ccbb69db7a2
+  - enabled: 1
+    path: Assets/Scenes/Type_Game.unity
+    guid: 71de6ab0e1b6ac54591f7c680ea5e0ce
   m_configObjects: {}
