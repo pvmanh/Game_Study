@@ -87,14 +87,14 @@ public class Object
 
             iObj = RandomNumber(listNumber);
             realNum = listNumber[iObj];
-            listObject[realNum].GetComponent<ObjectClick>().idObject = listID[idNum];
-            listObject[realNum].GetComponent<ObjectClick>().image.GetComponent<RawImage>().texture = icon[iTexture];
+            listObject[realNum].GetComponent<ObjectInfo>().idObject = listID[idNum];
+            listObject[realNum].GetComponent<ObjectInfo>().image.GetComponent<RawImage>().texture = icon[iTexture];
             listNumber.RemoveAt(iObj);
 
             iObj = RandomNumber(listNumber);
             realNum = listNumber[iObj];
-            listObject[realNum].GetComponent<ObjectClick>().idObject = listID[idNum];
-            listObject[realNum].GetComponent<ObjectClick>().image.GetComponent<RawImage>().texture = icon[iTexture];
+            listObject[realNum].GetComponent<ObjectInfo>().idObject = listID[idNum];
+            listObject[realNum].GetComponent<ObjectInfo>().image.GetComponent<RawImage>().texture = icon[iTexture];
             listNumber.RemoveAt(iObj);
 
             icon.RemoveAt(iTexture);
@@ -120,10 +120,11 @@ public class Object
     public static IEnumerator waitingFlip(List<GameObject> IDSelected)
     {
         yield return new WaitForSeconds(0.5f);
-        IDSelected[0].GetComponent<ObjectClick>().isSelected = false;
-        IDSelected[1].GetComponent<ObjectClick>().isSelected = false;
+        IDSelected[0].GetComponent<ObjectInfo>().isSelected = false;
+        IDSelected[1].GetComponent<ObjectInfo>().isSelected = false;
         IDSelected[0].GetComponent<Animator>().SetTrigger("isBack");
         IDSelected[1].GetComponent<Animator>().SetTrigger("isBack");
         IDSelected.Clear();
+
     }
 }

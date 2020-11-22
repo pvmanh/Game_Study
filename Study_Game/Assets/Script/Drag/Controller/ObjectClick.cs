@@ -5,32 +5,35 @@ using UnityEngine.EventSystems;
 
 public class ObjectClick : MonoBehaviour, IPointerClickHandler
 {
-    public int idObject;
-    public GameObject image;
-    public bool isSelected = false;
+    public GameObject parentArea;
+    public GameObject parent;
     Animator Flip;
     void Start()
     {
-        Flip = GetComponent<Animator>();
+        Flip = GetComponentInParent<Animator>();
+        parentArea = GameObject.Find("Area");
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(isSelected == false)
+        if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if(GetComponentInParent<ObjectInfo>().isSelected == false)
             {
-                if (GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                if (eventData.button == PointerEventData.InputButton.Left)
                 {
-                    GetComponentInParent<ObjectArea>().IDSelected.Add(gameObject);
-                    Flip.SetTrigger("isFlip");
+                    if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                    {
+                        parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                        Flip.SetTrigger("isFlip");
+                    }
+                    if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
+                    {
+                        parentArea.GetComponent<ObjectArea>().isCheckSelected = true;
+                    }
                 }
-                if (GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
-                {
-                    GetComponentInParent<ObjectArea>().isCheckSelected = true;
-                }
+                GetComponentInParent<ObjectInfo>().isSelected = true;
             }
-            isSelected = true;
-        } 
+        }
     }
 }

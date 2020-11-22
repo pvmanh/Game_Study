@@ -7,13 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuDragController : MonoBehaviour
 {
-    public PuzzleModel puzzleData;
     public MenuModel menuData;
 
     void Start()
     {
-        menuData.ZoomIn_alert_end = menuData.info_surrender.GetComponent<Animator>();
+        if(menuData.info_surrender != null)
+            menuData.ZoomIn_alert_end = menuData.info_surrender.GetComponent<Animator>();
+
         menuData.ZoomIn_menu_drag = menuData.menu_drag.GetComponent<Animator>();
+
         menuData.isMenuActive = false;
     }
 
@@ -27,11 +29,6 @@ public class MenuDragController : MonoBehaviour
                 menuData.isMenuActive = true;
             }
         }
-    }
-
-    public void ButtonRandom()
-    {
-        Puzzle.RandomPuzzlePosition(puzzleData);
     }
 
     public void ButtonSurrender()

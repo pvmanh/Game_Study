@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ObjectArea : MonoBehaviour
 {
     public ObjectModel objectData;
     public GameObject gridObject;
+    public TextMeshProUGUI text_Level;
+    public TimeModel timeData;
     public List<GameObject> IDSelected = new List<GameObject> { };
     float[] gridValue = new float[2];
     public List<Texture2D> listIcon = new List<Texture2D> { };
@@ -17,6 +20,11 @@ public class ObjectArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timeData.timegget = timeData.txt_time.text;
+        timeData.timeToDisplay = Time.time;
+
+        text_Level.text = objectData.Level.ToString();
+
         gridValue = Object.CaculatorValueGrid(gridValue, objectData);
         Object.SplitGridObject(objectData, gridObject, gridValue, transform);
 
@@ -32,9 +40,26 @@ public class ObjectArea : MonoBehaviour
         iChild = Object.CheckWinClick(gameObject);
         if(iChild == true)
         {
+            if(objectData.iLevel == 1)
+            {
+                //objectData.Width++;
+                objectData.Height++;    
+                objectData.iLevel = 3;
+            }
+            else if(objectData.iLevel == 2)
+            {
+                objectData.Width++;
+                objectData.Height++;
+                objectData.iLevel--;
+            }
+            else if(objectData.iLevel == 3)
+            {
+                objectData.Width++;
+                //objectData.Height++;
+                objectData.iLevel--;
+            }
             objectData.Level++;
-            objectData.Width += 2;
-            objectData.Height += 2;
+            text_Level.text = objectData.Level.ToString();
 
             objectData.xMin = objectData.xMax = 0f;
             objectData.yMin = objectData.yMax = 1f;
@@ -49,14 +74,17 @@ public class ObjectArea : MonoBehaviour
             Object.AddIDNumber(listNumber, ListID, GridList, listIcon);
             iChild = false;
         }
-
+    }
+    void FixedUpdate()
+    {
+        Timer.TimeClock(timeData);
     }
     void CheckSelected()
     {
         if(isCheckSelected == true)
         {
-            int ID_1 = IDSelected[0].GetComponent<ObjectClick>().idObject;
-            int ID_2 = IDSelected[1].GetComponent<ObjectClick>().idObject;
+            int ID_1 = IDSelected[0].GetComponent<ObjectInfo>().idObject;
+            int ID_2 = IDSelected[1].GetComponent<ObjectInfo>().idObject;
             if (ID_1 == ID_2)
             {
                 Destroy(IDSelected[0]);

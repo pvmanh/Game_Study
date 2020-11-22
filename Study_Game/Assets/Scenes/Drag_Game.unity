@@ -886,6 +886,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7489311969977823978, guid: 12cf7dd30036052489ad8ef7ce019c2e, type: 3}
   m_PrefabInstance: {fileID: 7052741233596697374}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &368473539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7489311969977823990, guid: 12cf7dd30036052489ad8ef7ce019c2e, type: 3}
+  m_PrefabInstance: {fileID: 7052741233596697374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368473538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87483918ab3b4264eb221b0ac4cca9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &374506186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7489311969988859452, guid: 12cf7dd30036052489ad8ef7ce019c2e, type: 3}
@@ -1181,10 +1192,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 511528673}
-        m_TargetAssemblyTypeName: MenuDragController, Assembly-CSharp
-        m_MethodName: ButtonMenuExit
-        m_Mode: 1
+      - m_Target: {fileID: 1959516014}
+        m_TargetAssemblyTypeName: LoadingScene, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1679,28 +1690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6dc6e7ffe432d4e803db2d0f8e1a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleData:
-    Puzzle_Area: {fileID: 436637262187605926}
-    xMin: -53
-    xMax: 53
-    yMin: -80
-    yMax: 80
-    Puzzle_Rect: {fileID: 0}
-    x: 0
-    y: 0
-    Puzzle_Game: {fileID: 0}
-    Puzzle_Parent: {fileID: 0}
-    Puzzle_Image_Raw: {fileID: 0}
-    txt_level: {fileID: 0}
-    Width: 0
-    Height: 0
-    level: 1
-    level_limit: 0
-    Lenght: 0
-    pCon: {fileID: 0}
-    ParentBase: {fileID: 0}
-    iCount: 0
-    isTrueCount: 0
   menuData:
     menu_drag: {fileID: 1824688694}
     hide_puzzle: {fileID: 399122747}
@@ -4804,8 +4793,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 511528673}
-        m_TargetAssemblyTypeName: MenuDragController, Assembly-CSharp
+      - m_Target: {fileID: 368473539}
+        m_TargetAssemblyTypeName: LoadPuzzle, Assembly-CSharp
         m_MethodName: ButtonRandom
         m_Mode: 1
         m_Arguments:

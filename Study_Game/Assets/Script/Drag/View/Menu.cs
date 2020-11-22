@@ -43,7 +43,7 @@ public class Menu
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
-
+            progress = Mathf.RoundToInt(progress);
             slider.value = progress;
             progressText.text = progress * 100f + "%";
 

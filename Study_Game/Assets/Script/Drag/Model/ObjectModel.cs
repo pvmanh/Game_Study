@@ -7,6 +7,8 @@ public class ObjectModel
 {
     [Header("Object Setting")]
     public int Level = 1;
+    public int LevelLimit;
+    public int iLevel = 3;
     public float Width;
     public float Height;
     [HideInInspector] public float xMin = 0f;

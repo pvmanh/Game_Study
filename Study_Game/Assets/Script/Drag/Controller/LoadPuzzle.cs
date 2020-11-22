@@ -38,4 +38,9 @@ public class LoadPuzzle : MonoBehaviour
     {
         Timer.TimeClock(timeData);
     }
+
+    public void ButtonRandom()
+    {
+        Puzzle.RandomPuzzlePosition(puzzleData);
+    }
 }
