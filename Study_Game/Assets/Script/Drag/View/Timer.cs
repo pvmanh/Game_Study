@@ -9,7 +9,7 @@ public class Timer
     {
         if (timeData.timegget == "00:00:00")
         {
-            float t = Time.time - timeData.timeToDisplay;
+            float t = timeData.timeToDisplay += Time.deltaTime;
 
             timeData.second = Mathf.FloorToInt(t % 3600 % 60);
             timeData.minute = Mathf.FloorToInt(t % 3600 / 60);
@@ -23,7 +23,8 @@ public class Timer
         {
             float tsecond = (float.Parse(timeData.timegget.Substring(0, 2)) * 3600 +
                 float.Parse(timeData.timegget.Substring(3, 2)) * 60 + float.Parse(timeData.timegget.Substring(6, 2)));
-            float t = (tsecond + Time.time) - timeData.timeToDisplay;
+            float t = timeData.timeToDisplay = tsecond;
+            t += Time.deltaTime;
 
             timeData.second = Mathf.FloorToInt(t % 3600 % 60);
             timeData.minute = Mathf.FloorToInt(t % 3600 / 60);

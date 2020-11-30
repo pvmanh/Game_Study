@@ -16,6 +16,7 @@ public class ImgControl : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private float x;
     private float y;
     private string ParentName;
+    public bool isTruePlace = false;
     private void Awake() 
     {
         rectTransform = puzzle.GetComponent<RectTransform>();
@@ -24,59 +25,68 @@ public class ImgControl : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isDrag = puzzle;
-        RawPuzzle.transform.SetAsLastSibling();
-        if(onParentRaw == true)
+        if(isTruePlace == false)
         {
-            blockray.blocksRaycasts = false;
-        }
-        else if(onParentRaw == false)
-        {
-            blockray.blocksRaycasts = false;
-            puzzle.transform.SetParent(RawPuzzle);
-            //onParentRaw = true;
+            isDrag = puzzle;
+            RawPuzzle.transform.SetAsLastSibling();
+            if(onParentRaw == true)
+            {
+                blockray.blocksRaycasts = false;
+            }
+            else if(onParentRaw == false)
+            {
+                blockray.blocksRaycasts = false;
+                puzzle.transform.SetParent(RawPuzzle);
+                //onParentRaw = true;
+            }
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        puzzle.transform.position = Input.mousePosition;
+        if(isTruePlace == false)
+        {
+            puzzle.transform.position = Input.mousePosition;
+        }
     }
     
     public void OnEndDrag(PointerEventData eventData)
     {
-        isDrag = null;
-        blockray.blocksRaycasts = true;
-        if(ParentName == transform.parent.name)
+        if(isTruePlace == false)
         {
-            if(onParentRaw == true)
+            isDrag = null;
+            blockray.blocksRaycasts = true;
+            if(ParentName == transform.parent.name)
             {
-                x = Random.Range(-53f, 53f);
-                y = Random.Range(-80f, 80f);
-                rectTransform.anchorMin = new Vector2 (0.5f, 0.5f);
-                rectTransform.anchorMax = new Vector2 (0.5f, 0.5f);
-                rectTransform.localPosition = new Vector2 (x, y);
-                rectTransform.sizeDelta = new Vector2 (100f, 80f);
+                if(onParentRaw == true)
+                {
+                    x = Random.Range(-53f, 53f);
+                    y = Random.Range(-80f, 80f);
+                    rectTransform.anchorMin = new Vector2 (0.5f, 0.5f);
+                    rectTransform.anchorMax = new Vector2 (0.5f, 0.5f);
+                    rectTransform.localPosition = new Vector2 (x, y);
+                    rectTransform.sizeDelta = new Vector2 (100f, 80f);
+                }
+                else if(onParentRaw == false)
+                {
+                    x = Random.Range(-53f, 53f);
+                    y = Random.Range(-80f, 80f);
+                    puzzle.transform.SetParent(RawPuzzle);
+                    rectTransform.anchorMin = new Vector2 (0.5f, 0.5f);
+                    rectTransform.anchorMax = new Vector2 (0.5f, 0.5f);
+                    rectTransform.localPosition = new Vector2 (x, y);
+                    rectTransform.sizeDelta = new Vector2 (100f, 80f);
+                    onParentRaw = true;
+                }
             }
-            else if(onParentRaw == false)
+            else if(ParentName != transform.parent.name)
             {
-                x = Random.Range(-53f, 53f);
-                y = Random.Range(-80f, 80f);
-                puzzle.transform.SetParent(RawPuzzle);
-                rectTransform.anchorMin = new Vector2 (0.5f, 0.5f);
-                rectTransform.anchorMax = new Vector2 (0.5f, 0.5f);
-                rectTransform.localPosition = new Vector2 (x, y);
-                rectTransform.sizeDelta = new Vector2 (100f, 80f);
-                onParentRaw = true;
+                onParentRaw = false;
+                rectTransform.anchorMin = new Vector2 (0f, 0f);
+                rectTransform.anchorMax = new Vector2 (1f, 1f);
+                rectTransform.offsetMin = new Vector2 (0f, 0f);
+                rectTransform.offsetMax = new Vector2 (0f, 0f);
             }
-        }
-        else if(ParentName != transform.parent.name)
-        {
-            onParentRaw = false;
-            rectTransform.anchorMin = new Vector2 (0f, 0f);
-            rectTransform.anchorMax = new Vector2 (1f, 1f);
-            rectTransform.offsetMin = new Vector2 (0f, 0f);
-            rectTransform.offsetMax = new Vector2 (0f, 0f);
         }
     }
 }

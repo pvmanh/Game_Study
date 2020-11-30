@@ -33,7 +33,24 @@ public class Menu
         g_1.GetComponent<CanvasGroup>().blocksRaycasts = isCanvasGroup;
         g_1.GetComponent<CanvasGroup>().interactable = isCanvasGroup;
     }
-
+    public static List<Image> AddMenuTitle(GameObject ParentMenuTitle)
+    {
+        List<Image> ListImg = new List<Image>{};
+        foreach (Transform Child in ParentMenuTitle.transform)
+        {
+            ListImg.Add(Child.gameObject.GetComponent<Image>());
+        }
+        return ListImg;
+    }
+    public static List<GameObject> AddMenuSubSelect(GameObject ParentMenuTitle)
+    {
+        List<GameObject> ListSub = new List<GameObject>{};
+        foreach (Transform Child in ParentMenuTitle.transform)
+        {
+            ListSub.Add(Child.gameObject);
+        }
+        return ListSub;
+    }
     public static IEnumerator LoadAsynchronously(int sceneIndex, GameObject loadingScreen, Slider slider, TextMeshProUGUI progressText)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -43,9 +60,9 @@ public class Menu
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
-            progress = Mathf.RoundToInt(progress);
+
             slider.value = progress;
-            progressText.text = progress * 100f + "%";
+            progressText.text = (progress * 100f).ToString("0") + "%";
 
             yield return null;
         }

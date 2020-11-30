@@ -32,8 +32,8 @@ RectTransform:
   m_Father: {fileID: 1446259403982119872}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25122455, y: 0.02}
-  m_AnchorMax: {x: 0.7497375, y: 0.98}
+  m_AnchorMin: {x: 0.2, y: 0.02}
+  m_AnchorMax: {x: 0.8, y: 0.98}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -166,6 +166,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentArea: {fileID: 0}
   parent: {fileID: 0}
+  x1: 4
+  x2: 4
+  x3: 7
+  x4: 6
+  x5: 8
+  x6: 8
 --- !u!95 &2356938125580932805
 Animator:
   serializedVersion: 3
@@ -233,8 +239,8 @@ RectTransform:
   m_Father: {fileID: 1446259403982119872}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25122455, y: 0.02}
-  m_AnchorMax: {x: 0.7497375, y: 0.98}
+  m_AnchorMin: {x: 0.2, y: 0.02}
+  m_AnchorMax: {x: 0.8, y: 0.98}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -266,7 +272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 4b0147f512aa2154b929ce5a4dc219f5, type: 3}
+  m_Texture: {fileID: 2800000, guid: bacb492385e8da547aaabc04585a9211, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -287,3 +293,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentArea: {fileID: 0}
   parent: {fileID: 1446259403982119879}
+  x1: 0
+  x2: 0
+  x3: 0
+  x4: 0
+  x5: 0
+  x6: 0

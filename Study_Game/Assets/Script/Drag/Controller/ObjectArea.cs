@@ -17,29 +17,56 @@ public class ObjectArea : MonoBehaviour
     public List<int> ListID = new List<int> { };
     public bool isCheckSelected = false;
     public bool iChild;
+    public Texture2D[] LoadListTexture;
+    [Header("Left Click")]
+    public int x1;
+    [Header("Right Click")]
+    public int x2;
+    public int x3;
+    [Header("Middle Click")]
+    public int x4;
+    public int x5;
+    [Header("Double Click")]
+    public int x6;    
+    // Start is called before the first frame update
     // Start is called before the first frame update
     void Start()
     {
+        LoadListTexture = Resources.LoadAll<Texture2D>("Card/");
+        
+        for(int i = 0; i < LoadListTexture.Length; i++)
+        {
+            listIcon.Add(LoadListTexture[i]);
+        }
+
         timeData.timegget = timeData.txt_time.text;
         timeData.timeToDisplay = Time.time;
 
         text_Level.text = objectData.Level.ToString();
 
-        gridValue = Object.CaculatorValueGrid(gridValue, objectData);
-        Object.SplitGridObject(objectData, gridObject, gridValue, transform);
+        gridValue = ObjectView.CaculatorValueGrid(gridValue, objectData);
+        ObjectView.SplitGridObject(objectData, gridObject, gridValue, transform);
 
-        GridList = Object.AddListObjectGrid(GridList, transform);
-        listNumber = Object.AddNumber(listNumber, GridList);
-        ListID = Object.AddNumberID(ListID, GridList);
-        Object.AddIDNumber(listNumber, ListID, GridList, listIcon);
+        GridList = ObjectView.AddListObjectGrid(GridList, transform);
+        listNumber = ObjectView.AddNumber(listNumber, GridList);
+        ListID = ObjectView.AddNumberID(ListID, GridList);
+        ObjectView.AddIDNumber(listNumber, ListID, GridList, listIcon);
     }
     void Update()
     {
-        //GridPuzzle.PuzzleLevelUp(pLoadPuzzle.puzzleData, GridObject, gridData, gridValue, transform);
         CheckSelected();
-        iChild = Object.CheckWinClick(gameObject);
-        if(iChild == true)
+        iChild = ObjectView.CheckWinClick(gameObject);
+        if(iChild == true && objectData.Level != objectData.LevelLimit)
         {
+            LoadListTexture = null;
+            listIcon.Clear();
+            LoadListTexture = Resources.LoadAll<Texture2D>("Card/");
+        
+            for(int i = 0; i < LoadListTexture.Length; i++)
+            {
+                listIcon.Add(LoadListTexture[i]);
+            }
+
             if(objectData.iLevel == 1)
             {
                 //objectData.Width++;
@@ -64,15 +91,19 @@ public class ObjectArea : MonoBehaviour
             objectData.xMin = objectData.xMax = 0f;
             objectData.yMin = objectData.yMax = 1f;
 
-            gridValue = Object.CaculatorValueGrid(gridValue, objectData);
-            Object.SplitGridObject(objectData, gridObject, gridValue, transform);
+            gridValue = ObjectView.CaculatorValueGrid(gridValue, objectData);
+            ObjectView.SplitGridObject(objectData, gridObject, gridValue, transform);
 
             GridList.Clear();
-            GridList = Object.AddListObjectGrid(GridList, transform);
-            listNumber = Object.AddNumber(listNumber, GridList);
-            ListID = Object.AddNumberID(ListID, GridList);
-            Object.AddIDNumber(listNumber, ListID, GridList, listIcon);
+            GridList = ObjectView.AddListObjectGrid(GridList, transform);
+            listNumber = ObjectView.AddNumber(listNumber, GridList);
+            ListID = ObjectView.AddNumberID(ListID, GridList);
+            ObjectView.AddIDNumber(listNumber, ListID, GridList, listIcon);
             iChild = false;
+        }
+        else if(iChild == true && objectData.Level == objectData.LevelLimit)
+        {
+            Debug.Log("Game Complete");
         }
     }
     void FixedUpdate()
@@ -87,14 +118,13 @@ public class ObjectArea : MonoBehaviour
             int ID_2 = IDSelected[1].GetComponent<ObjectInfo>().idObject;
             if (ID_1 == ID_2)
             {
-                Destroy(IDSelected[0]);
-                Destroy(IDSelected[1]);
-                IDSelected.Clear();
+                StartCoroutine(ObjectView.waitingFlipBeforeDestroy(IDSelected));
+                
                 isCheckSelected = false;
             }
             else
             {
-                StartCoroutine(Object.waitingFlip(IDSelected));
+                StartCoroutine(ObjectView.waitingFlip(IDSelected));
                 
                 isCheckSelected = false;
             }

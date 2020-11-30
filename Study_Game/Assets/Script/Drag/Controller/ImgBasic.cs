@@ -22,7 +22,11 @@ public class ImgBasic : MonoBehaviour, IDropHandler
     {
         if(!puzzle)
         {
-            ImgControl.isDrag.transform.SetParent(transform);
+            if(ImgControl.isDrag != null)
+            {
+                ImgControl.isDrag.transform.SetParent(transform);
+            }
+
         }
     }
 }

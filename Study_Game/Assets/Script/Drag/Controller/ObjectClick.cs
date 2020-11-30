@@ -16,23 +16,102 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
+        int clickCount = eventData.clickCount;
+        int level = parentArea.GetComponent<ObjectArea>().objectData.Level;
+        ObjectArea objData = parentArea.GetComponent<ObjectArea>();
+
+        if (clickCount == 1)
         {
-            if(GetComponentInParent<ObjectInfo>().isSelected == false)
+            if(level <= objData.x1)
             {
-                if (eventData.button == PointerEventData.InputButton.Left)
+                if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
                 {
-                    if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                    if(GetComponentInParent<ObjectInfo>().isSelected == false)
                     {
-                        parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
-                        Flip.SetTrigger("isFlip");
-                    }
-                    if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
-                    {
-                        parentArea.GetComponent<ObjectArea>().isCheckSelected = true;
+                        if (eventData.button == PointerEventData.InputButton.Left)
+                        {
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                Flip.SetTrigger("isFlip");
+                            }
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().isCheckSelected = true;
+                            }
+                            GetComponentInParent<ObjectInfo>().isSelected = true;
+                        }
                     }
                 }
-                GetComponentInParent<ObjectInfo>().isSelected = true;
+            }
+            else if(level > objData.x2 && level < objData.x3)
+            {
+                if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
+                {
+                    if(GetComponentInParent<ObjectInfo>().isSelected == false)
+                    {
+                        if (eventData.button == PointerEventData.InputButton.Right)
+                        {
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                Flip.SetTrigger("isFlip");
+                            }
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().isCheckSelected = true;
+                            }
+                            GetComponentInParent<ObjectInfo>().isSelected = true;
+                        }
+                    }
+                }
+            }
+            else if(level > objData.x4 && level < objData.x5)
+            {
+                if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
+                {
+                    if(GetComponentInParent<ObjectInfo>().isSelected == false)
+                    {
+                        if (eventData.button == PointerEventData.InputButton.Middle)
+                        {
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                Flip.SetTrigger("isFlip");
+                            }
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().isCheckSelected = true;
+                            }
+                            GetComponentInParent<ObjectInfo>().isSelected = true;
+                        }
+                    }
+                }
+            }
+        }
+        else if (clickCount == 2)
+        {
+            if(level == objData.x6)
+            {
+                if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
+                {
+                    if(GetComponentInParent<ObjectInfo>().isSelected == false)
+                    {
+                        if (eventData.button == PointerEventData.InputButton.Left)
+                        {
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                Flip.SetTrigger("isFlip");
+                            }
+                            if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
+                            {
+                                parentArea.GetComponent<ObjectArea>().isCheckSelected = true;
+                            }
+                            GetComponentInParent<ObjectInfo>().isSelected = true;
+                        }
+                    }
+                }
             }
         }
     }

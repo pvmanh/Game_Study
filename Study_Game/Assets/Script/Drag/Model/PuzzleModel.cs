@@ -31,4 +31,7 @@ public class PuzzleModel
     public GameObject ParentBase;
     [HideInInspector] public int iCount;
     [HideInInspector] public int isTrueCount;
+    public bool levelup = false;
+    public string str_name;
+    public string str_class;
 }
