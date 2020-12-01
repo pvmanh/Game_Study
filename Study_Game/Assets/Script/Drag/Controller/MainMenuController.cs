@@ -25,7 +25,7 @@ public class MainMenuController : MonoBehaviour
     public List<Image> Menu_Title_Selected;
     public List<GameObject> Menu_Sub_Selected;
     public List<GameObject> Menu_Sub_Child_Selected;
-    
+    //Xu ly thong tin lan dau
     public void Awake()
     {
         iLoading = LoadingSceneObj.GetComponent<LoadingScene>();
@@ -43,6 +43,7 @@ public class MainMenuController : MonoBehaviour
             Menu_Sub_Child_Selected.AddRange(Menu.AddMenuSubSelect(Menu_Sub_Selected[i]));
         }
     }
+    //Vao chon loai tro choi
     public void EnterSubMenu()
     {
         //StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomIn", timeDelay, 0, false));
@@ -55,6 +56,7 @@ public class MainMenuController : MonoBehaviour
         Sub_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Sub, Sub_Menu, "ZoomOut", timeDelay, 1, true));
     }
+    //vao cai dat
     public void EnterOption()
     {
         Main_Menu.SetActive(false);
@@ -62,6 +64,7 @@ public class MainMenuController : MonoBehaviour
         Option_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Option, Option_Menu, "ZoomOut", timeDelay, 1, true));
     }
+    //Xem BXH
     public void EnterRank()
     {
         Main_Menu.SetActive(false);
@@ -69,10 +72,12 @@ public class MainMenuController : MonoBehaviour
         Rank_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Rank, Rank_Menu, "ZoomOut", timeDelay, 1, true));
     }
+    //Thoat game
     public void EnterExit()
     {
         Application.Quit();
     }
+    //Thoat menu chon tro choi ve menu chinh
     public void ReturnMainMenu()
     {
         //StartCoroutine(Menu.WaitAnimation(ZoomIn_Sub, Sub_Menu, "ZoomIn", timeDelay, 0, false));
@@ -94,6 +99,7 @@ public class MainMenuController : MonoBehaviour
         Main_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
     }
+    //Tat cai dat
     public void ReturnOutOption()
     {
         Option_Menu.SetActive(false);
@@ -101,6 +107,7 @@ public class MainMenuController : MonoBehaviour
         Main_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
     }
+    //tat BXH
     public void ReturnOutRank()
     {
         Rank_Menu.SetActive(false);
@@ -108,6 +115,7 @@ public class MainMenuController : MonoBehaviour
         Main_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
     }
+    //Load man
     public void LoadLevel ()
     {
         if(indexScene != 0)

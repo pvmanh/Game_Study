@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 30, 2020 lúc 01:29 AM
+-- Thời gian đã tạo: Th12 01, 2020 lúc 12:35 PM
 -- Phiên bản máy phục vụ: 10.4.16-MariaDB
 -- Phiên bản PHP: 7.4.12
 
@@ -45,6 +45,36 @@ INSERT INTO `class` (`id`, `class`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `click_rank`
+--
+
+CREATE TABLE `click_rank` (
+  `id` bigint(20) NOT NULL,
+  `name` text NOT NULL,
+  `idclass` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `click_rank`
+--
+
+INSERT INTO `click_rank` (`id`, `name`, `idclass`, `level`, `time`) VALUES
+(132512712398611046, 'phan thi kim hoa', 1, 1, '00:00:05'),
+(132512712510299732, 'phan thi kim hoa', 1, 2, '00:00:09'),
+(132512712746366844, 'phan thi kim hoa', 1, 3, '00:00:22'),
+(132512713109855499, 'le thi ha', 1, 1, '00:00:05'),
+(132512713194864490, 'le thi ha', 1, 2, '00:00:07'),
+(132512713398503308, 'le thi ha', 1, 3, '00:00:19'),
+(132512862608758289, 'Tran Minh', 1, 1, '00:00:38'),
+(132512862765579408, 'Tran Minh', 1, 2, '00:00:12'),
+(132512862938601449, 'Tran Minh', 1, 3, '00:00:16'),
+(132512863294899908, 'Tran Minh', 1, 4, '00:00:34');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `drag_rank`
 --
 
@@ -69,7 +99,11 @@ INSERT INTO `drag_rank` (`id`, `name`, `idclass`, `level`, `time`) VALUES
 (132510936390198886, 'phan thi kim hoa', 1, 1, '00:00:05'),
 (132510936546529571, 'phan thi kim hoa', 1, 2, '00:00:12'),
 (132510936923046799, 'phan thi kim hoa', 1, 3, '00:00:34'),
-(132511368245232258, 'phan le', 1, 1, '00:00:08');
+(132511368245232258, 'phan le', 1, 1, '00:00:08'),
+(132512863610405709, 'ly thi hai', 2, 1, '00:00:10'),
+(132512863744244285, 'ly thi hai', 2, 2, '00:00:10'),
+(132512864082295894, 'ly thi hai', 2, 3, '00:00:28'),
+(132512865422337131, 'huynh ha', 2, 1, '00:00:08');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -80,6 +114,12 @@ INSERT INTO `drag_rank` (`id`, `name`, `idclass`, `level`, `time`) VALUES
 --
 ALTER TABLE `class`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `click_rank`
+--
+ALTER TABLE `click_rank`
+  ADD KEY `idclass` (`idclass`);
 
 --
 -- Chỉ mục cho bảng `drag_rank`
@@ -101,6 +141,12 @@ ALTER TABLE `class`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `click_rank`
+--
+ALTER TABLE `click_rank`
+  ADD CONSTRAINT `click_rank_ibfk_1` FOREIGN KEY (`idclass`) REFERENCES `class` (`id`);
 
 --
 -- Các ràng buộc cho bảng `drag_rank`

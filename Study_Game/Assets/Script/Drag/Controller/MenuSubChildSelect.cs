@@ -15,6 +15,7 @@ public class MenuSubChildSelect : MonoBehaviour
         MenuSubChild = GetComponent<Button>();
         MenuSubChild.onClick.AddListener(() => SelectedTitleMenu());
     }
+    //Xu ly bai thuc hanh duoc chon chi duy nhat 1 bai de bat dau
     public void SelectedTitleMenu()
     {
         if(isSelected == false)

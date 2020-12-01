@@ -8,23 +8,27 @@ using TMPro;
 
 public class Menu
 {
+    //set true 2 menu
     public static void SetActiveMenuTrue(GameObject background, GameObject main_object)
     {
         background.SetActive(true);
         main_object.SetActive(true);
         Time.timeScale = 0;
     }
+    //set false 2 menu
     public static void SetActiveMenuFalse(GameObject background, GameObject main_object)
     {
         main_object.SetActive(false);
         background.SetActive(false);
         Time.timeScale = 1;
     }
+    //load man moi theo string
     public static void LoadScene(string scene_name)
     {
         SceneManager.LoadScene(scene_name);
         Time.timeScale = 1;
     }
+    //doi animation menu
     public static IEnumerator WaitAnimation(Animator Ani_1, GameObject g_1, string Aname, float tDelay, int alpha_value, bool isCanvasGroup)
     {
         Ani_1.SetTrigger(Aname);
@@ -33,6 +37,7 @@ public class Menu
         g_1.GetComponent<CanvasGroup>().blocksRaycasts = isCanvasGroup;
         g_1.GetComponent<CanvasGroup>().interactable = isCanvasGroup;
     }
+    //them anh vao list
     public static List<Image> AddMenuTitle(GameObject ParentMenuTitle)
     {
         List<Image> ListImg = new List<Image>{};
@@ -42,6 +47,7 @@ public class Menu
         }
         return ListImg;
     }
+    //them menu con vao list
     public static List<GameObject> AddMenuSubSelect(GameObject ParentMenuTitle)
     {
         List<GameObject> ListSub = new List<GameObject>{};
@@ -51,6 +57,7 @@ public class Menu
         }
         return ListSub;
     }
+    //load % khi load man moi
     public static IEnumerator LoadAsynchronously(int sceneIndex, GameObject loadingScreen, Slider slider, TextMeshProUGUI progressText)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);

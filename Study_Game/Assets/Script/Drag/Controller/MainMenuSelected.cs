@@ -17,6 +17,7 @@ public class MainMenuSelected : MonoBehaviour
         MenuTitle = GetComponent<Button>();
         MenuTitle.onClick.AddListener(() => SelectedTitleMenu());
     }
+    //Xu ly tieu de lua chon 1 trong 2 lai danh may hoac chuot
     public void SelectedTitleMenu()
     {
         if(isSelected == false)

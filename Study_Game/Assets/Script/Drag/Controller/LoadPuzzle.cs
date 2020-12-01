@@ -28,31 +28,34 @@ public class LoadPuzzle : MonoBehaviour
     string URL_1 = "http://localhost/xampp/select_class.php";
     public string[] saveData;
     List<string> option_class = new List<string> { };
+    public bool isSave = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        isSave = false;
+        //Load hinh puzzle tu thu muc Puzzle
         textureData.TexturePuzzle = Resources.LoadAll<Texture2D>("Puzzle/");
-
+        //Them class vao dropdown
         StartCoroutine(SelectClassAddDropdownlist(URL_1));
-
+        //gan time = text
         timeData.timegget = timeData.txt_time.text;
         //timeData.timeToDisplay = Time.deltaTime;
-
+        //khoa bam ESC
         MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
-
+        //gan level size hien hanh
         txtLevelSelect.text = puzzleData.level.ToString();
         txtSizeSelect.text = (puzzleData.Height * puzzleData.Width).ToString();
-
+        //xu ly danh sach texture
         textureData.list_Texture = new int[textureData.TexturePuzzle.Length];
         Puzzle.LoadLevelImage(textureData.TexturePuzzle, ImgTxture, positionTmgTxture);
-
+        //xu ly random hinh anh puzzle
         ImageView.RandomNumberTexture(textureData);
         imageData = this.gameObject.GetComponent<CutImage>().imageData;
         BaseImage = this.gameObject.GetComponent<CutImage>();
-
+        //Tim txt-level TMP GUI
         puzzleData.txt_level = GameObject.Find("txt-level").GetComponent<TextMeshProUGUI>();
-
+        //ngung time hoac delta time
         Time.timeScale = 0;
         //Puzzle.LoadPuzzleLevel(puzzleData, imgpuzzle, imageData, BaseImage.BasePuzzleObject);
     }
@@ -60,39 +63,59 @@ public class LoadPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //kiem tra dieu kien win
         Puzzle.CheckWinPuzzle(puzzleData, timeData, Menu_Level_Select, imageData, BaseImage.BasePuzzleObject);
-
+        //Dat dieu kien thang tro choi & save rank cuoi
+        if (puzzleData.iCount == puzzleData.isTrueCount)
+        {
+            if (puzzleData.level == puzzleData.level_limit)
+            {
+                if(isSave == false)
+                {
+                    long idrank = System.DateTime.Now.ToFileTime();
+                    StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, puzzleData.level.ToString(), timeData.txt_time.text));
+                    isSave = true;
+                }
+                Debug.Log("Game Complete");
+            }
+        }
+        //hien bang nhap nen neu ten rong
         if(puzzleData.str_name == "")
         {
             MenuDragController iDrag = MenuData.GetComponent<MenuDragController>();
             Menu.SetActiveMenuTrue(iDrag.menuData.hide_puzzle, iDrag.menuData.info_surrender);
             StartCoroutine(Menu.WaitAnimation(iDrag.menuData.ZoomIn_alert_end, iDrag.menuData.info_surrender, "isAlert", iDrag.menuData.timeDelay, 1, true)); 
         }
-
+        //Xu ly level up thi hien bang chon hinh
         if(puzzleData.levelup == true)
         {
-            long idrank = System.DateTime.Now.ToFileTime();
-            StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, (puzzleData.level - 1).ToString(), timeData.txt_time.text));
+            if(isSave == false)
+            {
+                //Save rank level
+                long idrank = System.DateTime.Now.ToFileTime();
+                StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, (puzzleData.level - 1).ToString(), timeData.txt_time.text));
 
-            Time.timeScale = 0;
-            txtLevelSelect.text = puzzleData.level.ToString();
-            txtSizeSelect.text = (puzzleData.Height * puzzleData.Width).ToString();
-            MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
-            timeData.timeToDisplay = 0;
-            puzzleData.levelup = false;
+                Time.timeScale = 0;
+                txtLevelSelect.text = puzzleData.level.ToString();
+                txtSizeSelect.text = (puzzleData.Height * puzzleData.Width).ToString();
+                MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+                timeData.timeToDisplay = 0;
+                puzzleData.levelup = false;
+                isSave = true;
+            }
         }
     }
-
+    //thoi gian tro choi
     void FixedUpdate()
     {
         Timer.TimeClock(timeData);
     }
-
+    // hoan doi vi tri puzzle
     public void ButtonRandom()
     {
         Puzzle.RandomPuzzlePosition(puzzleData);
     }
-
+    //Chon hinh va bat dau tro choi
     public void OnPlayLevelSelect()
     {
         if(imgpuzzle != null)
@@ -112,8 +135,10 @@ public class LoadPuzzle : MonoBehaviour
 
             MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = false;
             Time.timeScale = 1;
+            isSave = false;
         }
     }
+    //Hien bang nhap ten
     public void InputNameClass()
     {
         if(text_name.text != null)
@@ -123,6 +148,7 @@ public class LoadPuzzle : MonoBehaviour
             Menu.SetActiveMenuFalse(iDrag.menuData.hide_puzzle, iDrag.menuData.info_surrender);
         }
     }
+    //Xu ly gan id class = dropdown changed
     public void ClassChangeAdd()
     {
         for (int i = 0; i < (saveData.Length - 1); i++)
@@ -133,8 +159,8 @@ public class LoadPuzzle : MonoBehaviour
                 break;
             }
         }
-
     }
+    //Chon class va them vao dropdown
     IEnumerator SelectClassAddDropdownlist(string URL)
     {
         UnityWebRequest www = UnityWebRequest.Get(URL);

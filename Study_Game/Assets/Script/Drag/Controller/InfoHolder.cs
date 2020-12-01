@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 public class InfoHolder : MonoBehaviour
 {
+    //thong tin tung dong BXH nguoi choi
     public TextMeshProUGUI STT;
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Class;

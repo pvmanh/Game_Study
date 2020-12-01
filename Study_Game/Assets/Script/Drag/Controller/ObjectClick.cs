@@ -13,7 +13,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
         Flip = GetComponentInParent<Animator>();
         parentArea = GameObject.Find("Area");
     }
-    
+    //Xu ly event cac loai click lat hinh theo cac level
     public void OnPointerClick(PointerEventData eventData)
     {
         int clickCount = eventData.clickCount;
@@ -22,6 +22,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
 
         if (clickCount == 1)
         {
+            //Xu ly chuot trai cho level <= x1
             if(level <= objData.x1)
             {
                 if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
@@ -44,6 +45,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                     }
                 }
             }
+            //Xu ly chuot phai cho level tu x2 > x3
             else if(level > objData.x2 && level < objData.x3)
             {
                 if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
@@ -66,6 +68,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                     }
                 }
             }
+            //Xu ly chuot giua cho level tu x4 > x5
             else if(level > objData.x4 && level < objData.x5)
             {
                 if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
@@ -89,6 +92,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
+        //Xu ly click doi cho level x6
         else if (clickCount == 2)
         {
             if(level == objData.x6)

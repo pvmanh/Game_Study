@@ -16,6 +16,7 @@ public class SelectLevelImg : MonoBehaviour, IPointerClickHandler
         parentImg = GameObject.Find("Content-img").transform;
         parent_App_Click = GameObject.Find("App_Click");
     }
+    //chon hinh anh cho level tiep theo
     public void OnPointerClick(PointerEventData eventData)
     {
         if(isSelected == false)
