@@ -16,7 +16,7 @@ public class Typer : MonoBehaviour
 
     private string colorWord = string.Empty ;
 
-    public Button btn1;
+    /*public Button btn1;
     public Button btn2;
     public Button btn3;
     public Button btn4;
@@ -56,17 +56,70 @@ public class Typer : MonoBehaviour
     public Button btnm;
     public Button btnphay;
     public Button btncham;
-    public Button btnxet;
+    public Button btnxet;*/
+
+    public GameObject btn1;
+    public GameObject btn2;
+    public GameObject btn3;
+    public GameObject btn4;
+    public GameObject btn5;
+    public GameObject btn6;
+    public GameObject btn7;
+    public GameObject btn8;
+    public GameObject btn9;
+    public GameObject btn0;
+    public GameObject btnq;
+    public GameObject btnw;
+    public GameObject btne;
+    public GameObject btnr;
+    public GameObject btnt;
+    public GameObject btny;
+    public GameObject btnu;
+    public GameObject btni;
+    public GameObject btno;
+    public GameObject btnp;
+    public GameObject btna;
+    public GameObject btns;
+    public GameObject btnd;
+    public GameObject btnf;
+    public GameObject btng;
+    public GameObject btnh;
+    public GameObject btnj;
+    public GameObject btnk;
+    public GameObject btnl;
+    public GameObject btnchamp;
+    //public GameObject btnmoh;
+    public GameObject btnz;
+    public GameObject btnx;
+    public GameObject btnc;
+    public GameObject btnv;
+    public GameObject btnb;
+    public GameObject btnn;
+    public GameObject btnm;
+    public GameObject btnphay;
+    public GameObject btncham;
+    public GameObject btnxet;
     //time
     public float timeStart = 60;
     public Text textTime ;
     private int i= 1 ;
+    //score
+    public Text textAccurary;
+    public Text textSpeed;
+    public TextMeshProUGUI ttAccurary;
+    public TextMeshProUGUI ttSpeed;
+    public GameObject total;
+    private float accurary = 0;
+    private float tudung = 0;
+    private float tusai = 0;
 
     // Start is called before the first frame update
      private void Start()
     {
        SetCurrentWord();
        textTime.text = timeStart.ToString();
+        textAccurary.text = "0";
+        textSpeed.text = "0";
     }
 
     private void SetCurrentWord()
@@ -95,12 +148,25 @@ public class Typer : MonoBehaviour
     // Update is called once per frame
      private void Update()
     {
-        timeStart -= Time.deltaTime;
-        textTime.text = Mathf.RoundToInt(timeStart).ToString();
-        CheckInput();
-        checkbp();
-        
-        
+        if (timeStart >= 0)
+        {
+            timeStart -= Time.deltaTime;
+            textTime.text = Mathf.RoundToInt(timeStart).ToString();
+
+            textAccurary.text = Mathf.RoundToInt(accurary).ToString();
+            textSpeed.text = Mathf.RoundToInt(tudung).ToString();
+            CheckInput();
+            checkbp();
+        }
+        if(timeStart <= 0)
+        {   
+            total.SetActive(true);
+            ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
+            ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
+            
+        }
+        //Debug.Log(timeStart);
+
     }
     
     private void CheckInput()
@@ -108,12 +174,23 @@ public class Typer : MonoBehaviour
         //test = null;
         if(Input.anyKeyDown)
         {
+            //Debug.Log("100");
             string keysPressed = Input.inputString;
-           // Debug.Log(test);
+            if(IsCorrectLetter(keysPressed) == false)
+            {
+                tusai++;
+            }
             if(keysPressed.Length ==1)
             {
                 EnterLetter(keysPressed);
+
             }
+           
+                accurary = (tudung / (tusai + tudung)) * 100;
+                Debug.Log(tudung);
+                Debug.Log(tusai);
+                Debug.Log(accurary);
+
             /*if(Input.GetKeyDown("a"))
             {
                 test += Input.inputString;
@@ -134,7 +211,7 @@ public class Typer : MonoBehaviour
             } 
             }
         }*/
-      //  Debug.Log(keysPressed);
+            //  Debug.Log(keysPressed);
         }
     }
 
@@ -147,6 +224,7 @@ public class Typer : MonoBehaviour
             {
             colorWord = currentWord.Substring(0,i);
             i++;
+            tudung++;
             }
            if(i > currentWord.Length)
             {
@@ -161,6 +239,8 @@ public class Typer : MonoBehaviour
             {
                 SetCurrentWord();
             }
+            
+           
         }
     }
 
@@ -180,6 +260,11 @@ public class Typer : MonoBehaviour
         return remainingWord.Length ==  0;
     }
     
+    private void checkscore()
+    {
+        //if
+
+    }
     private void checkbp()
     {
         //btn1.GetComponent<Image>().color = Color.blue;
@@ -213,7 +298,7 @@ public class Typer : MonoBehaviour
         btnk.gameObject.SetActive(false);
         btnl.gameObject.SetActive(false);
         btnchamp.gameObject.SetActive(false);
-        btnmoh.gameObject.SetActive(false);
+        //btnmoh.gameObject.SetActive(false);
         btnz.gameObject.SetActive(false);
         btnx.gameObject.SetActive(false);
         btnc.gameObject.SetActive(false);
@@ -356,10 +441,10 @@ public class Typer : MonoBehaviour
             {
                 btnchamp.gameObject.SetActive(true);
             }
-            if(remainingWord.Substring(0,1)== "'")
+           /* if(remainingWord.Substring(0,1)== "'")
             {
                 btnmoh.gameObject.SetActive(true);
-            }
+            }*/
             if(remainingWord.Substring(0,1)== "z")
             {
                 btnz.gameObject.SetActive(true);

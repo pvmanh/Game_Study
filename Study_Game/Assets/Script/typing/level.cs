@@ -10,9 +10,12 @@ public class level : MonoBehaviour
     public Button btnps;
     public Button btnot;
     public RawImage imgbp;
+    public GameObject banphim;
     public GameObject Typer;
     public GameObject OP;
     public GameObject time;
+    public GameObject accurary;
+    public GameObject speed;
 
     //	exit
    /* ComputerCotroller pComputer;
@@ -51,13 +54,15 @@ public class level : MonoBehaviour
         Typer.SetActive(true);
         OP.SetActive(true);
         time.SetActive(true);
+        accurary.SetActive(true);
+        speed.SetActive(true);
         btncb.gameObject.SetActive(false);
         btnhd.gameObject.SetActive(false);
         btnht.gameObject.SetActive(false);
         btnps.gameObject.SetActive(false);
         btnot.gameObject.SetActive(false);
-        imgbp.gameObject.SetActive(true);
-
+        //imgbp.gameObject.SetActive(true);
+        banphim.gameObject.SetActive(true);
     }
   /*  void CloseApp()
     {
