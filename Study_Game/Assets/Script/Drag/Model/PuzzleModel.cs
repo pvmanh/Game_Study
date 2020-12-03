@@ -34,4 +34,6 @@ public class PuzzleModel
     public bool levelup = false;
     public string str_name;
     public string str_class;
+    public GameObject win_background;
+    public GameObject btn_restart;
 }

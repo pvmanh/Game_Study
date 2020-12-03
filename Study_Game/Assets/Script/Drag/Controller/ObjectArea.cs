@@ -43,6 +43,9 @@ public class ObjectArea : MonoBehaviour
     public string[] saveData;
     List<string> option_class = new List<string> { };
     public bool isSave = false;
+    public GameObject Particle_Manager;
+    public GameObject Win_btn;
+    public TextMeshProUGUI txt_Notice;
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +92,7 @@ public class ObjectArea : MonoBehaviour
         //dat du dieu kien qua man
         if(iChild == true && objectData.Level != objectData.LevelLimit)
         {
+            Particle_Manager.GetComponent<ParticleManager>().TimeDelay();
             //Save du lieu vao table sau khi hoan thanh level
             if(isSave == false)
             {
@@ -160,13 +164,17 @@ public class ObjectArea : MonoBehaviour
         //thang man cuoi xu ly xong game
         else if(iChild == true && objectData.Level == objectData.LevelLimit)
         {
+            Particle_Manager.GetComponent<ParticleManager>().TimeDelay();
             if(isSave == false)
             {
+                MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+                Win_btn.SetActive(true);
                 long idrank = System.DateTime.Now.ToFileTime();
                 StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), objectData.str_name, objectData.str_class, objectData.Level.ToString(), timeData.txt_time.text));
                 isSave = true;
+                txt_Notice.gameObject.SetActive(true);
+                txt_Notice.text = "Congrulations!!!";
             }
-            Debug.Log("Game Complete");
         }
     }
     //Thoi gian cua dem sau moi frame co dinh

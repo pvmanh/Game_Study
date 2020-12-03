@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Puzzle 
 {
     //ham tao puzzle
+    public static bool isWin = true;
     public static void LoadPuzzleLevel(PuzzleModel puzzleData, Texture2D textureData, ImageModel imageData, List<RawImage> BasePuzzleObject)
     {
         puzzleData.txt_level.text = puzzleData.level.ToString();
@@ -39,7 +40,7 @@ public class Puzzle
         imageData.LoadDone = true;
     }
     //Kiem tra tro choi
-    public static void CheckWinPuzzle(PuzzleModel puzzleData, TimeModel timeData, GameObject MenuSelectLevel, ImageModel imageData, List<RawImage> BasePuzzleObject)
+    public static void CheckWinPuzzle(PuzzleModel puzzleData, TimeModel timeData, GameObject MenuSelectLevel, ImageModel imageData, List<RawImage> BasePuzzleObject, GameObject Particle_Manager, List<float> deltaFrame)
     {
         puzzleData.iCount = puzzleData.ParentBase.transform.childCount;
         puzzleData.isTrueCount = 0;
@@ -58,36 +59,58 @@ public class Puzzle
         //du dieu kien lvup
         if (puzzleData.iCount == puzzleData.isTrueCount)
         {
-            //level dat gioi han bao xong tro choi
-            if (puzzleData.level == puzzleData.level_limit)
-                Debug.Log("Game Complete");
-            //tien hanh lv up
-            else
+            Particle_Manager.GetComponent<ParticleManager>().TimeDelay();
+            if(Particle_Manager.GetComponent<ParticleManager>().isActive == true)
             {
-                puzzleData.level++;
-                puzzleData.Width++;
-                puzzleData.Height++;
-                //tinh lai dien tich
-                puzzleData.Lenght = puzzleData.Width * puzzleData.Height;
-
-                //Xoa toan bo child trong o chua grid
-                foreach (Transform child in puzzleData.ParentBase.transform)
-                {
-                    foreach (Transform ChildPuzzle in child.transform)
-                    {
-                        //Destroy(ChildPuzzle.GetComponent<ImgControl>());
-                        CutPuzzle.DestroyObject(ChildPuzzle.gameObject);
-                    }
-                }
-                //cai dat lai thong so
-                BasePuzzleObject.Clear();
-                imageData.y = 1f;
-                MenuSelectLevel.SetActive(true);
-                GameObject.Find("/Canvas/Select-menu/Bottom/Rank-com").SetActive(true);
-                GameObject.Find("/Canvas/Select-menu/Bottom/Rank-com/timecomplete").GetComponent<TextMeshProUGUI>().text = timeData.txt_time.text;
-                puzzleData.levelup = true;
-                //Puzzle.LoadPuzzleLevel(puzzleData, textureData, imageData, BasePuzzleObject);
+                //ban phao hoa den khi frame deltatime > 2
+                if(Particle_Manager.GetComponent<ParticleManager>().par_time > deltaFrame[0])
+                    Particle_Manager.GetComponent<ParticleManager>().isActive = false;
             }
+            if(Particle_Manager.GetComponent<ParticleManager>().isActive == false)
+            {
+                //level dat gioi han bao xong tro choi
+                if (puzzleData.level == puzzleData.level_limit)
+                {
+                    if(isWin == true)
+                    {
+                        Menu.SetActiveMenuTrue(puzzleData.win_background, puzzleData.btn_restart);
+                        isWin = false;
+                    }
+                }   
+                //tien hanh lv up
+                else
+                {
+                    puzzleData.level++;
+                    puzzleData.Width++;
+                    puzzleData.Height++;
+                    float iFrame = deltaFrame[0];
+                    deltaFrame.Clear();
+                    //tinh lai dien tich
+                    puzzleData.Lenght = puzzleData.Width * puzzleData.Height;
+
+                    //Xoa toan bo child trong o chua grid
+                    foreach (Transform child in puzzleData.ParentBase.transform)
+                    {
+                        foreach (Transform ChildPuzzle in child.transform)
+                        {
+                            //Destroy(ChildPuzzle.GetComponent<ImgControl>());
+                            CutPuzzle.DestroyObject(ChildPuzzle.gameObject);
+                        }
+                    }
+                    //cai dat lai thong so
+                    BasePuzzleObject.Clear();
+                    imageData.y = 1f;
+                    MenuSelectLevel.SetActive(true);
+                    GameObject.Find("/Canvas/Select-menu/Bottom/Rank-com").SetActive(true);
+                    GameObject.Find("/Canvas/Select-menu/Bottom/Rank-com/timecomplete").GetComponent<TextMeshProUGUI>().text = timeData.txt_time.text;
+                    iFrame += 3f;
+                    deltaFrame.Add(iFrame);
+                    puzzleData.levelup = true;
+                    //Puzzle.LoadPuzzleLevel(puzzleData, textureData, imageData, BasePuzzleObject);
+                }
+            }
+
+            
         }
     }
     //Ham random vi tri ngau nhien trong o chua theo xmin, xmax, ymin, ymax cai dat theo dien tich o chua

@@ -29,11 +29,15 @@ public class LoadPuzzle : MonoBehaviour
     public string[] saveData;
     List<string> option_class = new List<string> { };
     public bool isSave = false;
+    public GameObject Particle_Manager;
+    public TextMeshProUGUI txt_Notice;
+    List<float> deltaFrame = new List<float>{3f};
 
     // Start is called before the first frame update
     void Start()
     {
         isSave = false;
+        Puzzle.isWin = true;
         //Load hinh puzzle tu thu muc Puzzle
         textureData.TexturePuzzle = Resources.LoadAll<Texture2D>("Puzzle/");
         //Them class vao dropdown
@@ -64,19 +68,29 @@ public class LoadPuzzle : MonoBehaviour
     void Update()
     {
         //kiem tra dieu kien win
-        Puzzle.CheckWinPuzzle(puzzleData, timeData, Menu_Level_Select, imageData, BaseImage.BasePuzzleObject);
+        Puzzle.CheckWinPuzzle(puzzleData, timeData, Menu_Level_Select, imageData, BaseImage.BasePuzzleObject, Particle_Manager, deltaFrame);
         //Dat dieu kien thang tro choi & save rank cuoi
         if (puzzleData.iCount == puzzleData.isTrueCount)
         {
             if (puzzleData.level == puzzleData.level_limit)
             {
-                if(isSave == false)
+                if(Puzzle.isWin == false)
                 {
-                    long idrank = System.DateTime.Now.ToFileTime();
-                    StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, puzzleData.level.ToString(), timeData.txt_time.text));
-                    isSave = true;
-                }
-                Debug.Log("Game Complete");
+                    if(isSave == false)
+                    {
+                        MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+                        long idrank = System.DateTime.Now.ToFileTime();
+                        StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, puzzleData.level.ToString(), timeData.txt_time.text));
+                        isSave = true;
+                        txt_Notice.gameObject.SetActive(true);
+                        txt_Notice.text = "Congrulations!!!";
+                    }
+                    Time.timeScale = 0;
+                }  
+            }
+            else
+            {
+                MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
             }
         }
         //hien bang nhap nen neu ten rong
@@ -94,13 +108,14 @@ public class LoadPuzzle : MonoBehaviour
                 //Save rank level
                 long idrank = System.DateTime.Now.ToFileTime();
                 StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, (puzzleData.level - 1).ToString(), timeData.txt_time.text));
-
+                Debug.Log(":"+idrank);
                 Time.timeScale = 0;
                 txtLevelSelect.text = puzzleData.level.ToString();
                 txtSizeSelect.text = (puzzleData.Height * puzzleData.Width).ToString();
-                MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+                //MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
                 timeData.timeToDisplay = 0;
                 puzzleData.levelup = false;
+                Particle_Manager.GetComponent<ParticleManager>().isActive = true;
                 isSave = true;
             }
         }
