@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class ImgBasic : MonoBehaviour, IDropHandler
 {
     public int TagValueImg;
+    //kiem tra child cua grid null
     public GameObject puzzle
     {
         get
@@ -17,12 +18,16 @@ public class ImgBasic : MonoBehaviour, IDropHandler
             return null;
         }
     }
-
+    //tha vao grid sau khi keo xong
     public void OnDrop(PointerEventData eventData)
     {
         if(!puzzle)
         {
-            ImgControl.isDrag.transform.SetParent(transform);
+            if(ImgControl.isDrag != null)
+            {
+                ImgControl.isDrag.transform.SetParent(transform);
+            }
+
         }
     }
 }

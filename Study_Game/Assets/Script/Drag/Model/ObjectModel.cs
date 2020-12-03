@@ -11,6 +11,8 @@ public class ObjectModel
     public int iLevel = 3;
     public float Width;
     public float Height;
+    public string str_name;
+    public string str_class;
     [HideInInspector] public float xMin = 0f;
     [HideInInspector] public float xMax = 0f;
     [HideInInspector] public float yMin = 1f;

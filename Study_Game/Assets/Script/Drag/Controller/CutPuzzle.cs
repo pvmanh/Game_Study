@@ -9,7 +9,7 @@ public class CutPuzzle : MonoBehaviour
     public GameObject GridObject;
     LoadPuzzle pLoadPuzzle;
     float[] gridValue;
-    // Start is called before the first frame update
+    //tinh grid & them grid
     void Start()
     {
         pLoadPuzzle = gridData.pApp_Click.GetComponent<LoadPuzzle>();
@@ -17,19 +17,17 @@ public class CutPuzzle : MonoBehaviour
 
         GridPuzzle.SplitGridPuzzle(gridData, GridObject, pLoadPuzzle.puzzleData, gridValue, transform);
     }
-
-    // Update is called once per frame
+    //xoa grid cu => tinh grid => them grid moi khi level up
     void Update()
     {
-        GridPuzzle.PuzzleLevelUp(pLoadPuzzle.puzzleData, GridObject, gridData, gridValue, transform);
-        
+        GridPuzzle.PuzzleLevelUp(pLoadPuzzle.puzzleData, GridObject, gridData, gridValue, transform);      
     }
-
+    //ham huy gameobject ojb
     public static void DestroyObject(GameObject ojb)
     {
         Destroy(ojb);
     }
-
+    //ham tao gameobject ojb
     public static GameObject CreateObject(GameObject ojb, Transform parent)
     {
         return Instantiate(ojb, parent);

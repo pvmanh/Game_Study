@@ -16,14 +16,15 @@ public class CutImage : MonoBehaviour
         puzzleData = this.GetComponent<LoadPuzzle>();
         //WidthValue = 1f / pLoadPuzzle.Width;
         //HeightValue = 1f / pLoadPuzzle.Height;
-        Image.CaculatorSliptImageValue(imageValue, puzzleData.puzzleData);
+        //tinh thong so hinh cat
+        ImageView.CaculatorSliptImageValue(imageValue, puzzleData.puzzleData);
     }
-
+    //tinh thong so cat hinh => cat hinh moi
     void Update()
     {
         if(imageData.LoadDone == true)
         {
-            Image.SliptImage(imageData, puzzleData.puzzleData, imageValue, BasePuzzleObject, imageData.BaseImage);
+            ImageView.SliptImage(imageData, puzzleData.puzzleData, imageValue, BasePuzzleObject, imageData.BaseImage);
             imageData.LoadDone = false;
         }
     }
