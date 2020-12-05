@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Networking;
 public class WordDoc : MonoBehaviour
 {
  
@@ -18,8 +19,10 @@ public class WordDoc : MonoBehaviour
     private string reWord = string.Empty;
     private string txtdung = string.Empty;
     private string txtsai = string.Empty;
-    private int k = 0;
+    //private int k = 0;
+    //time
     public TimeModel timeData;
+
     //time
     //public float timeStart = 0;
    // public Text textTime;
@@ -34,13 +37,27 @@ public class WordDoc : MonoBehaviour
     private float tudung = 0;
     private float tusai = 0;
 
+    //save
+    public GameObject name;
+    public TextMeshProUGUI txtname;
+    public Button xacnhan;
+    string URL_1 = "http://localhost/xampp/select_class.php";
+    public string[] saveData;
+    public TMP_InputField text_name;
+    public TMP_Dropdown txt_class;
+    List<string> option_class = new List<string> { };
+    string str_name;
+    string str_class;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 0;
+        StartCoroutine(SelectClassAddDropdownlist(URL_1));
         timeData.timegget = timeData.txt_time.text;
         wordListcb = catList(WordList, wordListcb, 0);
-
+        //IPWord.Select();
         getList();
         catchuoi();
         currentWord = Final;
@@ -51,6 +68,8 @@ public class WordDoc : MonoBehaviour
         Debug.Log(stringgoc);
 
     }
+
+
 
     public static string[] catList(List<string> List, string[] StringList, int i)
     {
@@ -109,29 +128,75 @@ public class WordDoc : MonoBehaviour
     void Update()
     {
            // timeStart += Time.deltaTime;
-        if (tudung != 0 || tusai != 0)
-        {
-            accurary = (tudung / (tusai + tudung)) * 100;
-        }
-            //textTime.text = Mathf.RoundToInt(timeStart).ToString();
-            textAccurary.text = Mathf.RoundToInt(accurary).ToString();
+        
+        //textTime.text = Mathf.RoundToInt(timeStart).ToString();
+
+        textAccurary.text = Mathf.RoundToInt(accurary).ToString();
             textSpeed.text = Mathf.RoundToInt(tudung).ToString();
-          
+        // IPWord.Select();
         getWord();
         colorWord();
+        if (str_name == "")
+        {
+            
+            Menu.SetActiveMenuTrue(total, name);
+        }
     }
     void FixedUpdate()
     {
-        Timer.TimeClock(timeData);
+            Timer.TimeClock(timeData);
     }
 
     public void colorWord()
     {
         WordDocOP.text = reWord +currentWord;
     }
-    void test()
-    {
 
+
+    //Hien bang nhap ten
+    public void InputNameClass()
+    {
+        if (text_name.text != null)
+        {
+            str_name = text_name.text;
+            Menu.SetActiveMenuFalse(total,name) ;
+        }
+    }
+    //Xu ly gan id class = dropdown changed
+    public void ClassChangeAdd()
+    {
+        for (int i = 0; i < (saveData.Length - 1); i++)
+        {
+            if (txt_class.options[txt_class.value].text == SaveRankView.GetValueData(saveData[i], "class:"))
+            {
+              str_class = SaveRankView.GetValueData(saveData[i], "id:");
+                break;
+            }
+        }
+    }
+    IEnumerator SelectClassAddDropdownlist(string URL)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(URL);
+
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Select data complete!");
+        }
+        string usersDataString = www.downloadHandler.text;
+        saveData = usersDataString.Split(';');
+
+        for (int i = 0; i < (saveData.Length - 1); i++)
+        {
+            option_class.Add(SaveRankView.GetValueData(saveData[i], "class:"));
+        }
+
+        txt_class.AddOptions(option_class);
+        ClassChangeAdd();
     }
     public void getWord()
     {
@@ -139,7 +204,7 @@ public class WordDoc : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
            // k++;
-            if ( IPWord.text!=" "&& IPWord.text != "  " &&IPWord.text != "   " && IPWord.text != "    " && IPWord.text != "     ")
+            if ( IPWord.text!=" ")//&& IPWord.text != "  " &&IPWord.text != "   " && IPWord.text != "    " && IPWord.text != "     ")
             {
                 for (int i = 0; i < currentWord.Length; i++)
                 {
@@ -171,28 +236,33 @@ public class WordDoc : MonoBehaviour
                         //if (k >= 1)
                       //  {
                             IPWord.text = null;
-                            //Debug.Log(tudung);
-                            //Debug.Log(tusai);
-                       // }
+                        //Debug.Log(tudung);
+                        //Debug.Log(tusai);
+                        // }
+                        if (tudung != 0 || tusai != 0)
+                        {
+                            accurary = (tudung / (tusai + tudung)) * 100;
+                        }
                     }
                 }
+                if (currentWord.Length == 0)
+                {
+                    total.SetActive(true);
+                    WordDocOP.gameObject.SetActive(false);
+                    IPWord.gameObject.SetActive(false);
+                    Time.timeScale = 0;
+                    ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
+                    ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
+                    ttTime.text = timeData.txt_time.text;
+                }
             }
-
-            if (IPWord.text == "     ")
+            if ( IPWord.text == " ")
             {
+                Debug.Log("1");
                 IPWord.text = null;
             }
-            Debug.Log(currentWord+"1");
-            if (currentWord.Length == 0)
-            {
-                total.SetActive(true);
-                WordDocOP.gameObject.SetActive(false);
-                IPWord.gameObject.SetActive(false);
-                Time.timeScale = 0;
-                ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
-                ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
-                ttTime.text = timeData.txt_time.text;
-            }
+            //Debug.Log(currentWord+"1");
+            
         }
        /* else
         {
