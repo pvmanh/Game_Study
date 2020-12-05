@@ -17,6 +17,7 @@ public class ImgControl : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private float y;
     private string ParentName;
     public bool isTruePlace = false;
+    public bool isTrueSound = false;
     //set thong so dau game
     private void Awake() 
     {

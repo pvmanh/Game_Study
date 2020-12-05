@@ -34,7 +34,15 @@ public class AudioManager : MonoBehaviour
             backgroundSlider.value = backgroundFloat;
             soundEffectsFloat = PlayerPrefs.GetFloat(SoundEffectsPref);
             soundEffectsSliders.value = soundEffectsFloat;
+            UpdateSound();
         }
+    }
+    public void ReturnMenu()
+    {
+        backgroundFloat = PlayerPrefs.GetFloat(BackgroundPref);
+        soundEffectsFloat = PlayerPrefs.GetFloat(SoundEffectsPref);
+        backgroundSlider.value = backgroundFloat;
+        soundEffectsSliders.value = soundEffectsFloat;
     }
     public void SaveSoundSetting()
     {
@@ -56,5 +64,13 @@ public class AudioManager : MonoBehaviour
         {
             soundEffectsAudio[i].volume = soundEffectsSliders.value;
         }
+    }
+    public void PlayClipButton(AudioSource audioClip)
+    {
+        audioClip.Play();
+    }
+    public void StopClipButton(AudioSource audioClip)
+    {
+        audioClip.Stop();
     }
 }

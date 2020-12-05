@@ -52,6 +52,13 @@ public class Puzzle
                 if (child.GetComponent<ImgBasic>().TagValueImg == ChildPuzzle.GetComponent<ImgControl>().TagValueImg)
                 {
                     puzzleData.isTrueCount++;
+
+                    if(ChildPuzzle.GetComponent<ImgControl>().isTrueSound == false)
+                    {
+                        puzzleData.SFX.GetComponent<AudioManager>().PlayClipButton(puzzleData.SFX.GetComponent<AudioManager>().soundEffectsAudio[0]);
+                        ChildPuzzle.GetComponent<ImgControl>().isTrueSound = true;
+                    }
+                    
                     ChildPuzzle.GetComponent<ImgControl>().isTruePlace = true;
                 }
             }

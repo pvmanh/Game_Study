@@ -7,16 +7,18 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
 {
     public GameObject parentArea;
     public GameObject parent;
+    public GameObject SFX;
     Animator Flip;
     void Start()
     {
         Flip = GetComponentInParent<Animator>();
         parentArea = GameObject.Find("Area");
+        SFX = GameObject.Find("SFX");
     }
     //Xu ly event cac loai click lat hinh theo cac level
     public void OnPointerClick(PointerEventData eventData)
     {
-        int clickCount = eventData.clickCount;
+        int clickCount = eventData.clickCount; 
         int level = parentArea.GetComponent<ObjectArea>().objectData.Level;
         ObjectArea objData = parentArea.GetComponent<ObjectArea>();
 
@@ -34,6 +36,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
                             {
                                 parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                SFX.GetComponent<AudioManager>().PlayClipButton(SFX.GetComponent<AudioManager>().soundEffectsAudio[1]);
                                 Flip.SetTrigger("isFlip");
                             }
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
@@ -46,7 +49,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                 }
             }
             //Xu ly chuot phai cho level tu x2 > x3
-            else if(level > objData.x2 && level < objData.x3)
+            else if(level >= objData.x2 && level < objData.x3)
             {
                 if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
                 {
@@ -57,6 +60,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
                             {
                                 parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                SFX.GetComponent<AudioManager>().PlayClipButton(SFX.GetComponent<AudioManager>().soundEffectsAudio[1]);
                                 Flip.SetTrigger("isFlip");
                             }
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
@@ -69,7 +73,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                 }
             }
             //Xu ly chuot giua cho level tu x4 > x5
-            else if(level > objData.x4 && level < objData.x5)
+            else if(level >= objData.x4 && level < objData.x5)
             {
                 if(parentArea.GetComponent<ObjectArea>().IDSelected.Count < 2)
                 {
@@ -80,6 +84,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
                             {
                                 parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                SFX.GetComponent<AudioManager>().PlayClipButton(SFX.GetComponent<AudioManager>().soundEffectsAudio[1]);
                                 Flip.SetTrigger("isFlip");
                             }
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)
@@ -106,6 +111,7 @@ public class ObjectClick : MonoBehaviour, IPointerClickHandler
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count < 2)
                             {
                                 parentArea.GetComponent<ObjectArea>().IDSelected.Add(parent);
+                                SFX.GetComponent<AudioManager>().PlayClipButton(SFX.GetComponent<AudioManager>().soundEffectsAudio[1]);
                                 Flip.SetTrigger("isFlip");
                             }
                             if (parentArea.GetComponentInParent<ObjectArea>().IDSelected.Count >= 2)

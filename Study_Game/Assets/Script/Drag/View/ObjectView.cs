@@ -133,23 +133,25 @@ public class ObjectView
         return false;
     }
     //doi lat anh sau 0.5s up anh lai
-    public static IEnumerator waitingFlip(List<GameObject> IDSelected)
+    public static IEnumerator waitingFlip(List<GameObject> IDSelected, GameObject SFX)
     {
         yield return new WaitForSeconds(0.5f);
         IDSelected[0].GetComponent<ObjectInfo>().isSelected = false;
         IDSelected[1].GetComponent<ObjectInfo>().isSelected = false;
         IDSelected[0].GetComponent<Animator>().SetTrigger("isBack");
         IDSelected[1].GetComponent<Animator>().SetTrigger("isBack");
+        SFX.GetComponent<AudioManager>().PlayClipButton(SFX.GetComponent<AudioManager>().soundEffectsAudio[3]);
         IDSelected.Clear();
     }
     //Doi lat anh xong ssau 0.5s xoa anh
-    public static IEnumerator waitingFlipBeforeDestroy(List<GameObject> IDSelected)
+    public static IEnumerator waitingFlipBeforeDestroy(List<GameObject> IDSelected, GameObject SFX)
     {
         yield return new WaitForSeconds(0.5f);
         IDSelected[0].GetComponent<Animator>().SetTrigger("isBack");
         IDSelected[1].GetComponent<Animator>().SetTrigger("isBack");
         CutPuzzle.DestroyObject(IDSelected[0]);
         CutPuzzle.DestroyObject(IDSelected[1]);
+        SFX.GetComponent<AudioManager>().PlayClipButton(SFX.GetComponent<AudioManager>().soundEffectsAudio[2]);
         IDSelected.Clear();
     }
 }

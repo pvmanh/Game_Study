@@ -59,6 +59,16 @@ public class MenuDragController : MonoBehaviour
         menuData.isMenuActive = false;
 
     }
+    //vao cai dat
+    public void ButtonMenuOption()
+    {
+        menuData.OptionMenu.SetActive(true);
+    }
+    //thoat cai dat
+    public void ButtonExitMenuOption()
+    {
+        menuData.OptionMenu.SetActive(false);
+    }
     //Xu ly nut thoat quay ve menu chinh
     public void ButtonMenuExit()
     {

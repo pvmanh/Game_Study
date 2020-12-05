@@ -32,11 +32,15 @@ public class LoadPuzzle : MonoBehaviour
     public GameObject Particle_Manager;
     public TextMeshProUGUI txt_Notice;
     List<float> deltaFrame = new List<float>{3f};
+    public bool levelup_sound = false;
 
     // Start is called before the first frame update
     void Start()
     {
         isSave = false;
+
+        puzzleData.SFX = GameObject.Find("SFX");
+
         Puzzle.isWin = true;
         //Load hinh puzzle tu thu muc Puzzle
         textureData.TexturePuzzle = Resources.LoadAll<Texture2D>("Puzzle/");
@@ -78,6 +82,8 @@ public class LoadPuzzle : MonoBehaviour
                 {
                     if(isSave == false)
                     {
+                        puzzleData.SFX.GetComponent<AudioManager>().PlayClipButton(puzzleData.SFX.GetComponent<AudioManager>().soundEffectsAudio[2]);
+
                         MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
                         long idrank = System.DateTime.Now.ToFileTime();
                         StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, puzzleData.level.ToString(), timeData.txt_time.text));
@@ -90,7 +96,12 @@ public class LoadPuzzle : MonoBehaviour
             }
             else
             {
-                MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+                if(levelup_sound == false)
+                {
+                    MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+                    puzzleData.SFX.GetComponent<AudioManager>().PlayClipButton(puzzleData.SFX.GetComponent<AudioManager>().soundEffectsAudio[1]);
+                    levelup_sound = true;
+                }
             }
         }
         //hien bang nhap nen neu ten rong
@@ -108,7 +119,6 @@ public class LoadPuzzle : MonoBehaviour
                 //Save rank level
                 long idrank = System.DateTime.Now.ToFileTime();
                 StartCoroutine(SaveRankView.AddRankDrag(URL, idrank.ToString(), puzzleData.str_name, puzzleData.str_class, (puzzleData.level - 1).ToString(), timeData.txt_time.text));
-                Debug.Log(":"+idrank);
                 Time.timeScale = 0;
                 txtLevelSelect.text = puzzleData.level.ToString();
                 txtSizeSelect.text = (puzzleData.Height * puzzleData.Width).ToString();
@@ -117,6 +127,7 @@ public class LoadPuzzle : MonoBehaviour
                 puzzleData.levelup = false;
                 Particle_Manager.GetComponent<ParticleManager>().isActive = true;
                 isSave = true;
+                levelup_sound = false;
             }
         }
     }

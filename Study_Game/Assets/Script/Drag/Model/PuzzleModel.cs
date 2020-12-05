@@ -36,4 +36,5 @@ public class PuzzleModel
     public string str_class;
     public GameObject win_background;
     public GameObject btn_restart;
+    public GameObject SFX;
 }
