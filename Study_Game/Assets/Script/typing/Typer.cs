@@ -118,6 +118,7 @@ public class Typer : MonoBehaviour
     public GameObject name;
     public TextMeshProUGUI txtname;
     public Button xacnhan;
+    string URL = "http://localhost/xampp/type_rank_insert.php";
     string URL_1 = "http://localhost/xampp/select_class.php";
     public string[] saveData;
     public TMP_InputField text_name;

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 01, 2020 lúc 12:35 PM
--- Phiên bản máy phục vụ: 10.4.16-MariaDB
--- Phiên bản PHP: 7.4.12
+-- Thời gian đã tạo: Th12 06, 2020 lúc 02:29 PM
+-- Phiên bản máy phục vụ: 10.4.17-MariaDB
+-- Phiên bản PHP: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,7 +70,9 @@ INSERT INTO `click_rank` (`id`, `name`, `idclass`, `level`, `time`) VALUES
 (132512862608758289, 'Tran Minh', 1, 1, '00:00:38'),
 (132512862765579408, 'Tran Minh', 1, 2, '00:00:12'),
 (132512862938601449, 'Tran Minh', 1, 3, '00:00:16'),
-(132512863294899908, 'Tran Minh', 1, 4, '00:00:34');
+(132512863294899908, 'Tran Minh', 1, 4, '00:00:34'),
+(132516922936002388, 'k', 1, 1, '00:00:23'),
+(132516923783112055, 'k', 1, 2, '00:01:16');
 
 -- --------------------------------------------------------
 
@@ -105,6 +107,43 @@ INSERT INTO `drag_rank` (`id`, `name`, `idclass`, `level`, `time`) VALUES
 (132512864082295894, 'ly thi hai', 2, 3, '00:00:28'),
 (132512865422337131, 'huynh ha', 2, 1, '00:00:08');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `typedoc_rank`
+--
+
+CREATE TABLE `typedoc_rank` (
+  `id` bigint(20) NOT NULL,
+  `idclass` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `time` time NOT NULL,
+  `accurary` int(11) NOT NULL,
+  `speed` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `typedoc_rank`
+--
+
+INSERT INTO `typedoc_rank` (`id`, `idclass`, `name`, `time`, `accurary`, `speed`) VALUES
+(132517221966458343, 1, 'Minh', '00:00:11', 40, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `type_rank`
+--
+
+CREATE TABLE `type_rank` (
+  `id` bigint(20) NOT NULL,
+  `idclass` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `level` text NOT NULL,
+  `accurary` int(11) NOT NULL,
+  `speed` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -126,6 +165,19 @@ ALTER TABLE `click_rank`
 --
 ALTER TABLE `drag_rank`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `idclass` (`idclass`);
+
+--
+-- Chỉ mục cho bảng `typedoc_rank`
+--
+ALTER TABLE `typedoc_rank`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idclass` (`idclass`);
+
+--
+-- Chỉ mục cho bảng `type_rank`
+--
+ALTER TABLE `type_rank`
   ADD KEY `idclass` (`idclass`);
 
 --
@@ -153,6 +205,18 @@ ALTER TABLE `click_rank`
 --
 ALTER TABLE `drag_rank`
   ADD CONSTRAINT `drag_rank_ibfk_1` FOREIGN KEY (`idclass`) REFERENCES `class` (`id`);
+
+--
+-- Các ràng buộc cho bảng `typedoc_rank`
+--
+ALTER TABLE `typedoc_rank`
+  ADD CONSTRAINT `typedoc_rank_ibfk_1` FOREIGN KEY (`idclass`) REFERENCES `class` (`id`);
+
+--
+-- Các ràng buộc cho bảng `type_rank`
+--
+ALTER TABLE `type_rank`
+  ADD CONSTRAINT `type_rank_ibfk_1` FOREIGN KEY (`idclass`) REFERENCES `class` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

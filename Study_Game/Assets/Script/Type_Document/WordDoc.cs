@@ -42,6 +42,7 @@ public class WordDoc : MonoBehaviour
     public GameObject name;
     public TextMeshProUGUI txtname;
     public Button xacnhan;
+    string URL = "http://localhost/xampp/typedoc_rank_insert.php";
     string URL_1 = "http://localhost/xampp/select_class.php";
     public string[] saveData;
     public TMP_InputField text_name;
@@ -199,6 +200,33 @@ public class WordDoc : MonoBehaviour
         txt_class.AddOptions(option_class);
         ClassChangeAdd();
     }
+
+
+    public IEnumerator AddRankDrag()
+    {
+        //data dung de post tuong ung mysql trong php
+         
+        WWWForm form = new WWWForm();
+        form.AddField("addIDrank", System.DateTime.Now.ToFileTime().ToString());
+        form.AddField("addnamerank", str_name);
+        form.AddField("addclasrank", str_class);
+        form.AddField("addaccuraryrank", accurary.ToString());
+        form.AddField("addtimerank", timeData.txt_time.text);
+        form.AddField("addspeedrank", tudung.ToString());
+
+        //Post form len php => insert into
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
+    }
+    //Cat du lieu string lay dc
     public void getWord()
     {
 
@@ -256,6 +284,8 @@ public class WordDoc : MonoBehaviour
                     ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
                     ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
                     ttTime.text = timeData.txt_time.text;
+                    Debug.Log("112222");
+                   StartCoroutine(AddRankDrag());
                 }
             }
             if ( IPWord.text == " ")
@@ -263,12 +293,8 @@ public class WordDoc : MonoBehaviour
                 Debug.Log("1");
                 IPWord.text = null;
             }
-            //Debug.Log(currentWord+"1");
-            
+            //Debug.Log(currentWord+"1")
         }
-       /* else
-        {
-            k = 0;
-        }*/
     }
+
 }

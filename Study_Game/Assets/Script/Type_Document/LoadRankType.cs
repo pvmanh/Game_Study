@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
-public class LoadRankDC : MonoBehaviour
-{ 
+public class LoadRankType : MonoBehaviour
+{
     string URL_class = "http://localhost/xampp/select_class.php";
     [Header("Class Setting")]
     public List<string> data_Class_name;
@@ -24,8 +24,6 @@ public class LoadRankDC : MonoBehaviour
     public string class_id_click;
     string URL_drag = "http://localhost/xampp/drag_rank_select.php?level=";
     string URL_click = "http://localhost/xampp/click_rank_select.php?level=";
-    string URL_type = "http://localhost/xampp/type_rank_select.php?level=";
-    string URL_typedoc = "http://localhost/xampp/typedoc_rank_select.php?class=";
     [System.Serializable]
     public struct SaveRankData
     {
@@ -34,29 +32,8 @@ public class LoadRankDC : MonoBehaviour
         public string ClassName;
         public string LevelGame;
         public string TimePlayed;
-        
-    }
-    [System.Serializable]
-    public struct TypeDocData
-    {
-        public string idnumber;
-        public string PlayerName;
-        public string ClassName;
-        public string Accurary;
-        public string TimePlayed;
-        public string Speed;
-    }
-    [System.Serializable]
-    public struct TypeData
-    {
-        public string idnumber;
-        public string PlayerName;
-        public string ClassName;
-        public string Accurary;
-        public string LevelGame;
-        public string Speed;
-    }
 
+    }
     [Header("Rank Setting")]
     public SaveRankData[] data_Drag_Rank;
     public SaveRankData[] data_Click_Rank;
@@ -70,13 +47,15 @@ public class LoadRankDC : MonoBehaviour
     public Transform Click_Content;
     public bool isDrag_class = false;
     public bool isClick_class = false;
-    private void Start() {
+    private void Start()
+    {
         //lay class cho drag & click
         StartCoroutine(SelectClassAndAddToList(URL_class, data_class, dropdown_class_drag, dropdown_class_click));
     }
-    private void Update() {
+    private void Update()
+    {
         //them options dropdownlist
-        if(isLoaded == true)
+        if (isLoaded == true)
         {
             AddOptionsDropdown(data_class, data_Class_name, dropdown_class_drag, dropdown_class_click);
             class_id_drag = GetClassIDFromDropdown(class_id_drag, dropdown_class_drag, data_class);
@@ -87,13 +66,13 @@ public class LoadRankDC : MonoBehaviour
 
             string level_click = dropdown_level_click.options[dropdown_level_click.value].text;
             StartCoroutine(SelectDataRankCustom(URL_click, level_click, class_id_click, data_click_uncut));
-           
+
             isLoaded = false;
         }
 
-        if(isCut == true)
+        if (isCut == true)
         {
-            if(isDrag_class == true)
+            if (isDrag_class == true)
             {
                 data_Drag_Rank = new SaveRankData[data_rank_uncut.Count];
                 data_Drag_Rank = CutDataRank(data_Drag_Rank, data_rank_uncut);
@@ -101,7 +80,7 @@ public class LoadRankDC : MonoBehaviour
                 isDrag_class = false;
             }
 
-            if(isClick_class == true)
+            if (isClick_class == true)
             {
                 data_Click_Rank = new SaveRankData[data_click_uncut.Count];
                 data_Click_Rank = CutDataRank(data_Click_Rank, data_click_uncut);
@@ -115,18 +94,18 @@ public class LoadRankDC : MonoBehaviour
     //class changed event
     public void ClassChanged(TMP_Dropdown class_dropdown)
     {
-        if(class_dropdown.name == "class-select-drag")
+        if (class_dropdown.name == "class-select-drag")
         {
             foreach (Transform child in Drag_Content)
             {
                 Destroy(child.gameObject);
             }
-            class_id_drag = GetClassIDFromDropdown(class_id_drag, class_dropdown, data_class); 
+            class_id_drag = GetClassIDFromDropdown(class_id_drag, class_dropdown, data_class);
             string level_drag = dropdown_level_drag.options[dropdown_level_drag.value].text;
             StartCoroutine(SelectDataRankCustom(URL_drag, level_drag, class_id_drag, data_rank_uncut));
             isDrag_class = true;
         }
-        else if(class_dropdown.name == "class-select-click")
+        else if (class_dropdown.name == "class-select-click")
         {
             foreach (Transform child in Click_Content)
             {
@@ -168,7 +147,7 @@ public class LoadRankDC : MonoBehaviour
     //Them options dropdownlist
     void AddOptionsDropdown(List<SaveClassData> list_class, List<string> list_class_name, TMP_Dropdown classDropdown_drag, TMP_Dropdown classDropdown_click)
     {
-        for(int i = 0; i < list_class.Count; i++)
+        for (int i = 0; i < list_class.Count; i++)
         {
             list_class_name.Add(list_class[i].class_name);
         }
@@ -195,10 +174,12 @@ public class LoadRankDC : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Get(link + level + "&class=" + classid);
 
         yield return www.SendWebRequest();
-        if(www.isNetworkError || www.isHttpError) {
+        if (www.isNetworkError || www.isHttpError)
+        {
             Debug.Log(www.error);
         }
-        else {
+        else
+        {
             Debug.Log("Select data complete!");
         }
         string usersDataString = www.downloadHandler.text;
@@ -206,13 +187,13 @@ public class LoadRankDC : MonoBehaviour
 
         data_uncut.Clear();
 
-        if(saveData.Length != 0)
+        if (saveData.Length != 0)
         {
             for (int i = 0; i < (saveData.Length - 1); i++)
             {
                 data_uncut.Add(saveData[i]);
             }
-        }  
+        }
         isCut = true;
 
 
@@ -220,7 +201,7 @@ public class LoadRankDC : MonoBehaviour
     //cut data thanh Array
     SaveRankData[] CutDataRank(SaveRankData[] data_Rank, List<string> data_uncut)
     {
-        if(data_uncut.Count != 0)
+        if (data_uncut.Count != 0)
         {
             for (int i = 0; i < data_uncut.Count; i++)
             {
@@ -231,15 +212,15 @@ public class LoadRankDC : MonoBehaviour
                 data_Rank[i].TimePlayed = SaveRankView.GetValueData(data_uncut[i], "time:");
             }
             //DataChangeRankTable();
-        }  
+        }
         return data_Rank;
     }
     //Add data to gameobject
     public void AddRankDataToGUI(SaveRankData[] data_Rank, GameObject RankRows, Transform Content)
     {
-        if(data_Rank.Length != 0)
+        if (data_Rank.Length != 0)
         {
-            for(int i = 0; i < data_Rank.Length; i++)
+            for (int i = 0; i < data_Rank.Length; i++)
             {
                 var RankInfo = Instantiate(RankRows, Content);
                 RankInfo.GetComponent<InfoHolder>().STT.text = (i + 1).ToString();
@@ -247,29 +228,29 @@ public class LoadRankDC : MonoBehaviour
                 RankInfo.GetComponent<InfoHolder>().Class.text = data_Rank[i].ClassName;
                 RankInfo.GetComponent<InfoHolder>().Level.text = data_Rank[i].LevelGame;
                 RankInfo.GetComponent<InfoHolder>().Time.text = data_Rank[i].TimePlayed;
-                if(i == 0)
+                if (i == 0)
                 {
                     RankInfo.GetComponent<Image>().color = new Color32(255, 238, 0, 255);
                 }
-                else if(i == 1)
+                else if (i == 1)
                 {
                     RankInfo.GetComponent<Image>().color = new Color32(110, 179, 255, 255);
                 }
-                else if(i == 2)
+                else if (i == 2)
                 {
                     RankInfo.GetComponent<Image>().color = new Color32(140, 255, 120, 255);
                 }
-                else if(i%2 == 0 && i > 2)
+                else if (i % 2 == 0 && i > 2)
                 {
                     RankInfo.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                 }
-                else if(i%2 != 0 && i > 2)
+                else if (i % 2 != 0 && i > 2)
                 {
                     RankInfo.GetComponent<Image>().color = new Color32(240, 240, 240, 255);
                 }
             }
         }
-        else if(data_Rank.Length == 0)
+        else if (data_Rank.Length == 0)
         {
             var RankInfo = Instantiate(RankRows, Content);
             RankInfo.GetComponent<InfoHolder>().STT.gameObject.SetActive(false);
