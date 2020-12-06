@@ -49,12 +49,20 @@ public class ObjectArea : MonoBehaviour
     public GameObject Win_btn;
     public TextMeshProUGUI txt_Notice;
     public GameObject SFX;
+    [Header("Help Setting")]
+    public GameObject Help;
+    public GameObject Help_1;
+    public GameObject Help_2;
+    public GameObject Help_3;
+    public GameObject Help_4;
     // Start is called before the first frame update
     void Start()
     {
         isSave = false;
 
         SFX = GameObject.Find("SFX");
+
+        HelpActive(Help, Help_1);
 
         rect_min = new Vector2(0f, 0f);
         rect_max = new Vector2(1f, 1f);
@@ -188,10 +196,23 @@ public class ObjectArea : MonoBehaviour
                 text_Level.text = objectData.Level.ToString();
 
                 //Gan lai x, y min, x, y max
-                if(objectData.Level == (x2) || objectData.Level == (x4) || objectData.Level == x6)
+                if(objectData.Level == x2)
                 {
                     rect_min = new Vector2(0f, 0f);
                     rect_max = new Vector2(1f, 1f);
+                    HelpActive(Help, Help_2);
+                }
+                else if(objectData.Level == x4)
+                {
+                    rect_min = new Vector2(0f, 0f);
+                    rect_max = new Vector2(1f, 1f);
+                    HelpActive(Help, Help_3);
+                }
+                else if(objectData.Level == x6)
+                {
+                    rect_min = new Vector2(0f, 0f);
+                    rect_max = new Vector2(1f, 1f);
+                    HelpActive(Help, Help_4);
                 }
 
                 //reset vi tri grid
@@ -285,6 +306,35 @@ public class ObjectArea : MonoBehaviour
         Menu.SetActiveMenuFalse(iDrag.menuData.hide_puzzle, RankTimeComplete);
         MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = false;
         isLevelup = true;
+    }
+    //bat tro giup
+    void HelpActive(GameObject _Help, GameObject _Help_1)
+    {
+        Menu.SetActiveMenuTrue(_Help, _Help_1);
+        MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+    }
+    //tat tro giup
+    public void HelpDisable()
+    {
+        if(Help_1.activeSelf == true)
+        {
+            Help_1.SetActive(false);
+        }
+        else if(Help_2.activeSelf == true)
+        {
+            Help_2.SetActive(false);
+        }
+        else if(Help_3.activeSelf == true)
+        {
+            Help_3.SetActive(false);
+        }
+        else if(Help_4.activeSelf == true)
+        {
+            Help_4.SetActive(false);
+        }
+        Help.SetActive(false);
+        MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = false;
+        Time.timeScale = 1;
     }
     //Doi class id khi co su kien dropdown changed
     public void ClassChangeAdd()

@@ -18,6 +18,7 @@ public class LoadPuzzle : MonoBehaviour
     public TMP_InputField text_name;
     public TMP_Dropdown txt_class;
     public GameObject MenuData;
+    public GameObject Help;
     public Texture2D imgpuzzle;
     public ImageModel imageData;
     public CutImage BaseImage;
@@ -210,5 +211,19 @@ public class LoadPuzzle : MonoBehaviour
 
         txt_class.AddOptions(option_class);
         ClassChangeAdd();
+    }
+    //bat tro giup
+    public void HelpActive()
+    {
+        Help.SetActive(true);
+        Time.timeScale = 0;
+        MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+    }
+    //tat tro giup
+    public void HelpDisable()
+    {
+        Help.SetActive(false);
+        MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = false;
+        Time.timeScale = 1;
     }
 }
