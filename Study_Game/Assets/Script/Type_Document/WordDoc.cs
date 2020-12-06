@@ -33,6 +33,7 @@ public class WordDoc : MonoBehaviour
     public TextMeshProUGUI ttSpeed;
     public TextMeshProUGUI ttTime;
     public GameObject total;
+    public GameObject menu;
     private float accurary = 0;
     private float tudung = 0;
     private float tusai = 0;
@@ -138,7 +139,7 @@ public class WordDoc : MonoBehaviour
         colorWord();
         if (str_name == "")
         {
-            
+      
             Menu.SetActiveMenuTrue(total, name);
         }
     }
@@ -248,6 +249,7 @@ public class WordDoc : MonoBehaviour
                 if (currentWord.Length == 0)
                 {
                     total.SetActive(true);
+                    menu.SetActive(true);
                     WordDocOP.gameObject.SetActive(false);
                     IPWord.gameObject.SetActive(false);
                     Time.timeScale = 0;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.Networking;
 public class Typer : MonoBehaviour
 { //Ngân Hàng Từ
     public WordBank wordBank =null;
@@ -113,10 +113,24 @@ public class Typer : MonoBehaviour
     private float tudung = 0;
     private float tusai = 0;
 
+    //save
+    public GameObject menu;
+    public GameObject name;
+    public TextMeshProUGUI txtname;
+    public Button xacnhan;
+    string URL_1 = "http://localhost/xampp/select_class.php";
+    public string[] saveData;
+    public TMP_InputField text_name;
+    public TMP_Dropdown txt_class;
+    List<string> option_class = new List<string> { };
+    string str_name;
+    string str_class;
+
     // Start is called before the first frame update
-     private void Start()
+    private void Start()
     {
-       SetCurrentWord();
+        StartCoroutine(SelectClassAddDropdownlist(URL_1));
+        SetCurrentWord();
        textTime.text = timeStart.ToString();
         textAccurary.text = "0";
         textSpeed.text = "0";
@@ -148,27 +162,90 @@ public class Typer : MonoBehaviour
     // Update is called once per frame
      private void Update()
     {
-        if (timeStart >= 0)
+        if (str_name == "")
         {
-            timeStart -= Time.deltaTime;
-            textTime.text = Mathf.RoundToInt(timeStart).ToString();
 
-            textAccurary.text = Mathf.RoundToInt(accurary).ToString();
-            textSpeed.text = Mathf.RoundToInt(tudung).ToString();
-            CheckInput();
-            checkbp();
+            Menu.SetActiveMenuTrue(total, name);
+
+        }else
+        {
+            if (timeStart >= 0)
+            {
+                timeStart -= Time.deltaTime;
+                textTime.text = Mathf.RoundToInt(timeStart).ToString();
+
+                textAccurary.text = Mathf.RoundToInt(accurary).ToString();
+                textSpeed.text = Mathf.RoundToInt(tudung).ToString();
+                CheckInput();
+                checkbp();
+            }
+            if (timeStart <= 0)
+            {
+                total.SetActive(true);
+                menu.SetActive(true);
+                name.SetActive(false);
+                ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
+                ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
+
+            }
         }
-        if(timeStart <= 0)
-        {   
-            total.SetActive(true);
-            ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
-            ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
-            
-        }
+
+        
+
+        
         //Debug.Log(timeStart);
 
     }
-    
+
+
+    //Hien bang nhap ten
+    public void InputNameClass()
+    {
+        if (text_name.text != null)
+        {
+            str_name = text_name.text;
+            Menu.SetActiveMenuFalse(total, name);
+        }
+    }
+    //Xu ly gan id class = dropdown changed
+    public void ClassChangeAdd()
+    {
+        for (int i = 0; i < (saveData.Length - 1); i++)
+        {
+            if (txt_class.options[txt_class.value].text == SaveRankView.GetValueData(saveData[i], "class:"))
+            {
+                str_class = SaveRankView.GetValueData(saveData[i], "id:");
+                break;
+            }
+        }
+    }
+    IEnumerator SelectClassAddDropdownlist(string URL)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(URL);
+
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Select data complete!");
+        }
+        string usersDataString = www.downloadHandler.text;
+        saveData = usersDataString.Split(';');
+
+        for (int i = 0; i < (saveData.Length - 1); i++)
+        {
+            option_class.Add(SaveRankView.GetValueData(saveData[i], "class:"));
+        }
+
+        txt_class.AddOptions(option_class);
+        ClassChangeAdd();
+    }
+
+
+
     private void CheckInput()
     {
         //test = null;

@@ -16,16 +16,17 @@ public class level : MonoBehaviour
     public GameObject time;
     public GameObject accurary;
     public GameObject speed;
+    public GameObject total;
 
     //	exit
-   /* ComputerCotroller pComputer;
-    public GameObject imgb;
-    AppOpen pApp;
-	public Button Close;
-    public GameObject pCom;
-    public string App_Name;
-    public Sprite None_App;
-    public GameObject App_Parent;*/
+    /* ComputerCotroller pComputer;
+     public GameObject imgb;
+     AppOpen pApp;
+     public Button Close;
+     public GameObject pCom;
+     public string App_Name;
+     public Sprite None_App;
+     public GameObject App_Parent;*/
     public string tlevel;
     
     // Start is called before the first frame update
@@ -51,6 +52,7 @@ public class level : MonoBehaviour
     private void GetLevel(Button btn)
     {
         tlevel = btn.name;
+        //total.SetActive(true);
         Typer.SetActive(true);
         OP.SetActive(true);
         time.SetActive(true);
