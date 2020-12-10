@@ -52,7 +52,7 @@ public class level : MonoBehaviour
     private void GetLevel(Button btn)
     {
         tlevel = btn.name;
-        //total.SetActive(true);
+        total.SetActive(true);
         Typer.SetActive(true);
         OP.SetActive(true);
         time.SetActive(true);
