@@ -57,7 +57,7 @@ public class Typer : MonoBehaviour
     public Button btnphay;
     public Button btncham;
     public Button btnxet;*/
-
+    //img ban phim
     public GameObject btn1;
     public GameObject btn2;
     public GameObject btn3;
@@ -99,6 +99,37 @@ public class Typer : MonoBehaviour
     public GameObject btnphay;
     public GameObject btncham;
     public GameObject btnxet;
+    public GameObject btnsQ;
+    public GameObject btnsW;
+    public GameObject btnsE;
+    public GameObject btnsR;
+    public GameObject btnsT;
+    public GameObject btnsY;
+    public GameObject btnsU;
+    public GameObject btnsI;
+    public GameObject btnsO;
+    public GameObject btnsP;
+    public GameObject btnsA;
+    public GameObject btnsS;
+    public GameObject btnsD;
+    public GameObject btnsF;
+    public GameObject btnsG;
+    public GameObject btnsH;
+    public GameObject btnsJ;
+    public GameObject btnsK;
+    public GameObject btnsL;
+    //public GameObject btnchamp;
+    //public GameObject btnmoh;
+    public GameObject btnsZ;
+    public GameObject btnsX;
+    public GameObject btnsC;
+    public GameObject btnsV;
+    public GameObject btnsB;
+    public GameObject btnsN;
+    public GameObject btnsM;
+
+
+
     //time
     public float timeStart = 60;
     public Text textTime ;
@@ -112,6 +143,7 @@ public class Typer : MonoBehaviour
     private float accurary = 0;
     private float tudung = 0;
     private float tusai = 0;
+    bool iname = false;
 
     //save
     public GameObject menu;
@@ -126,15 +158,43 @@ public class Typer : MonoBehaviour
     List<string> option_class = new List<string> { };
     string str_name;
     string str_class;
+    string str_level;
+    bool endgame = true;
+    level lv;
 
     // Start is called before the first frame update
     private void Start()
     {
+        //total.SetActive(true);
         StartCoroutine(SelectClassAddDropdownlist(URL_1));
         SetCurrentWord();
+        Time.timeScale = 0;
        textTime.text = timeStart.ToString();
         textAccurary.text = "0";
         textSpeed.text = "0";
+        lv = wordBank.gameObject.GetComponent<level>();
+        if (lv.tlevel == "BtnCB")
+        {
+            str_level = "0";
+        }
+        else if (lv.tlevel == "BtnHD")
+        {
+            str_level = "2";
+        }
+        else if (lv.tlevel == "BtnHT")
+        {
+            str_level = "1";
+        }
+        else if (lv.tlevel == "BtnPS")
+        {
+            str_level = "3";
+        }
+        else if (lv.tlevel == "BtnOT")
+        {
+            str_level = "4";
+        }
+
+        Debug.Log(str_level);
     }
 
     private void SetCurrentWord()
@@ -147,7 +207,10 @@ public class Typer : MonoBehaviour
        // Debug.Log(currentWord);
         }
         j =0;
-        
+        if (str_level == null)
+        {
+
+        }
         SetRemainingWord(currentWord);
     }
 
@@ -179,15 +242,17 @@ public class Typer : MonoBehaviour
                 textSpeed.text = Mathf.RoundToInt(tudung).ToString();
                 CheckInput();
                 checkbp();
+
             }
-            if (timeStart <= 0)
+            if (timeStart <= 0 && endgame == true)
             {
                 total.SetActive(true);
                 menu.SetActive(true);
                 name.SetActive(false);
                 ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
                 ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
-
+                StartCoroutine(AddRankType());
+                endgame = false;
             }
         }
 
@@ -206,6 +271,9 @@ public class Typer : MonoBehaviour
         {
             str_name = text_name.text;
             Menu.SetActiveMenuFalse(total, name);
+            Time.timeScale = 1;
+            iname = true;
+            Debug.Log(str_name);
         }
     }
     //Xu ly gan id class = dropdown changed
@@ -244,13 +312,37 @@ public class Typer : MonoBehaviour
         txt_class.AddOptions(option_class);
         ClassChangeAdd();
     }
+    public IEnumerator AddRankType()
+    {
+        //data dung de post tuong ung mysql trong php
+        Debug.Log(  str_level) ;
+        WWWForm form = new WWWForm();
+        form.AddField("addIDrank", System.DateTime.Now.ToFileTime().ToString());
+        form.AddField("addnamerank", str_name);
+        form.AddField("addclasrank", str_class);
+        form.AddField("addaccuraryrank", accurary.ToString());
+        form.AddField("addlevelrank", str_level);
+        form.AddField("addspeedrank", tudung.ToString());
+        
+        //Post form len php => insert into
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
+    }
 
 
 
     private void CheckInput()
     {
         //test = null;
-        if(Input.anyKeyDown)
+        if (Input.anyKeyDown && iname == true)
         {
             //Debug.Log("100");
             string keysPressed = Input.inputString;
@@ -387,7 +479,37 @@ public class Typer : MonoBehaviour
         btnphay.gameObject.SetActive(false);
         btncham.gameObject.SetActive(false);
         btnxet.gameObject.SetActive(false);
-         if(remainingWord.Substring(0,1)== "1")
+
+        btnsQ.gameObject.SetActive(false);
+        btnsW.gameObject.SetActive(false);
+        btnsE.gameObject.SetActive(false);
+        btnsR.gameObject.SetActive(false);
+        btnsT.gameObject.SetActive(false);
+        btnsY.gameObject.SetActive(false);
+        btnsU.gameObject.SetActive(false);
+        btnsI.gameObject.SetActive(false);
+        btnsO.gameObject.SetActive(false);
+        btnsP.gameObject.SetActive(false);
+        btnsA.gameObject.SetActive(false);
+        btnsS.gameObject.SetActive(false);
+        btnsD.gameObject.SetActive(false);
+        btnsF.gameObject.SetActive(false);
+        btnsG.gameObject.SetActive(false);
+        btnsH.gameObject.SetActive(false);
+        btnsJ.gameObject.SetActive(false);
+        btnsK.gameObject.SetActive(false);
+        btnsL.gameObject.SetActive(false);
+      //  btnchamp.gameObject.SetActive(false);
+        //btnmoh.gameObject.SetActive(false);
+        btnsZ.gameObject.SetActive(false);
+        btnsX.gameObject.SetActive(false);
+        btnsC.gameObject.SetActive(false);
+        btnsV.gameObject.SetActive(false);
+        btnsB.gameObject.SetActive(false);
+        btnsN.gameObject.SetActive(false);
+        btnsM.gameObject.SetActive(false);
+
+        if (remainingWord.Substring(0,1)== "1")
             {
                 btn1.gameObject.SetActive(true);
              
@@ -563,7 +685,119 @@ public class Typer : MonoBehaviour
             {
                 btnxet.gameObject.SetActive(true);
             }
-
+            //shift
+        if (remainingWord.Substring(0, 1) == "Q")
+        {
+            btnsQ.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "W")
+        {
+            btnsW.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "E")
+        {
+            btnsE.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "R")
+        {
+            btnsR.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "T")
+        {
+            btnsT.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "Y")
+        {
+            btnsY.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "U")
+        {
+            btnsU.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "I")
+        {
+            btnsI.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "O")
+        {
+            btnsO.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "P")
+        {
+            btnsP.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "A")
+        {
+            btnsA.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "S")
+        {
+            btnsS.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "D")
+        {
+            btnsD.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "F")
+        {
+            btnsF.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "G")
+        {
+            btnsG.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "H")
+        {
+            btnsH.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "J")
+        {
+            btnsJ.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "K")
+        {
+            btnsK.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "L")
+        {
+            btnsL.gameObject.SetActive(true);
+        }
+       /* if (remainingWord.Substring(0, 1) == ";")
+        {
+            btnchamp.gameObject.SetActive(true);
+        }
+        /* if(remainingWord.Substring(0,1)== "'")
+         {
+             btnmoh.gameObject.SetActive(true);
+         }*/
+        if (remainingWord.Substring(0, 1) == "Z")
+        {
+            btnsZ.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "X")
+        {
+            btnsX.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "C")
+        {
+            btnsC.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "V")
+        {
+            btnsV.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "B")
+        {
+            btnsB.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "N")
+        {
+            btnsN.gameObject.SetActive(true);
+        }
+        if (remainingWord.Substring(0, 1) == "M")
+        {
+            btnsM.gameObject.SetActive(true);
+        }
 
     }
 

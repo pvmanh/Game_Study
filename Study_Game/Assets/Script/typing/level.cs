@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class level : MonoBehaviour
 {   public Button btncb;
@@ -27,7 +28,7 @@ public class level : MonoBehaviour
      public string App_Name;
      public Sprite None_App;
      public GameObject App_Parent;*/
-    public string tlevel;
+    public string tlevel = null;
     
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class level : MonoBehaviour
     private void GetLevel(Button btn)
     {
         tlevel = btn.name;
-        //total.SetActive(true);
+        total.SetActive(true);
         Typer.SetActive(true);
         OP.SetActive(true);
         time.SetActive(true);
@@ -65,6 +66,9 @@ public class level : MonoBehaviour
         btnot.gameObject.SetActive(false);
         //imgbp.gameObject.SetActive(true);
         banphim.gameObject.SetActive(true);
+        Debug.Log(tlevel);
+
+  
     }
   /*  void CloseApp()
     {
