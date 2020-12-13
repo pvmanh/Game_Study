@@ -202,7 +202,7 @@ public class WordDoc : MonoBehaviour
     }
 
 
-    public IEnumerator AddRankDrag()
+    public IEnumerator AddRankTypeDoc()
     {
         //data dung de post tuong ung mysql trong php
          
@@ -285,7 +285,7 @@ public class WordDoc : MonoBehaviour
                     ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
                     ttTime.text = timeData.txt_time.text;
                     Debug.Log("112222");
-                   StartCoroutine(AddRankDrag());
+                   StartCoroutine(AddRankTypeDoc());
                 }
             }
             if ( IPWord.text == " ")

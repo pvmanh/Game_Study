@@ -158,6 +158,9 @@ public class Typer : MonoBehaviour
     List<string> option_class = new List<string> { };
     string str_name;
     string str_class;
+    string str_level;
+    bool endgame = true;
+    level lv;
 
     // Start is called before the first frame update
     private void Start()
@@ -169,6 +172,29 @@ public class Typer : MonoBehaviour
        textTime.text = timeStart.ToString();
         textAccurary.text = "0";
         textSpeed.text = "0";
+        lv = wordBank.gameObject.GetComponent<level>();
+        if (lv.tlevel == "BtnCB")
+        {
+            str_level = "0";
+        }
+        else if (lv.tlevel == "BtnHD")
+        {
+            str_level = "2";
+        }
+        else if (lv.tlevel == "BtnHT")
+        {
+            str_level = "1";
+        }
+        else if (lv.tlevel == "BtnPS")
+        {
+            str_level = "3";
+        }
+        else if (lv.tlevel == "BtnOT")
+        {
+            str_level = "4";
+        }
+
+        Debug.Log(str_level);
     }
 
     private void SetCurrentWord()
@@ -181,7 +207,10 @@ public class Typer : MonoBehaviour
        // Debug.Log(currentWord);
         }
         j =0;
-        
+        if (str_level == null)
+        {
+
+        }
         SetRemainingWord(currentWord);
     }
 
@@ -213,15 +242,17 @@ public class Typer : MonoBehaviour
                 textSpeed.text = Mathf.RoundToInt(tudung).ToString();
                 CheckInput();
                 checkbp();
+
             }
-            if (timeStart <= 0)
+            if (timeStart <= 0 && endgame == true)
             {
                 total.SetActive(true);
                 menu.SetActive(true);
                 name.SetActive(false);
                 ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
                 ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
-
+                StartCoroutine(AddRankType());
+                endgame = false;
             }
         }
 
@@ -242,6 +273,7 @@ public class Typer : MonoBehaviour
             Menu.SetActiveMenuFalse(total, name);
             Time.timeScale = 1;
             iname = true;
+            Debug.Log(str_name);
         }
     }
     //Xu ly gan id class = dropdown changed
@@ -279,6 +311,30 @@ public class Typer : MonoBehaviour
 
         txt_class.AddOptions(option_class);
         ClassChangeAdd();
+    }
+    public IEnumerator AddRankType()
+    {
+        //data dung de post tuong ung mysql trong php
+        Debug.Log(  str_level) ;
+        WWWForm form = new WWWForm();
+        form.AddField("addIDrank", System.DateTime.Now.ToFileTime().ToString());
+        form.AddField("addnamerank", str_name);
+        form.AddField("addclasrank", str_class);
+        form.AddField("addaccuraryrank", accurary.ToString());
+        form.AddField("addlevelrank", str_level);
+        form.AddField("addspeedrank", tudung.ToString());
+        
+        //Post form len php => insert into
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
     }
 
 

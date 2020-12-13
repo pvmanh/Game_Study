@@ -16,6 +16,7 @@ public class WordBank : MonoBehaviour
 	public GameObject GO;
 	public GameObject imgcb;
 	private string randomWord ;
+	private string level;
 
 	 private void Start()
 	{
@@ -29,25 +30,25 @@ public class WordBank : MonoBehaviour
 		{
 			randomIndex = Random.Range(0, wordListcb.Length);
 			randomWord = wordListcb[randomIndex];
-			//imgcb.SetActive(true);
+            //imgcb.SetActive(true);
 
-		}
-		if(lv.tlevel == "BtnHD")
+        }
+        else  if(lv.tlevel == "BtnHD")
 		{
 			randomIndex = Random.Range(0, wordListhd.Length);
 			randomWord = wordListhd[randomIndex];
 		}
-		if(lv.tlevel == "BtnHT")
+		else if (lv.tlevel == "BtnHT")
 		{
 			randomIndex = Random.Range(0, wordListht.Length);
 			randomWord = wordListht[randomIndex];
 		}
-		if(lv.tlevel == "BtnPS")
+		else if (lv.tlevel == "BtnPS")
 		{
 			randomIndex = Random.Range(0, wordListps.Length);
 			randomWord = wordListps[randomIndex];
 		}
-		if(lv.tlevel == "BtnOT")
+		else if (lv.tlevel == "BtnOT")
 		{
 			randomIndex = Random.Range(0, wordListot.Length);
 			randomWord = wordListot[randomIndex];
@@ -55,6 +56,5 @@ public class WordBank : MonoBehaviour
 		Debug.Log(lv.tlevel);
 		return randomWord;
 	}
-	
 
 }

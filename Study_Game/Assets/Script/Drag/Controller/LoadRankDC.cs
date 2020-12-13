@@ -24,8 +24,7 @@ public class LoadRankDC : MonoBehaviour
     public string class_id_click;
     string URL_drag = "http://localhost/xampp/drag_rank_select.php?level=";
     string URL_click = "http://localhost/xampp/click_rank_select.php?level=";
-    string URL_type = "http://localhost/xampp/type_rank_select.php?level=";
-    string URL_typedoc = "http://localhost/xampp/typedoc_rank_select.php?class=";
+   
     [System.Serializable]
     public struct SaveRankData
     {
@@ -36,26 +35,7 @@ public class LoadRankDC : MonoBehaviour
         public string TimePlayed;
         
     }
-    [System.Serializable]
-    public struct TypeDocData
-    {
-        public string idnumber;
-        public string PlayerName;
-        public string ClassName;
-        public string Accurary;
-        public string TimePlayed;
-        public string Speed;
-    }
-    [System.Serializable]
-    public struct TypeData
-    {
-        public string idnumber;
-        public string PlayerName;
-        public string ClassName;
-        public string Accurary;
-        public string LevelGame;
-        public string Speed;
-    }
+    
 
     [Header("Rank Setting")]
     public SaveRankData[] data_Drag_Rank;
@@ -70,9 +50,55 @@ public class LoadRankDC : MonoBehaviour
     public Transform Click_Content;
     public bool isDrag_class = false;
     public bool isClick_class = false;
+    //===========================================================================
+
+    public TMP_Dropdown dropdown_class_type;
+    public TMP_Dropdown dropdown_class_typedoc;
+    public string class_id_type;
+    public string class_id_typedoc;
+    string URL_type = "http://localhost/xampp/type_rank_select.php?level=";
+    string URL_typedoc = "http://localhost/xampp/typedoc_rank_select.php?class=";
+   /* [System.Serializable]
+    public struct TypeDocData
+    {
+        public string idnumber;
+        public string PlayerName;
+        public string ClassName;
+        public string Accurary;
+        public string TimePlayed;
+        public string Speed;
+    }*/
+    [System.Serializable]
+    public struct TypeData
+    {
+        public string idnumber;
+        public string PlayerName;
+        public string ClassName;
+        public string Accurary;
+        public string LevelGame;
+        public string TimePlayed;
+        public string Speed;
+    }
+    [Header("Rank Setting")]
+    public TypeData[] data_Type_Rank;
+    public TypeData[] data_TypeDoc_Rank;
+    public List<string> data_type_uncut;
+    public List<string> data_typedoc_uncut;
+    public TMP_Dropdown dropdown_level_type;
+    public TMP_Dropdown dropdown_level_typedoc;
+    ///public bool isCut = false;
+    public GameObject InfoType_rank;
+    public GameObject InfoTypeDoc_rank;
+    public Transform Type_Content;
+    public Transform TypeDoc_Content;
+    public bool isType_class = false;
+    public bool isTypeDoc_class = false;
+
     private void Start() {
         //lay class cho drag & click
-        StartCoroutine(SelectClassAndAddToList(URL_class, data_class, dropdown_class_drag, dropdown_class_click));
+        StartCoroutine(SelectClassAndAddToList(URL_class, data_class));
+        //lay class cho type && typedoc
+        //StartCoroutine(SelectClassAndAddToList(URL_class, data_class, dropdown_class_type, dropdown_class_typedoc));
     }
     private void Update() {
         //them options dropdownlist
@@ -87,7 +113,20 @@ public class LoadRankDC : MonoBehaviour
 
             string level_click = dropdown_level_click.options[dropdown_level_click.value].text;
             StartCoroutine(SelectDataRankCustom(URL_click, level_click, class_id_click, data_click_uncut));
-           
+
+
+            //==============
+
+            AddOptionsDropdown(data_class, data_Class_name, dropdown_class_type, dropdown_class_typedoc);
+            class_id_type = GetClassIDFromDropdown(class_id_type, dropdown_class_type, data_class);
+            class_id_typedoc = GetClassIDFromDropdown(class_id_typedoc, dropdown_class_typedoc, data_class);
+
+            string level_type = dropdown_level_type.options[dropdown_level_type.value].text;
+            StartCoroutine(SelectDataRankCustom(URL_type, level_type, class_id_type, data_type_uncut));
+
+            //string level_typedoc = dropdown_level_click.options[dropdown_level_click.value].text;
+            StartCoroutine(SelectDataRankCustomTypeDoc(URL_typedoc, class_id_typedoc, data_typedoc_uncut));
+
             isLoaded = false;
         }
 
@@ -107,6 +146,22 @@ public class LoadRankDC : MonoBehaviour
                 data_Click_Rank = CutDataRank(data_Click_Rank, data_click_uncut);
                 AddRankDataToGUI(data_Click_Rank, Info_rank, Click_Content);
                 isClick_class = false;
+            }
+
+            if (isType_class == true)
+            {
+                data_Type_Rank = new TypeData[data_type_uncut.Count];
+                data_Type_Rank = CutDataTypeRank(data_Type_Rank, data_type_uncut);
+                AddRankDataToGUIType(data_Type_Rank, InfoType_rank, Type_Content,dropdown_level_type);
+                isType_class = false;
+            }
+
+            if (isTypeDoc_class == true)
+            {
+                data_TypeDoc_Rank = new TypeData[data_typedoc_uncut.Count];
+                data_TypeDoc_Rank = CutDataTypeRank(data_TypeDoc_Rank, data_typedoc_uncut);
+                AddRankDataToGUIType(data_TypeDoc_Rank, InfoTypeDoc_rank, TypeDoc_Content,dropdown_level_typedoc);
+                isTypeDoc_class = false;
             }
 
             isCut = false;
@@ -137,9 +192,33 @@ public class LoadRankDC : MonoBehaviour
             StartCoroutine(SelectDataRankCustom(URL_click, level_click, class_id_click, data_click_uncut));
             isClick_class = true;
         }
+        else if (class_dropdown.name == "class-select-type")
+        {
+            foreach (Transform child in Type_Content)
+            {
+                Destroy(child.gameObject);
+            }
+            class_id_type = GetClassIDFromDropdown(class_id_type, class_dropdown, data_class);
+            int level = dropdown_level_type.value;
+            string level_type = level.ToString();
+            StartCoroutine(SelectDataRankCustom(URL_type, level_type, class_id_type, data_type_uncut));
+            isType_class = true;
+        }
+        else if (class_dropdown.name == "class-select-typedoc")
+        {
+            foreach (Transform child in TypeDoc_Content)
+            {
+                Destroy(child.gameObject);
+            }
+            class_id_typedoc = GetClassIDFromDropdown(class_id_typedoc, class_dropdown, data_class);
+            //string level_typedoc = dropdown_level_click.options[dropdown_level_click.value].text;
+            StartCoroutine(SelectDataRankCustomTypeDoc(URL_typedoc, class_id_typedoc, data_typedoc_uncut));
+            isTypeDoc_class = true;
+        }
+
     }
     //Lay data class va them vao list
-    IEnumerator SelectClassAndAddToList(string link, List<SaveClassData> list_class, TMP_Dropdown classDropdown_drag, TMP_Dropdown classDropdown_click)
+    IEnumerator SelectClassAndAddToList(string link, List<SaveClassData> list_class)
     {
         UnityWebRequest www = UnityWebRequest.Get(link);
 
@@ -168,6 +247,7 @@ public class LoadRankDC : MonoBehaviour
     //Them options dropdownlist
     void AddOptionsDropdown(List<SaveClassData> list_class, List<string> list_class_name, TMP_Dropdown classDropdown_drag, TMP_Dropdown classDropdown_click)
     {
+        list_class_name.Clear();
         for(int i = 0; i < list_class.Count; i++)
         {
             list_class_name.Add(list_class[i].class_name);
@@ -175,6 +255,7 @@ public class LoadRankDC : MonoBehaviour
 
         classDropdown_drag.AddOptions(list_class_name); //them class name vao rank drag
         classDropdown_click.AddOptions(list_class_name); //them class name vao rank click
+
     }
     //lay id class
     string GetClassIDFromDropdown(string classid, TMP_Dropdown class_dropdown, List<SaveClassData> list_class)
@@ -217,6 +298,39 @@ public class LoadRankDC : MonoBehaviour
 
 
     }
+    //=========================
+    IEnumerator SelectDataRankCustomTypeDoc(string link, string classid, List<string> data_uncut)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(link + classid);
+
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Select data complete!");
+        }
+        string usersDataString = www.downloadHandler.text;
+        string[] saveData = usersDataString.Split(';');
+
+        data_uncut.Clear();
+
+        if (saveData.Length != 0)
+        {
+            for (int i = 0; i < (saveData.Length - 1); i++)
+            {
+                data_uncut.Add(saveData[i]);
+            }
+        }
+        isCut = true;
+
+
+    }
+
+
+
     //cut data thanh Array
     SaveRankData[] CutDataRank(SaveRankData[] data_Rank, List<string> data_uncut)
     {
@@ -234,6 +348,27 @@ public class LoadRankDC : MonoBehaviour
         }  
         return data_Rank;
     }
+    //===========================
+    TypeData[] CutDataTypeRank(TypeData[] data_Rank, List<string> data_uncut)
+    {
+        if (data_uncut.Count != 0)
+        {
+            for (int i = 0; i < data_uncut.Count; i++)
+            {
+                data_Rank[i].idnumber = SaveRankView.GetValueData(data_uncut[i], "id:");
+                data_Rank[i].PlayerName = SaveRankView.GetValueData(data_uncut[i], "name:");
+                data_Rank[i].LevelGame = SaveRankView.GetValueData(data_uncut[i], "level:");
+                data_Rank[i].ClassName = SaveRankView.GetValueData(data_uncut[i], "class:");
+                data_Rank[i].TimePlayed = SaveRankView.GetValueData(data_uncut[i], "time:");
+                data_Rank[i].Accurary = SaveRankView.GetValueData(data_uncut[i], "accurary:");
+                data_Rank[i].Speed = SaveRankView.GetValueData(data_uncut[i], "speed:");
+            }
+            //DataChangeRankTable();
+        }
+        return data_Rank;
+    }
+
+
     //Add data to gameobject
     public void AddRankDataToGUI(SaveRankData[] data_Rank, GameObject RankRows, Transform Content)
     {
@@ -280,4 +415,73 @@ public class LoadRankDC : MonoBehaviour
             RankInfo.GetComponent<InfoHolder>().Alert.gameObject.SetActive(true);
         }
     }
+
+
+    //===============================================
+    public void AddRankDataToGUIType(TypeData[] data_Rank, GameObject RankRows, Transform Content, TMP_Dropdown ddlevel)
+    {
+        if (data_Rank.Length != 0)
+        {
+            for (int i = 0; i < data_Rank.Length; i++)
+            {
+                var RankInfo = Instantiate(RankRows, Content);
+                RankInfo.GetComponent<InfoType>().STT.text = (i + 1).ToString();
+                RankInfo.GetComponent<InfoType>().Name.text = data_Rank[i].PlayerName;
+                RankInfo.GetComponent<InfoType>().Class.text = data_Rank[i].ClassName;
+                if (RankInfo.GetComponent<InfoType>().Level != null)
+                {
+                    if (ddlevel != null)
+                    {
+                        RankInfo.GetComponent<InfoType>().Level.text = ddlevel.options[int.Parse(data_Rank[i].LevelGame)].text;
+                    }
+                }
+                if (RankInfo.GetComponent<InfoType>().Time != null)
+                {
+                    RankInfo.GetComponent<InfoType>().Time.text = data_Rank[i].TimePlayed;
+                }
+                RankInfo.GetComponent<InfoType>().Accurary.text = data_Rank[i].Accurary;
+                RankInfo.GetComponent<InfoType>().Speed.text = data_Rank[i].Speed;
+                if (i == 0)
+                {
+                    RankInfo.GetComponent<Image>().color = new Color32(255, 238, 0, 255);
+                }
+                else if (i == 1)
+                {
+                    RankInfo.GetComponent<Image>().color = new Color32(110, 179, 255, 255);
+                }
+                else if (i == 2)
+                {
+                    RankInfo.GetComponent<Image>().color = new Color32(140, 255, 120, 255);
+                }
+                else if (i % 2 == 0 && i > 2)
+                {
+                    RankInfo.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                }
+                else if (i % 2 != 0 && i > 2)
+                {
+                    RankInfo.GetComponent<Image>().color = new Color32(240, 240, 240, 255);
+                }
+            }
+        }
+        else if (data_Rank.Length == 0)
+        {
+            var RankInfo = Instantiate(RankRows, Content);
+            RankInfo.GetComponent<InfoType>().STT.gameObject.SetActive(false);
+            RankInfo.GetComponent<InfoType>().Name.gameObject.SetActive(false);
+            RankInfo.GetComponent<InfoType>().Class.gameObject.SetActive(false);
+            RankInfo.GetComponent<InfoType>().Accurary.gameObject.SetActive(false);
+            RankInfo.GetComponent<InfoType>().Speed.gameObject.SetActive(false);
+            RankInfo.GetComponent<InfoType>().Alert.gameObject.SetActive(true);
+            if (RankInfo.GetComponent<InfoType>().Time != null)
+            {
+                RankInfo.GetComponent<InfoType>().Time.gameObject.SetActive(false);
+            }
+            if (RankInfo.GetComponent<InfoType>().Level != null)
+            {
+                RankInfo.GetComponent<InfoType>().Level.gameObject.SetActive(false);
+            }
+
+        }
+    }
+   
 }
