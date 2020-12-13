@@ -233,7 +233,7 @@ public class WordDoc : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
            // k++;
-            if ( IPWord.text!=" ")//&& IPWord.text != "  " &&IPWord.text != "   " && IPWord.text != "    " && IPWord.text != "     ")
+            if ( IPWord.text != "")//&& IPWord.text != "  " &&IPWord.text != "   " && IPWord.text != "    " && IPWord.text != "     ")
             {
                 for (int i = 0; i < currentWord.Length; i++)
                 {
@@ -242,7 +242,7 @@ public class WordDoc : MonoBehaviour
                     {
                         txtsai = null;
                         txtdung = null;
-                        if (IPWord.text == currentWord.Substring(0, i + 1))
+                        if (IPWord.text == currentWord.Substring(0, i))
                         {
                             Debug.Log(currentWord.Substring(0, i));
                             txtdung = "<color=green>" + currentWord.Substring(0, i + 1) + "</color>";
@@ -251,7 +251,7 @@ public class WordDoc : MonoBehaviour
                             tudung++;
                             Debug.Log(txtdung);
                         }
-                        else if (IPWord.text != currentWord.Substring(0, i + 1))
+                        else if (IPWord.text != currentWord.Substring(0, i))
                         {
 
                             txtsai = "<color=red>" + currentWord.Substring(0, i + 1) + "</color>";
@@ -287,11 +287,6 @@ public class WordDoc : MonoBehaviour
                     Debug.Log("112222");
                    StartCoroutine(AddRankTypeDoc());
                 }
-            }
-            if ( IPWord.text == " ")
-            {
-                Debug.Log("1");
-                IPWord.text = null;
             }
             //Debug.Log(currentWord+"1")
         }
