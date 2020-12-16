@@ -37,7 +37,9 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		transform.position = Input.mousePosition; //set vi tri block = vi tri chuot di chuyen
+		Vector3 mousePos = Input.mousePosition;
+    	mousePos.z = Camera.main.nearClipPlane;
+		transform.position = Camera.main.ScreenToWorldPoint(mousePos); //set vi tri block = vi tri chuot di chuyen
 
 		if(firstCreateTool == true) //kiem tra tool
 		{
@@ -104,6 +106,9 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		{
 			transform.SetParent(eventData.pointerEnter.gameObject.transform);
 		}
+
+		GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x ,GetComponent<RectTransform>().localPosition.y , 0);
+		GetComponent<BlockInfo>().isActive = true;
 
 		if(transform.parent == startParent || transform.parent == Hold_Block_Tool) //kiem tra parent neu nam trong hold block hoac tool
 		{

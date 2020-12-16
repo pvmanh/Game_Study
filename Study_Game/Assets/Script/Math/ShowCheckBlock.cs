@@ -28,6 +28,10 @@ public class ShowCheckBlock : MonoBehaviour
             {
                 Bot_Check.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
+            if(GetComponent<BlockInfo>().Mid_Contain != null && GetComponent<BlockInfo>().Function_name == "Turn_Away")
+            {
+                GetComponent<BlockInfo>().Mid_Contain.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
         }
         else if(BlockDragging.itemBeingDragged == null)
         {
@@ -38,6 +42,10 @@ public class ShowCheckBlock : MonoBehaviour
             if(Bot_Check != null)
             {
                 Bot_Check.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
+            if(GetComponent<BlockInfo>().Mid_Contain != null)
+            {
+                GetComponent<BlockInfo>().Mid_Contain.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
         }
 

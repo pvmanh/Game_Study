@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BlockInfo : MonoBehaviour
 {
+    public string Function_name;
     public GameObject Mid_Contain;
+    public bool isActive = false;
     // Start is called before the first frame update
     void Start()
     {

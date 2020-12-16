@@ -1,43 +1,43 @@
 fileFormatVersion: 2
-guid: d35dfed5064e9bd4bbf31087753b1ba6
+guid: 5d3002e98ba306445a92d3001338df87
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3691987728178403706
-    second: Character_2_16x16_RPGMAKER_0
+      213: 8647558480309044111
+    second: Character_2_48x48_RPGMAKER_0
   - first:
-      213: 3670684535867324263
-    second: Character_2_16x16_RPGMAKER_1
+      213: -43887826415804823
+    second: Character_2_48x48_RPGMAKER_1
   - first:
-      213: 8870830131814939313
-    second: Character_2_16x16_RPGMAKER_2
+      213: -6102990086878403354
+    second: Character_2_48x48_RPGMAKER_2
   - first:
-      213: -2017143604136374734
-    second: Character_2_16x16_RPGMAKER_3
+      213: -3739843241341678112
+    second: Character_2_48x48_RPGMAKER_3
   - first:
-      213: -6693805614938032669
-    second: Character_2_16x16_RPGMAKER_4
+      213: -4159346996157715042
+    second: Character_2_48x48_RPGMAKER_4
   - first:
-      213: -6704924656099430821
-    second: Character_2_16x16_RPGMAKER_5
+      213: -5231148523093498487
+    second: Character_2_48x48_RPGMAKER_5
   - first:
-      213: 227161858335242898
-    second: Character_2_16x16_RPGMAKER_6
+      213: 8191710669870286744
+    second: Character_2_48x48_RPGMAKER_6
   - first:
-      213: 7971841186327254743
-    second: Character_2_16x16_RPGMAKER_7
+      213: 896185670497380291
+    second: Character_2_48x48_RPGMAKER_7
   - first:
-      213: 5512607597691280977
-    second: Character_2_16x16_RPGMAKER_8
+      213: -3350020083662639797
+    second: Character_2_48x48_RPGMAKER_8
   - first:
-      213: -1858615557447453644
-    second: Character_2_16x16_RPGMAKER_9
+      213: 8734224828759491419
+    second: Character_2_48x48_RPGMAKER_9
   - first:
-      213: -2827047966356678136
-    second: Character_2_16x16_RPGMAKER_10
+      213: 2269721557006813259
+    second: Character_2_48x48_RPGMAKER_10
   - first:
-      213: 8846990798335438516
-    second: Character_2_16x16_RPGMAKER_11
+      213: 4276219783355351281
+    second: Character_2_48x48_RPGMAKER_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -137,13 +137,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_0
+      name: Character_2_48x48_RPGMAKER_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 15
-        height: 21
+        y: 288
+        width: 45
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68623d2e8bc63ccc0800000000000000
-      internalID: -3691987728178403706
+      spriteID: f83cc310f9c420870800000000000000
+      internalID: 8647558480309044111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_1
+      name: Character_2_48x48_RPGMAKER_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 96
-        width: 16
-        height: 21
+        x: 48
+        y: 288
+        width: 48
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76734e22324e0f230800000000000000
-      internalID: 3670684535867324263
+      spriteID: 96e95802144146ff0800000000000000
+      internalID: -43887826415804823
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_2
+      name: Character_2_48x48_RPGMAKER_2
       rect:
         serializedVersion: 2
-        x: 33
-        y: 96
-        width: 15
-        height: 21
+        x: 99
+        y: 288
+        width: 45
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ba39a551058b1b70800000000000000
-      internalID: 8870830131814939313
+      spriteID: 6e4e1ebd9d2dd4ba0800000000000000
+      internalID: -6102990086878403354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_3
+      name: Character_2_48x48_RPGMAKER_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 13
-        height: 20
+        y: 192
+        width: 39
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23e008e449aa104e0800000000000000
-      internalID: -2017143604136374734
+      spriteID: 0ed0f24f268691cc0800000000000000
+      internalID: -3739843241341678112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_4
+      name: Character_2_48x48_RPGMAKER_4
       rect:
         serializedVersion: 2
-        x: 16
-        y: 64
-        width: 13
-        height: 21
+        x: 48
+        y: 192
+        width: 39
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e57a1e2243da13a0800000000000000
-      internalID: -6693805614938032669
+      spriteID: e9d6e64b1f70746c0800000000000000
+      internalID: -4159346996157715042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_5
+      name: Character_2_48x48_RPGMAKER_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 13
-        height: 20
+        x: 96
+        y: 192
+        width: 39
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5e6f6bac8253f2a0800000000000000
-      internalID: -6704924656099430821
+      spriteID: 985e3b1522a3767b0800000000000000
+      internalID: -5231148523093498487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_6
+      name: Character_2_48x48_RPGMAKER_6
       rect:
         serializedVersion: 2
-        x: 3
-        y: 32
-        width: 13
-        height: 20
+        x: 9
+        y: 96
+        width: 39
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,20 +277,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29af690b18a072300800000000000000
-      internalID: 227161858335242898
+      spriteID: 8974564e37dcea170800000000000000
+      internalID: 8191710669870286744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_7
+      name: Character_2_48x48_RPGMAKER_7
       rect:
         serializedVersion: 2
-        x: 19
-        y: 32
-        width: 13
-        height: 21
+        x: 57
+        y: 96
+        width: 39
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,20 +298,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d65dd4825ba1ae60800000000000000
-      internalID: 7971841186327254743
+      spriteID: 3c7aace7e14ef6c00800000000000000
+      internalID: 896185670497380291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_8
+      name: Character_2_48x48_RPGMAKER_8
       rect:
         serializedVersion: 2
-        x: 35
-        y: 32
-        width: 13
-        height: 20
+        x: 105
+        y: 96
+        width: 39
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,20 +319,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15e128e2767b08c40800000000000000
-      internalID: 5512607597691280977
+      spriteID: b4d2ddaab765281d0800000000000000
+      internalID: -3350020083662639797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_9
+      name: Character_2_48x48_RPGMAKER_9
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 15
-        height: 21
+        width: 45
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,20 +340,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43474547ffed436e0800000000000000
-      internalID: -1858615557447453644
+      spriteID: b534b92b433363970800000000000000
+      internalID: 8734224828759491419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_10
+      name: Character_2_48x48_RPGMAKER_10
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 0
-        width: 16
-        height: 21
+        width: 48
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -361,20 +361,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80ad15a5ade44c8d0800000000000000
-      internalID: -2827047966356678136
+      spriteID: b4800780bbbaf7f10800000000000000
+      internalID: 2269721557006813259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_2_16x16_RPGMAKER_11
+      name: Character_2_48x48_RPGMAKER_11
       rect:
         serializedVersion: 2
-        x: 33
+        x: 99
         y: 0
-        width: 15
-        height: 21
+        width: 45
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -382,8 +382,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4beeee9f143d6ca70800000000000000
-      internalID: 8846990798335438516
+      spriteID: 1f0c4609c3f285b30800000000000000
+      internalID: 4276219783355351281
       vertices: []
       indices: 
       edges: []
@@ -391,7 +391,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: dbc983e023ae9e84f9624270ac894e0c
+    spriteID: 04c0811d6e16a9241b3b06c180d229c9
     internalID: 0
     vertices: []
     indices: 

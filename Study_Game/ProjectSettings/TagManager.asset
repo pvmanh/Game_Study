@@ -19,6 +19,9 @@ TagManager:
   - Closet
   - Pantr
   - DragGame
+  - Wall
+  - Number
+  - Hole
   layers:
   - Default
   - TransparentFX
@@ -30,7 +33,7 @@ TagManager:
   - 
   - PC
   - PC_Visible
-  - 
+  - StopsMoveMent
   - 
   - 
   - 
