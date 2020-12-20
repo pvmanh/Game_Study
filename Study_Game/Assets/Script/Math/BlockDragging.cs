@@ -33,11 +33,18 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			GetComponent<ShowCheckBlock>().Mid_Check.SetActive(true);
 		if(GetComponent<ShowCheckBlock>().Bot_Check != null)
 			GetComponent<ShowCheckBlock>().Bot_Check.SetActive(true);
+
+		if(name == "For")
+		{
+			transform.GetChild(2).GetComponent<CanvasGroup>().blocksRaycasts = true;
+		}
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		transform.position = Input.mousePosition; //set vi tri block = vi tri chuot di chuyen
+		Vector3 mousePos = Input.mousePosition;
+    	mousePos.z = Camera.main.nearClipPlane;
+		transform.position = Camera.main.ScreenToWorldPoint(mousePos); //set vi tri block = vi tri chuot di chuyen
 
 		if(firstCreateTool == true) //kiem tra tool
 		{
@@ -56,6 +63,11 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			if(new_Tool.GetComponent<ShowCheckBlock>().Bot_Check != null)
 				new_Tool.GetComponent<ShowCheckBlock>().Bot_Check.SetActive(false);
 				new_Tool.GetComponent<ShowCheckBlock>().Bot_Check.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+			if(new_Tool.name == "For")
+			{
+				new_Tool.transform.GetChild(2).GetComponent<CanvasGroup>().blocksRaycasts = false;
+			}
 			
 			firstCreateTool = false; //set ko con la tool
 		}
@@ -104,6 +116,9 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		{
 			transform.SetParent(eventData.pointerEnter.gameObject.transform);
 		}
+
+		GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x ,GetComponent<RectTransform>().localPosition.y , 0);
+		GetComponent<BlockInfo>().isActive = true;
 
 		if(transform.parent == startParent || transform.parent == Hold_Block_Tool) //kiem tra parent neu nam trong hold block hoac tool
 		{
