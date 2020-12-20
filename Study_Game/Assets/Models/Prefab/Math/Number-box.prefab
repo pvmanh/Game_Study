@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 8431041344045101521}
   - component: {fileID: 8431041344045101535}
   - component: {fileID: 8431041344045101534}
+  - component: {fileID: 4534121794333680735}
   m_Layer: 0
   m_Name: txt-Number
   m_TagString: Untagged
@@ -280,3 +281,41 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+--- !u!114 &4534121794333680735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8431041344045101520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1911d527b93cb47ad210994519f36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TintColors:
+  - {r: 1, g: 0, b: 0.55099344, a: 1}
+  - {r: 1, g: 0, b: 0.90361214, a: 1}
+  - {r: 0.7623987, g: 0, b: 1, a: 1}
+  - {r: 0.48492336, g: 0, b: 1, a: 1}
+  - {r: 0.20369053, g: 0, b: 1, a: 1}
+  - {r: 0, g: 0.26607513, b: 1, a: 1}
+  - {r: 0, g: 0.5638194, b: 1, a: 1}
+  - {r: 0, g: 0.5799811, b: 1, a: 1}
+  - {r: 0, g: 0.8202615, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.6349025, a: 1}
+  - {r: 0, g: 1, b: 0.33473516, a: 1}
+  - {r: 0, g: 1, b: 0.3324015, a: 1}
+  - {r: 0, g: 1, b: 0.07667947, a: 1}
+  - {r: 0.40482342, g: 1, b: 0, a: 1}
+  - {r: 0.65928495, g: 1, b: 0, a: 1}
+  - {r: 0.7521895, g: 1, b: 0, a: 1}
+  - {r: 0.8318777, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.99437773, b: 0, a: 1}
+  - {r: 1, g: 0.7909454, b: 0, a: 1}
+  - {r: 1, g: 0.61737454, b: 0, a: 1}
+  - {r: 1, g: 0.39000797, b: 0, a: 1}
+  - {r: 1, g: 0.32348293, b: 0, a: 1}
+  - {r: 1, g: 0.07898489, b: 0, a: 1}
+  - {r: 1, g: 0.029678369, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.22297573, a: 1}

@@ -33,6 +33,11 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			GetComponent<ShowCheckBlock>().Mid_Check.SetActive(true);
 		if(GetComponent<ShowCheckBlock>().Bot_Check != null)
 			GetComponent<ShowCheckBlock>().Bot_Check.SetActive(true);
+
+		if(name == "For")
+		{
+			transform.GetChild(2).GetComponent<CanvasGroup>().blocksRaycasts = true;
+		}
 	}
 
 	public void OnDrag(PointerEventData eventData)
@@ -58,6 +63,11 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			if(new_Tool.GetComponent<ShowCheckBlock>().Bot_Check != null)
 				new_Tool.GetComponent<ShowCheckBlock>().Bot_Check.SetActive(false);
 				new_Tool.GetComponent<ShowCheckBlock>().Bot_Check.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+			if(new_Tool.name == "For")
+			{
+				new_Tool.transform.GetChild(2).GetComponent<CanvasGroup>().blocksRaycasts = false;
+			}
 			
 			firstCreateTool = false; //set ko con la tool
 		}
