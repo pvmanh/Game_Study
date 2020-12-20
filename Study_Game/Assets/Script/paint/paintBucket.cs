@@ -12,7 +12,7 @@ public class paintBucket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //paint(colorCount);
+        paint(colorCount);
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class paintBucket : MonoBehaviour
     {
         curColor = colorList[colorCount];
         var ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray, -Vector2.up);
+        RaycastHit2D hit = Physics2D.Raycast(ray, Vector2.zero);
         
 
         if (Input.GetButton("Fire1"))
@@ -35,7 +35,7 @@ public class paintBucket : MonoBehaviour
             if (hit.collider == null)
             {
                 //
-                Camera.main.backgroundColor = curColor;
+               // Camera.main.backgroundColor = curColor;
             }
         }
 
