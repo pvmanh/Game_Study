@@ -37,6 +37,7 @@ public class WordDoc : MonoBehaviour
     private float accurary = 0;
     private float tudung = 0;
     private float tusai = 0;
+    private float speed = 0;
 
     //save
     public GameObject name;
@@ -58,7 +59,14 @@ public class WordDoc : MonoBehaviour
         Time.timeScale = 0;
         StartCoroutine(SelectClassAddDropdownlist(URL_1));
         timeData.timegget = timeData.txt_time.text;
+        if (MenuTypeDoc.i == 1)
+        { 
         wordListcb = catList(WordList, wordListcb, 0);
+        }
+        if(MenuTypeDoc.i == 2)
+        {
+            wordListcb = catList(WordList, wordListcb, Random.Range(1,10));
+        }
         //IPWord.Select();
         getList();
         catchuoi();
@@ -147,6 +155,8 @@ public class WordDoc : MonoBehaviour
     void FixedUpdate()
     {
             Timer.TimeClock(timeData);
+       // Debug.Log(timeData.second);
+       // Debug.Log(timeData.minute);
     }
 
     public void colorWord()
@@ -271,6 +281,7 @@ public class WordDoc : MonoBehaviour
                         if (tudung != 0 || tusai != 0)
                         {
                             accurary = (tudung / (tusai + tudung)) * 100;
+                            speed = (tudung)/(timeData.hour*60 +timeData.minute+ timeData.second/60);
                         }
                     }
                 }
@@ -282,10 +293,13 @@ public class WordDoc : MonoBehaviour
                     IPWord.gameObject.SetActive(false);
                     Time.timeScale = 0;
                     ttAccurary.text = Mathf.RoundToInt(accurary).ToString();
-                    ttSpeed.text = Mathf.RoundToInt(tudung).ToString();
+                    ttSpeed.text = ((speed*100.0f)/100.0f).ToString();
                     ttTime.text = timeData.txt_time.text;
                     Debug.Log("112222");
-                   StartCoroutine(AddRankTypeDoc());
+                    if (MenuTypeDoc.i != 1)
+                    {
+                        StartCoroutine(AddRankTypeDoc());
+                    }
                 }
             }
             //Debug.Log(currentWord+"1")

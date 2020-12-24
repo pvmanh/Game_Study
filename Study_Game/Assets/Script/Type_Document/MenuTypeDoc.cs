@@ -8,7 +8,8 @@ public class MenuTypeDoc : MonoBehaviour
 {
     public GameObject typedoc;
     public Button btnLT;
-    public Button btnVB;
+    public Button btnVB; 
+    public static int i = 0;
     private static string[] wordListLT = {};
 
     // Start is called before the first frame update
@@ -31,12 +32,15 @@ public class MenuTypeDoc : MonoBehaviour
         {
             btnLT.gameObject.SetActive(false);
             btnVB.gameObject.SetActive(false);
+            i = 1;
+            typedoc.gameObject.SetActive(true);
 
         }
         if (btn.name == "btnvanban")
         {
             btnLT.gameObject.SetActive(false);
             btnVB.gameObject.SetActive(false);
+            i = 2;
             typedoc.gameObject.SetActive(true);
         }
 
