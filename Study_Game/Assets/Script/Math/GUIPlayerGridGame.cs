@@ -45,6 +45,7 @@ public class GUIPlayerGridGame : MonoBehaviour
     private void Start() 
     {
         Time.timeScale = 0;
+        Player.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
     // Update is called once per frame
     void Update()
@@ -87,6 +88,7 @@ public class GUIPlayerGridGame : MonoBehaviour
 
         Math_Menu.SetActive(false);
         backgroundNotForClick.SetActive(false);
+        Player.GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
     //Kiem tra da nhan number
     void Check_Result_Run_One_Time()
@@ -135,8 +137,9 @@ public class GUIPlayerGridGame : MonoBehaviour
             }
             StartCoroutine(Waiting_Report_Per_Check_Result("Đúng rồi!"));
             number_success++;
-            number_hole++;
-            Debug.Log(number_success);
+            if(number_hole != 5)
+                number_hole++;
+                
             if(number_success == 2)
             {
                 List_Tool_Has[2].SetActive(true);
@@ -234,7 +237,7 @@ public class GUIPlayerGridGame : MonoBehaviour
                 iR = Random.Range(1,3);
                 if(iR == 1)
                 {
-                    Number_rand = Random.Range(0, 26);
+                    Number_rand = Random.Range(0, 11);
                     List_Number_Operator.Number_First = "?";
                     List_Number_Operator.Number_Second = Random.Range(0, 11).ToString();
                     List_Number_Operator.Number_Result = (int.Parse(List_Number_Operator.Number_Second) * Number_rand).ToString();
@@ -242,14 +245,14 @@ public class GUIPlayerGridGame : MonoBehaviour
                 else if(iR == 2)
                 {
                     Number_rand = Random.Range(0, 11);
-                    List_Number_Operator.Number_First = Random.Range(0, 26).ToString();
+                    List_Number_Operator.Number_First = Random.Range(0, 11).ToString();
                     List_Number_Operator.Number_Second = "?";
                     List_Number_Operator.Number_Result = (int.Parse(List_Number_Operator.Number_First) * Number_rand).ToString();
                 }
                 else if(iR == 3)
                 {
 
-                    List_Number_Operator.Number_First = Random.Range(0, 26).ToString();
+                    List_Number_Operator.Number_First = Random.Range(0, 11).ToString();
                     List_Number_Operator.Number_Second = Random.Range(0, 11).ToString();
                     List_Number_Operator.Number_Result = "?";
                 }
@@ -262,18 +265,18 @@ public class GUIPlayerGridGame : MonoBehaviour
                 {
                     List_Number_Operator.Number_First = "?";
                     List_Number_Operator.Number_Second = Random.Range(1, 11).ToString();
-                    List_Number_Operator.Number_Result = Random.Range(0, 26).ToString();
+                    List_Number_Operator.Number_Result = Random.Range(0, 11).ToString();
                 }
                 else if(iR == 2)
                 {
                     Number_rand = Random.Range(1, 11);
                     List_Number_Operator.Number_Second = "?";
-                    List_Number_Operator.Number_Result = Random.Range(0, 26).ToString();
+                    List_Number_Operator.Number_Result = Random.Range(0, 11).ToString();
                     List_Number_Operator.Number_First = (int.Parse(List_Number_Operator.Number_Result) * Number_rand).ToString();
                 }
                 else if(iR == 3)
                 {
-                    Number_rand = Random.Range(0, 26);
+                    Number_rand = Random.Range(0, 11);
                     List_Number_Operator.Number_Second = Random.Range(1, 11).ToString();
                     List_Number_Operator.Number_Result = "?";
                     List_Number_Operator.Number_First = (int.Parse(List_Number_Operator.Number_Result) * Number_rand).ToString();
@@ -354,7 +357,7 @@ public class GUIPlayerGridGame : MonoBehaviour
         }
 
         Vector3 Player_Stant = new Vector3(Mathf.Round(Player.transform.localPosition.x * 100.0f) / 100.0f, Mathf.Round(Player.transform.localPosition.y * 100.0f) / 100.0f, 0);
-        
+        Debug.Log(Player_Stant);
         //Reset value
         for(int i = 0; i < 5; i++)
         {
@@ -399,6 +402,12 @@ public class GUIPlayerGridGame : MonoBehaviour
                 {
                     Number_rand = int.Parse(List_Number_Operator.Number_First) + int.Parse(List_Number_Operator.Number_Second);
                 }
+
+                for(int i = 0; i < 4; i++)
+                {
+                    Create_Random_Number_Box(Random.Range(0, 99));
+                }
+
                 break;
             }  
             case "-":
@@ -416,6 +425,12 @@ public class GUIPlayerGridGame : MonoBehaviour
                 {
                     Number_rand = int.Parse(List_Number_Operator.Number_First) - int.Parse(List_Number_Operator.Number_Second);
                 }
+
+                for(int i = 0; i < 4; i++)
+                {
+                    Create_Random_Number_Box(Random.Range(0, 99));
+                }
+
                 break;
             }
             case "*":
@@ -424,6 +439,10 @@ public class GUIPlayerGridGame : MonoBehaviour
                 if(List_Number_Operator.Number_Result == "?")
                 {
                     Number_rand = int.Parse(List_Number_Operator.Number_First) * int.Parse(List_Number_Operator.Number_Second);
+                }
+                for(int i = 0; i < 4; i++)
+                {
+                    Create_Random_Number_Box(Random.Range(0, 11));
                 }
                 break;
             }
@@ -434,16 +453,15 @@ public class GUIPlayerGridGame : MonoBehaviour
                 {
                     Number_rand = int.Parse(List_Number_Operator.Number_Second) * int.Parse(List_Number_Operator.Number_Result);
                 }
+                for(int i = 0; i < 4; i++)
+                {
+                    Create_Random_Number_Box(Random.Range(0, 11));
+                }
                 break;
             }
         }
         
         Create_Random_Number_Box(Number_rand);
-
-        for(int i = 0; i < 4; i++)
-        {
-            Create_Random_Number_Box(Random.Range(0, 99));
-        }
                 
         for(int j = 0; j < number_hole; j++)
         {
