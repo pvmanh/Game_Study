@@ -101,11 +101,10 @@ public class FunctionCenter : MonoBehaviour
         startPos = transform.localPosition;
         nextPos = startPos + Side_Vector_Player;
         
-        GetComponent<Rigidbody2D>().velocity = Side_Vector_Player * 2f;
-        //transform.localPosition += Side_Vector_Player;
+        GetComponent<Rigidbody2D>().velocity = Side_Vector_Player * 1.8f;
+        //transform.localPosition += Side_Vector_Player * Time.deltaTime;
         yield return new WaitForSeconds(0.5f);
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-
         transform.localPosition = nextPos;
 
         Player_Animator.SetBool("isMove", false);

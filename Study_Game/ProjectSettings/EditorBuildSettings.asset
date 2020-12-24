@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Type_Document.unity
     guid: cb3400b8626d9f04b9b6579c6c1c230d
+  - enabled: 1
+    path: Assets/Scenes/ToturialDev/Math_1_0.unity
+    guid: 6fec168021fd1664695a147ce2e92ff7
   m_configObjects: {}
