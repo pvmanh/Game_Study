@@ -41,9 +41,16 @@ namespace FreeDraw
         Color transparent;
         Color32[] cur_colors;
         bool mouse_was_previously_held_down = false;
-        bool no_drawing_on_current_drag = false;
+        //public bool no_drawing_on_current_drag = false;
 
-        bool is_bucket_point = false;
+        //public bool is_bucket_point = false;
+
+        public enum Paint_style
+        {
+            is_brush,
+            is_bucket
+        }
+        public Paint_style Style_paint;
 
 //////////////////////////////////////////////////////////////////////////////
 // BRUSH TYPES. Implement your own here
@@ -140,7 +147,7 @@ namespace FreeDraw
         {
             // Is the user holding down the left mouse button?
             bool mouse_held_down = Input.GetMouseButton(0); 
-            if (mouse_held_down && !no_drawing_on_current_drag)
+            if (mouse_held_down && Style_paint == Paint_style.is_brush)
             {
                 // Convert mouse coordinates to world coordinates
                 Vector2 mouse_world_position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -172,10 +179,10 @@ namespace FreeDraw
                 previous_drag_position = Vector2.zero;
                 //no_drawing_on_current_drag = false;
             }
-            //mouse_was_previously_held_down = mouse_held_down;
+           mouse_was_previously_held_down = mouse_held_down;
 
-            //T√¥ m√†u 
-            if(Input.GetMouseButton(0) && is_bucket_point == true)
+            //TÙ m‡u 
+            if(Input.GetMouseButton(0) && Style_paint == Paint_style.is_bucket)
             {
                 Vector2 mouse_world_position_bucket = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //RaycastHit2D hit = Physics2D.Raycast(mouse_world_position_bucket, Vector2.zero);
@@ -204,6 +211,16 @@ namespace FreeDraw
 
                 
             }
+        }
+
+        public void Bucket_change()
+        {
+            Style_paint = Paint_style.is_bucket;
+        }
+
+        public void Brush_change()
+        {
+            Style_paint = Paint_style.is_brush;
         }
 
         // Set the colour of pixels in a straight line from start_point all the way to end_point, to ensure everything inbetween is coloured
