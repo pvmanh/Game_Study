@@ -10,7 +10,7 @@ namespace FreeDraw
     // 2. Set the drawing_layers  to use in the raycast
     // 3. Attach a 2D collider (like a Box Collider 2D) to this sprite
     // 4. Hold down left mouse to draw on this texture!
-    public class Drawable : MonoBehaviour
+    public class Drawable : MonoBehaviour 
     {
         // PEN COLOUR
         public static Color Pen_Colour = Color.red;     // Change these to change the default drawing settings
@@ -43,7 +43,7 @@ namespace FreeDraw
         bool mouse_was_previously_held_down = false;
         bool no_drawing_on_current_drag = false;
 
-
+        bool is_bucket_point = false;
 
 //////////////////////////////////////////////////////////////////////////////
 // BRUSH TYPES. Implement your own here
@@ -139,7 +139,7 @@ namespace FreeDraw
         void Update()
         {
             // Is the user holding down the left mouse button?
-            bool mouse_held_down = Input.GetMouseButton(0);
+            bool mouse_held_down = Input.GetMouseButton(0); 
             if (mouse_held_down && !no_drawing_on_current_drag)
             {
                 // Convert mouse coordinates to world coordinates
@@ -162,7 +162,7 @@ namespace FreeDraw
                     {
                         // This is a new drag where the user is left clicking off the canvas
                         // Ensure no drawing happens until a new drag is started
-                        no_drawing_on_current_drag = true;
+                        //no_drawing_on_current_drag = true;
                     }
                 }
             }
@@ -170,12 +170,41 @@ namespace FreeDraw
             else if (!mouse_held_down)
             {
                 previous_drag_position = Vector2.zero;
-                no_drawing_on_current_drag = false;
+                //no_drawing_on_current_drag = false;
             }
-            mouse_was_previously_held_down = mouse_held_down;
+            //mouse_was_previously_held_down = mouse_held_down;
+
+            //Tô màu 
+            if(Input.GetMouseButton(0) && is_bucket_point == true)
+            {
+                Vector2 mouse_world_position_bucket = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //RaycastHit2D hit = Physics2D.Raycast(mouse_world_position_bucket, Vector2.zero);
+                Collider2D hit = Physics2D.OverlapPoint(mouse_world_position_bucket, Drawing_Layers.value);
+                if (!hit)
+                {
+                    return;
+                }
+
+                SpriteRenderer rend = hit.transform.GetComponent<SpriteRenderer>();
+                BoxCollider2D meshCollider = hit as BoxCollider2D;
+
+                if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
+                {
+                    return;
+                }
+
+                Texture2D tex = rend.material.mainTexture as Texture2D;
+                Vector2 pixelUV = WorldToPixelCoordinates(mouse_world_position_bucket);
+                //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Pen_Colour);
+                int num_X = (int)pixelUV.x;
+                int num_Y = (int)pixelUV.y;
+                
+                ImageUtils.FloodFillArea(tex, num_X, num_Y, Pen_Colour);
+                tex.Apply();
+
+                
+            }
         }
-
-
 
         // Set the colour of pixels in a straight line from start_point all the way to end_point, to ensure everything inbetween is coloured
         public void ColourBetween(Vector2 start_point, Vector2 end_point, int width, Color color)

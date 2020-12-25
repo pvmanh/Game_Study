@@ -70,5 +70,13 @@ namespace FreeDraw
         {
             SetMarkerColour(new Color(255f, 255f, 255f, 0.5f));
         }
+
+        public void SetColorBucket()
+        {
+            Color c = Color.blue;
+            c.a = Transparency;
+            SetMarkerColour(c);
+
+        }
     }
 }
