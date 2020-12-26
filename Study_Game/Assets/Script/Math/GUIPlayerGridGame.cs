@@ -19,6 +19,8 @@ public class GUIPlayerGridGame : MonoBehaviour
     public GameObject Player;
     public GameObject Play_btn;
     public GameObject Math_Menu;
+    public GameObject Menu_Data;
+    public GameObject SFX;
     public Vector2[,] List_Grid_Blox = new Vector2[5,9];
     public bool[,] List_Grid_Blox_Value = new bool[5,9];
     public List<TextMeshProUGUI> List_Show_Number_Text;
@@ -50,6 +52,15 @@ public class GUIPlayerGridGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Math_Menu.activeSelf == true)
+        {
+            Menu_Data.GetComponent<MenuDragController>().menuData.isMenuActive = true;
+        }
+        if(Menu_Data.transform.GetChild(0).gameObject.activeSelf == true)
+        {
+            Sorting_Order_GameObject_To_Zero();
+        }
+
         Check_Result_Run_One_Time();
 
         if(isChecked == true)
@@ -89,6 +100,24 @@ public class GUIPlayerGridGame : MonoBehaviour
         Math_Menu.SetActive(false);
         backgroundNotForClick.SetActive(false);
         Player.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        Menu_Data.GetComponent<MenuDragController>().menuData.isMenuActive = false;
+    }
+    public void Sorting_Order_GameObject_To_Zero()
+    {
+        Player.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        foreach(Transform child in Math_Round_Object)
+        {
+            child.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+    }
+    public void Sorting_Order_GameObject_To_One()
+    {
+        Player.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        foreach(Transform child in Math_Round_Object)
+        {
+            if(child.tag == "Hole")
+                child.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
     }
     //Kiem tra da nhan number
     void Check_Result_Run_One_Time()
@@ -171,7 +200,11 @@ public class GUIPlayerGridGame : MonoBehaviour
         backgroundNotForClick.SetActive(true);
         var Notification_new = Instantiate(go_Notification, backgroundNotForClick.transform);
         Notification_new.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Notification_str;
-        
+        if(Notification_str == "Đúng rồi!")
+            SFX.GetComponent<AudioManager>().soundEffectsAudio[1].Play();
+        else if(Notification_str == "Sai rồi!")
+            SFX.GetComponent<AudioManager>().soundEffectsAudio[2].Play();
+
         yield return new WaitForSeconds(2f);
 
         Destroy(Notification_new);
@@ -442,7 +475,7 @@ public class GUIPlayerGridGame : MonoBehaviour
                 }
                 for(int i = 0; i < 4; i++)
                 {
-                    Create_Random_Number_Box(Random.Range(0, 11));
+                    Create_Random_Number_Box(Random.Range(0, 50));
                 }
                 break;
             }
@@ -455,7 +488,7 @@ public class GUIPlayerGridGame : MonoBehaviour
                 }
                 for(int i = 0; i < 4; i++)
                 {
-                    Create_Random_Number_Box(Random.Range(0, 11));
+                    Create_Random_Number_Box(Random.Range(0, 50));
                 }
                 break;
             }

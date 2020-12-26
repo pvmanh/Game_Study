@@ -7,7 +7,7 @@ public class BlockInfo : MonoBehaviour
 {
     public string Function_name;
     public GameObject Mid_Contain;
-    public TMP_InputField repeat_number;
+    public TMP_Dropdown repeat_number;
     public int int_variable;
     public bool isActive = false;
     // Start is called before the first frame update
