@@ -14,9 +14,12 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	Vector3 startPosition; //vi tri bat dau
 	bool firstCreateTool = true; //bien kiem tra tao tool moi khi tool cu dc keo
 	int SiblingIndexBlock;
+	public GameObject SFX;
 	//Khi bat dau drag
 	public void OnBeginDrag(PointerEventData eventData)
 	{
+		SFX.GetComponent<AudioManager>().soundEffectsAudio[3].Play();
+
 		itemBeingDragged = gameObject; //gan bien check trang thai keo = gameobject
 		startPosition = transform.position; //set vi tri ban dau
 		SiblingIndexBlock = transform.GetSiblingIndex();
@@ -38,6 +41,10 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		{
 			transform.GetChild(2).GetComponent<CanvasGroup>().blocksRaycasts = true;
 		}
+		else if(name == "Repeat")
+		{
+			transform.GetChild(3).GetComponent<CanvasGroup>().blocksRaycasts = true;
+		}
 	}
 
 	public void OnDrag(PointerEventData eventData)
@@ -58,8 +65,8 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			if(new_Tool.GetComponent<ShowCheckBlock>().Top_Check != null)
 				new_Tool.GetComponent<ShowCheckBlock>().Top_Check.SetActive(false);
 				new_Tool.GetComponent<ShowCheckBlock>().Top_Check.GetComponent<CanvasGroup>().blocksRaycasts = false;
-			if(new_Tool.GetComponent<ShowCheckBlock>().Mid_Check != null)
-				new_Tool.GetComponent<ShowCheckBlock>().Mid_Check.SetActive(false);
+			//if(new_Tool.GetComponent<ShowCheckBlock>().Mid_Check != null)
+			//	new_Tool.GetComponent<ShowCheckBlock>().Mid_Check.SetActive(false);
 			if(new_Tool.GetComponent<ShowCheckBlock>().Bot_Check != null)
 				new_Tool.GetComponent<ShowCheckBlock>().Bot_Check.SetActive(false);
 				new_Tool.GetComponent<ShowCheckBlock>().Bot_Check.GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -67,6 +74,10 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			if(new_Tool.name == "For")
 			{
 				new_Tool.transform.GetChild(2).GetComponent<CanvasGroup>().blocksRaycasts = false;
+			}
+			else if(new_Tool.name == "Repeat")
+			{
+				new_Tool.transform.GetChild(3).GetComponent<CanvasGroup>().blocksRaycasts = false;
 			}
 			
 			firstCreateTool = false; //set ko con la tool
@@ -124,5 +135,7 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		{
 			Destroy(gameObject); //xoa block
 		}
+
+		SFX.GetComponent<AudioManager>().soundEffectsAudio[3].Play();
 	}
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace FreeDraw
 {
@@ -41,9 +42,11 @@ namespace FreeDraw
         Color transparent;
         Color32[] cur_colors;
         bool mouse_was_previously_held_down = false;
-        bool no_drawing_on_current_drag = false;
+        public bool no_drawing_on_current_drag = false;
 
-        bool is_bucket_point = false;
+        public bool is_bucket_point = false;
+
+        public bool is_paste_icon = false;
 
 //////////////////////////////////////////////////////////////////////////////
 // BRUSH TYPES. Implement your own here
@@ -201,10 +204,10 @@ namespace FreeDraw
                 
                 ImageUtils.FloodFillArea(tex, num_X, num_Y, Pen_Colour);
                 tex.Apply();
-
-                
             }
         }
+
+        
 
         // Set the colour of pixels in a straight line from start_point all the way to end_point, to ensure everything inbetween is coloured
         public void ColourBetween(Vector2 start_point, Vector2 end_point, int width, Color color)
@@ -224,10 +227,6 @@ namespace FreeDraw
                 MarkPixelsToColour(cur_position, width, color);
             }
         }
-
-
-
-
 
         public void MarkPixelsToColour(Vector2 center_pixel, int pen_thickness, Color color_of_pen)
         {

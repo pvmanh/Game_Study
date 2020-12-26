@@ -43,7 +43,7 @@ public class ShowCheckBlock : MonoBehaviour
             {
                 Bot_Check.GetComponent<CanvasGroup>().blocksRaycasts = false;
             }
-            if(GetComponent<BlockInfo>().Mid_Contain != null)
+            if(GetComponent<BlockInfo>().Mid_Contain != null && GetComponent<BlockInfo>().Function_name == "Turn_Away")
             {
                 GetComponent<BlockInfo>().Mid_Contain.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
@@ -55,7 +55,7 @@ public class ShowCheckBlock : MonoBehaviour
             {
                 if(Top_Check != null)
                 {
-                    Top_Check.GetComponent<Image>().color = new Color32(255, 255, 255, 100);
+                    Top_Check.GetComponent<Image>().color = new Color32(255, 235, 0, 100);
                 }
                 if(Mid_Check != null)
                 {
@@ -63,14 +63,14 @@ public class ShowCheckBlock : MonoBehaviour
                 }
                 if(Bot_Check != null)
                 {
-                    Bot_Check.GetComponent<Image>().color = new Color32(255, 255, 255, 100);
+                    Bot_Check.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
                 }
             }
             else
             {
                 if(Top_Check != null)
                 {
-                    Top_Check.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                    Top_Check.GetComponent<Image>().color = new Color32(255, 235, 0, 0);
                 }
                 if(Mid_Check != null)
                 {
@@ -78,7 +78,7 @@ public class ShowCheckBlock : MonoBehaviour
                 }
                 if(Bot_Check != null)
                 {
-                    Bot_Check.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                    Bot_Check.GetComponent<Image>().color = new Color32(255, 0, 0, 0);
                 }
             }  
         }
@@ -86,7 +86,7 @@ public class ShowCheckBlock : MonoBehaviour
         {
             if(Top_Check != null)
             {
-                Top_Check.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                Top_Check.GetComponent<Image>().color = new Color32(255, 235, 0, 0);
             }
             if(Mid_Check != null)
             {
@@ -94,7 +94,7 @@ public class ShowCheckBlock : MonoBehaviour
             }
             if(Bot_Check != null)
             {
-                Bot_Check.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                Bot_Check.GetComponent<Image>().color = new Color32(255, 0, 0, 0);
             }
         }
     }
