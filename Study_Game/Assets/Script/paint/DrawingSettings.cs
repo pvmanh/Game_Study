@@ -57,71 +57,26 @@ namespace FreeDraw
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
         }
-        public void SetMarkerYellow()
-        {
-            Color c = Color.yellow;
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-        public void SetMarkerBlack()
-        {
-            Color c = Color.black;
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-        public void SetMarkerGray()
-        {
-            Color c = Color.gray;
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-        public void SetMarkerPink()
-        {
-            Color c = Color.magenta;
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-        public void SetMarkerBrown()
-        {
-            Color c = new Color(139f, 69f, 19f, 255f);
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-
-        public void SetMarkerPurple()
-        {
-            Color c = new Color(86f, 0f, 255f, 255f);
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-        public void SetMarkerOrange()
-        {
-            Color c = new Color(255f, 127f, 0f, 255f);
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
-        public void SetMarkerSkyBlue()
-        {
-            Color c = Color.cyan;
-            c.a = Transparency;
-            SetMarkerColour(c);
-            Drawable.drawable.SetPenBrush();
-        }
         public void SetEraser()
         {
-            SetMarkerColour(new Color(255f, 255f, 255f, 0f));
+            Color c = Color.white;
+           // c.a = Transparency;
+            SetMarkerColour(c);
+            Drawable.drawable.SetPenBrush();
+            //SetMarkerColour(new Color(255f, 255f, 255f, 0f));
         }
 
         public void PartialSetEraser()
         {
             SetMarkerColour(new Color(255f, 255f, 255f, 0.5f));
+        }
+
+        public void SetColorBucket()
+        {
+            Color c = Color.blue;
+            c.a = Transparency;
+            SetMarkerColour(c);
+
         }
     }
 }
