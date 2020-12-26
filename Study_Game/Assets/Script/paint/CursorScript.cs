@@ -4,55 +4,49 @@ using UnityEngine;
 
 public class CursorScript : MonoBehaviour
 {
-    public Texture2D iconArrow;
-    public Vector2 arrowRegPoint;
-    public Texture2D iconZoom;
-    public Vector2 zoomRegPoint;
-    public Texture2D iconTarget;
-    public Vector2 targetRegPoint;
-    private Vector2 mouseReg;
+    public Texture2D cursorPen;
+    public Texture2D cursorTomau;
+    public Texture2D cursorEraser;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+    int i = 0;
 
-    void Start()
+    private void Start()
     {
-        guiTexture.enabled = true;
-        if (iconArrow)
-        {
-            guiTexture.texture = iconArrow;
-            mouseReg = arrowRegPoint;
-            Cursor.visible = false;
-        }
+        OnMousePen();
     }
 
-    void Update()
+    private void Update()
     {
-        Vector2 mouseCoord = Input.mousePosition;
-        Texture mouseTex = guiTexture.texture;
-        guiTexture.pixelInset = new Rect(mouseCoord.x - (mouseReg.x), mouseCoord.y - (mouseReg.y), mouseTex.width, mouseTex.height);
+        if(i==1)
+        {
+            Cursor.SetCursor(cursorPen, hotSpot, cursorMode);
+        }
+        else if(i==2)
+        {
+            Cursor.SetCursor(cursorTomau, hotSpot, cursorMode);
+        }
+        else if(i==3)
+        {
+            Cursor.SetCursor(cursorEraser, hotSpot, cursorMode);
+        }
+    }
+    public void OnMousePen()
+    {
+        i=1;
+    }
 
-        if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))
-        {
-            if (iconTarget)
-            {
-                guiTexture.texture = iconTarget;
-                mouseReg = targetRegPoint;
-            }
-        }
-        else if (Input.GetMouseButton(1))
-        {
-            if (iconZoom)
-            {
-                guiTexture.texture = iconZoom;
-                mouseReg = zoomRegPoint;
-            }
-        }
-        else
-        {
-            if (iconArrow)
-            {
-                guiTexture.texture = iconArrow;
-                mouseReg = arrowRegPoint;
-            }
-        }
+     public void OnMouseTomau()
+    {
+        i=2;
+    }
+    public void OnMouseEraser()
+    {
+        i=3;
+    }
+    void OnMouseExit()
+    {
+        Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
 
 }

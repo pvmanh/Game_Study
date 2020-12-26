@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace FreeDraw
 {
@@ -13,7 +15,7 @@ namespace FreeDraw
     public class Drawable : MonoBehaviour 
     {
         // PEN COLOUR
-        public static Color Pen_Colour = Color.red;     // Change these to change the default drawing settings
+        public static Color Pen_Colour = Color.black;     // Change these to change the default drawing settings
         // PEN WIDTH (actually, it's a radius, in pixels)
         public static int Pen_Width = 3;
 
@@ -41,14 +43,23 @@ namespace FreeDraw
         Color transparent;
         Color32[] cur_colors;
         bool mouse_was_previously_held_down = false;
+        public Texture2D icon;
+        public Texture2D[] LoadPicture;
+        public GameObject ScrollView;
+        public GameObject SVimage;
+        
+
         //public bool no_drawing_on_current_drag = false;
 
         //public bool is_bucket_point = false;
 
+
         public enum Paint_style
         {
             is_brush,
-            is_bucket
+            is_bucket,
+            is_paste_icon,
+            is_load
         }
         public Paint_style Style_paint;
 
@@ -211,6 +222,84 @@ namespace FreeDraw
 
                 
             }
+            if (Style_paint == Paint_style.is_load)
+            {
+                Color[] icon_list = icon.GetPixels();
+
+
+
+                drawable_texture.SetPixels(0, 0, 1000, 750, icon_list);
+
+
+                drawable_texture.Apply();
+
+                GetComponent<Renderer>().material.mainTexture = drawable_texture;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (Input.GetMouseButtonDown(0) && Style_paint == Paint_style.is_paste_icon)
+            {
+                Vector2 mouse_world_position_icon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //RaycastHit2D hit = Physics2D.Raycast(mouse_world_position_bucket, Vector2.zero);
+                Collider2D hit = Physics2D.OverlapPoint(mouse_world_position_icon, Drawing_Layers.value);
+
+                if (!hit)
+                {
+                    return;
+                }
+
+                SpriteRenderer rend = hit.transform.GetComponent<SpriteRenderer>();
+                BoxCollider2D meshCollider = hit as BoxCollider2D;
+
+                if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
+                {
+                    return;
+                }
+
+                Texture2D tex = rend.material.mainTexture as Texture2D;
+                Vector2 pixelUV = WorldToPixelCoordinates(mouse_world_position_icon);
+                //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Pen_Colour);
+                int num_X = (int)pixelUV.x;
+                int num_Y = (int)pixelUV.y;
+
+                int w_pointer = icon.width;
+                int h_pointer = icon.height;
+                int x_pointer = num_X - (w_pointer / 2);
+                int y_pointer = num_Y - (h_pointer / 2);
+
+                int default_x_point = x_pointer;
+
+                int w_counter = 1;
+
+                Color[] icon_list = icon.GetPixels();
+
+                for (int i = 0; i < icon_list.Length; i++)
+                {
+                    if (icon_list[i].a != 0)
+                    {
+                        tex.SetPixel(x_pointer, y_pointer, icon_list[i]);
+                    }
+
+                    if (w_counter == w_pointer)
+                    {
+                        x_pointer = default_x_point;
+                        y_pointer++;
+                        w_counter = 1;
+                    }
+                    else if (w_counter != w_pointer)
+                    {
+                        x_pointer++;
+                        w_counter++;
+                    }
+
+                }
+
+                tex.Apply();
+
+                GetComponent<Renderer>().material.mainTexture = tex;
+            }
         }
 
         public void Bucket_change()
@@ -340,6 +429,13 @@ namespace FreeDraw
             drawable = this;
             // DEFAULT BRUSH SET HERE
             current_brush = PenBrush;
+            LoadPicture = Resources.LoadAll<Texture2D>("Paint/");
+            for (int i = 0; i < LoadPicture.Length; i++)
+            {
+                var picture = Instantiate(SVimage,ScrollView.transform);
+                picture.GetComponent<Selected>().selectedTxture = LoadPicture[i];
+                picture.GetComponent<RawImage>().texture = LoadPicture[i];
+            }
 
             drawable_sprite = this.GetComponent<SpriteRenderer>().sprite;
             drawable_texture = drawable_sprite.texture;
@@ -352,6 +448,28 @@ namespace FreeDraw
             // Should we reset our canvas image when we hit play in the editor?
             if (Reset_Canvas_On_Play)
                 ResetCanvas();
+
+            
+        }
+        public void LoadImage()
+        {
+            int i =0;
+            foreach (Transform child in ScrollView.transform)
+            {
+                if(child.GetComponent<Selected>().isSelected == true)
+                {
+                    i++;
+                }
+            }if(i !=0)
+            { //LOad
+                Color[] icon_list = icon.GetPixels();
+
+                drawable_texture.SetPixels(0, 0, 1000, 750, icon_list);
+                drawable_texture.Apply();
+
+                GetComponent<Renderer>().material.mainTexture = drawable_texture;
+                GameObject.Find("Select-menu").SetActive(false);
+            }
         }
     }
 }

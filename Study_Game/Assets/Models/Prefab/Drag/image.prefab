@@ -130,7 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500b8d0bacb7a1f44a0e9c0a48a216f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 2100000, guid: 35cce6123e613214a9e24beb461e2a4c, type: 2}
+  parentImg: {fileID: 0}
+  parent_App_Click: {fileID: 0}
+  selectedTxture: {fileID: 0}
   isSelected: 0
 --- !u!1 &7099153571125752051
 GameObject:
@@ -149,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7099153571125752050
 RectTransform:
   m_ObjectHideFlags: 0
