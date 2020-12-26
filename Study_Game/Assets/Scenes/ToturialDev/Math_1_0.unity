@@ -3141,7 +3141,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.6
+  m_fontSize: 27.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4224,7 +4224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Function_name: RepeatAfterNTurn
   Mid_Contain: {fileID: 1170801158}
-  repeat_number: {fileID: 1031175144}
+  repeat_number: {fileID: 0}
   int_variable: 0
   isActive: 0
 --- !u!114 &801162558
@@ -7311,7 +7311,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 155066403}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10546,7 +10546,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1201542082}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13663,7 +13663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.05}
   m_AnchorMax: {x: 0.45, y: 0.25}
-  m_AnchoredPosition: {x: -24.369995, y: 0}
+  m_AnchoredPosition: {x: -24.369993, y: 0}
   m_SizeDelta: {x: 35.099983, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2349832998527984082
