@@ -100,34 +100,11 @@ public class FunctionCenter : MonoBehaviour
 
         startPos = transform.localPosition;
         nextPos = startPos + Side_Vector_Player;
-
-        bool isNull = true;
         
-        for(int i = 0; i < 5; i++)
-        {
-            for(int j = 0; j < 9; j++)
-            {
-                if(new Vector2(nextPos.x, nextPos.y) == GUI_Math.GetComponent<GUIPlayerGridGame>().List_Grid_Blox[i,j])
-                {
-                    GetComponent<Rigidbody2D>().velocity = Side_Vector_Player * 2f;
-                    //transform.localPosition += Side_Vector_Player * Time.deltaTime;
-                    isNull = false;
-                    yield return new WaitUntil(()=> Vector2.Distance(startPos, transform.localPosition) > 1f);
-                    GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                }
-            }
-        }
-        if(isNull == true)
-        { 
-            GetComponent<Rigidbody2D>().velocity = Side_Vector_Player * 1.5f;
-            //transform.localPosition += Side_Vector_Player * Time.deltaTime;
-            yield return new WaitForSeconds(0.5f);
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        }
-        //GetComponent<Rigidbody2D>().velocity = Side_Vector_Player * 1.5f;
+        GetComponent<Rigidbody2D>().velocity = Side_Vector_Player * 1.8f;
         //transform.localPosition += Side_Vector_Player * Time.deltaTime;
-        //yield return new WaitForSeconds(0.5f);
-        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         transform.localPosition = nextPos;
 
         Player_Animator.SetBool("isMove", false);
@@ -249,7 +226,7 @@ public class FunctionCenter : MonoBehaviour
                         case "RepeatAfterNTurn":
                         {
                             child.GetComponent<Image>().material = Outline_Run_Blox;
-                            object[] parameters_func = new object[2]{Mid_Contain, int.Parse(child.GetComponent<BlockInfo>().repeat_number.options[child.GetComponent<BlockInfo>().repeat_number.value].text)};
+                            object[] parameters_func = new object[2]{Mid_Contain, int.Parse(child.GetComponent<BlockInfo>().repeat_number.text)};
                             StartCoroutine(Func_name, parameters_func);
                             yield return new WaitUntil(() => child.GetComponent<BlockInfo>().int_variable == (int)parameters_func[1]);
                             child.GetComponent<Image>().material = Outline_None_Blox;
@@ -316,7 +293,7 @@ public class FunctionCenter : MonoBehaviour
                         {
                             child.GetComponent<Image>().material = Outline_Run_Blox;
                             GameObject Mid_contain = child.GetComponent<BlockInfo>().Mid_Contain;
-                            object[] parameters_func_c = new object[2]{Mid_contain, int.Parse(((GameObject)parameters_func[0]).transform.parent.GetComponent<BlockInfo>().repeat_number.options[((GameObject)parameters_func[0]).transform.parent.GetComponent<BlockInfo>().repeat_number.value].text)};
+                            object[] parameters_func_c = new object[2]{Mid_contain, int.Parse(((GameObject)parameters_func[0]).transform.parent.GetComponent<BlockInfo>().repeat_number.text)};
                             StartCoroutine(Func_name, parameters_func_c);
                             yield return new WaitUntil(() => child.GetComponent<BlockInfo>().int_variable == (int)parameters_func_c[1]);
                             child.GetComponent<Image>().material = Outline_None_Blox;
