@@ -47,6 +47,11 @@ public class PlayMath : MonoBehaviour
         ListActive.Clear();
         StartCoroutine(WattingSetBeginPoint());
         Player.GetComponent<FunctionCenter>().Reset_Direction_Player();
+
+        foreach(Transform child in Area.transform)
+        {
+            child.GetComponent<Image>().material = Outline_None_Blox;
+        }
     }
     public void Clear_Area_Command_Btn()
     {
@@ -105,7 +110,7 @@ public class PlayMath : MonoBehaviour
                     {
                         ListActive[i].GetComponent<Image>().material = Outline_Run_Blox;
                         GameObject Mid_Contain = ListActive[i].GetComponent<BlockInfo>().Mid_Contain;
-                        object[] parameters_func = new object[2]{Mid_Contain, int.Parse(ListActive[i].GetComponent<BlockInfo>().repeat_number.text)};
+                        object[] parameters_func = new object[2]{Mid_Contain, int.Parse(ListActive[i].GetComponent<BlockInfo>().repeat_number.options[ListActive[i].GetComponent<BlockInfo>().repeat_number.value].text)};
                         Script_Player.StartCoroutine(Func_name, parameters_func);
                         yield return new WaitUntil(() => ListActive[i].GetComponent<BlockInfo>().int_variable == (int)parameters_func[1]);
                         ListActive[i].GetComponent<Image>().material = Outline_None_Blox;
