@@ -1,0 +1,634 @@
+fileFormatVersion: 2
+guid: f136188269a3eca4696f443faac12e54
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3111445756476434820
+    second: colorpen_0
+  - first:
+      213: -6808876532310371814
+    second: colorpen_1
+  - first:
+      213: -7323771806698761540
+    second: colorpen_2
+  - first:
+      213: -448378574523874606
+    second: colorpen_3
+  - first:
+      213: -4772866858187185002
+    second: colorpen_4
+  - first:
+      213: 5336987258166498173
+    second: colorpen_5
+  - first:
+      213: 6680906487337812186
+    second: colorpen_6
+  - first:
+      213: 3173495343596534287
+    second: colorpen_7
+  - first:
+      213: 3217850108210300983
+    second: colorpen_8
+  - first:
+      213: -1068997825674737912
+    second: colorpen_9
+  - first:
+      213: -5789493034912531155
+    second: colorpen_10
+  - first:
+      213: -4015344214789253887
+    second: colorpen_11
+  - first:
+      213: 3645724593205893034
+    second: colorpen_12
+  - first:
+      213: 5712028904141262942
+    second: colorpen_13
+  - first:
+      213: -7567180464565292680
+    second: colorpen_14
+  - first:
+      213: -5557563703253118744
+    second: colorpen_15
+  - first:
+      213: -1088861266907057213
+    second: colorpen_16
+  - first:
+      213: 3351811315843330360
+    second: colorpen_17
+  - first:
+      213: -541521199137808219
+    second: colorpen_18
+  - first:
+      213: 5295535240262073310
+    second: colorpen_19
+  - first:
+      213: -369078665639248919
+    second: colorpen_20
+  - first:
+      213: 6744963483907016528
+    second: colorpen_21
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: colorpen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1983
+        width: 438
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 489acac2e631e2b20800000000000000
+      internalID: 3111445756476434820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1888
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a12952c6ed20281a0800000000000000
+      internalID: -6808876532310371814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1794
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb213b5485cbc5a90800000000000000
+      internalID: -7323771806698761540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1699
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2cb94ef0a07c9f0800000000000000
+      internalID: -448378574523874606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1605
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694a48551ee53cdb0800000000000000
+      internalID: -4772866858187185002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1511
+        width: 438
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d73dccd72a9c01a40800000000000000
+      internalID: 5336987258166498173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1416
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad08f53ad0957bc50800000000000000
+      internalID: 6680906487337812186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1322
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0a7d6b73358a0c20800000000000000
+      internalID: 3173495343596534287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1227
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 738c350ef9918ac20800000000000000
+      internalID: 3217850108210300983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1133
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8070efe24282a21f0800000000000000
+      internalID: -1068997825674737912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1038
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2db07042c697afa0800000000000000
+      internalID: -5789493034912531155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 944
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105119af5b1a648c0800000000000000
+      internalID: -4015344214789253887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 849
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa751fe9337389230800000000000000
+      internalID: 3645724593205893034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 755
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e509a125604354f40800000000000000
+      internalID: 5712028904141262942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 660
+        width: 438
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8717f4ac579fbf690800000000000000
+      internalID: -7567180464565292680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 566
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e05ef2d1419fd2b0800000000000000
+      internalID: -5557563703253118744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 472
+        width: 438
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c3b250627693e0f0800000000000000
+      internalID: -1088861266907057213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 377
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 831f9f212a6048e20800000000000000
+      internalID: 3351811315843330360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 283
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a02c07a6512c78f0800000000000000
+      internalID: -541521199137808219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 188
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edb326b7e358d7940800000000000000
+      internalID: 5295535240262073310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 94
+        width: 438
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ebb568b8e4c0eaf0800000000000000
+      internalID: -369078665639248919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: colorpen_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 438
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05742416d8cea9d50800000000000000
+      internalID: 6744963483907016528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a430dce47240c874ea10f7b775776940
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

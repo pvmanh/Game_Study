@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace FreeDraw
 {
@@ -11,6 +12,7 @@ namespace FreeDraw
         public static bool isCursorOverUI = false;
         public float Transparency = 1f;
         public Color total;
+        public Image totalcolor;
 
         // Changing pen settings is easy as changing the static properties Drawable.Pen_Colour and Drawable.Pen_Width
         public void SetMarkerColour(Color new_color)
@@ -41,6 +43,7 @@ namespace FreeDraw
         {
             Color c = Color.red;
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -49,6 +52,7 @@ namespace FreeDraw
         {
             Color c = Color.green;
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -57,6 +61,7 @@ namespace FreeDraw
         {
             Color c = Color.blue;
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -66,6 +71,7 @@ namespace FreeDraw
             //Color c = Color.yellow;
             Color c = new Color(0.9058824f, 0.8705883f, 0.09019608f, 1f);
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -75,14 +81,16 @@ namespace FreeDraw
             Color c = Color.black;
             //Color c = new Color(0.79f, 0.54f, 0.54f, 0f);
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
         }
         public void SetMarkerGray()
         {
-            Color c = new Color(0.7686275f, 0.7098039f, 0.6039216f, 1f);
+            Color c = new Color(0.145098f, 0.9960785f, 0.5372549f, 1f);
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -91,6 +99,7 @@ namespace FreeDraw
         {
             Color c = Color.magenta;
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -99,15 +108,35 @@ namespace FreeDraw
         {
             Color c = new Color(0.3764706f, 0.2156863f, 0.08235294f, 1f);
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
         }
 
+        public void SetMarkerBrown1()
+        {
+            Color c = new Color(0.9960785f, 0.3803922f, 0.1568628f, 1f);
+            total = c;
+            totalcolor.color = c;
+            c.a = Transparency;
+            SetMarkerColour(c);
+            Drawable.drawable.SetPenBrush();
+        }
+        public void SetMarkerBrown2()
+        {
+            Color c = new Color(0.7529413f, 0.9960785f, 0.2313726f, 1f);
+            total = c;
+            totalcolor.color = c;
+            c.a = Transparency;
+            SetMarkerColour(c);
+            Drawable.drawable.SetPenBrush();
+        }
         public void SetMarkerPurple()
         {
             Color c = new Color(0.4f, 0.1803922f, 0.5686275f, 1f);
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -116,6 +145,7 @@ namespace FreeDraw
         {
             Color c = new Color(0.9686275f, 0.5843138f, 0.1098039f, 1f);
             total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();
@@ -124,6 +154,16 @@ namespace FreeDraw
         {
             Color c = Color.cyan;
             total = c;
+            totalcolor.color = c;
+            c.a = Transparency;
+            SetMarkerColour(c);
+            Drawable.drawable.SetPenBrush();
+        }
+        public void SetMarkerGrey2()
+        {
+            Color c = Color.grey;
+            total = c;
+            totalcolor.color = c;
             c.a = Transparency;
             SetMarkerColour(c);
             Drawable.drawable.SetPenBrush();

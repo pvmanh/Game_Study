@@ -6143,7 +6143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentMenu: {fileID: 44442982}
   MenuSubChild: {fileID: 0}
-  indexScene: 0
+  indexScene: 6
   isSelected: 0
 --- !u!114 &545282731
 MonoBehaviour:

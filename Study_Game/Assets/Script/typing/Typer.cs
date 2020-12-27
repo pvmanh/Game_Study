@@ -156,8 +156,8 @@ public class Typer : MonoBehaviour
     public TMP_InputField text_name;
     public TMP_Dropdown txt_class;
     List<string> option_class = new List<string> { };
-    string str_name;
-    string str_class;
+    public string str_name;
+    public string str_class;
     string str_level;
     bool endgame = true;
     level lv;

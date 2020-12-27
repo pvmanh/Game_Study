@@ -46,9 +46,14 @@ namespace FreeDraw
         bool mouse_was_previously_held_down = false;
         public Texture2D icon;
         public Texture2D[] LoadPicture;
+        public Texture2D[] LoadPath;
         public GameObject ScrollView;
+        public GameObject ScrollViewpath;
         public GameObject SVimage;
-        
+        public GameObject SVimagePath;
+        public bool is_bool= true;
+        int icounter = 1;
+
 
         //public bool no_drawing_on_current_drag = false;
 
@@ -236,80 +241,106 @@ namespace FreeDraw
 
                 GetComponent<Renderer>().material.mainTexture = drawable_texture;
             }
+            if(Input.GetMouseButtonUp(0))
+            {
+                icounter = 1;
+            }
         }
 
         private void FixedUpdate()
         {
-            if (Input.GetMouseButtonDown(0) && Style_paint == Paint_style.is_paste_icon)
+             int a = 0;
+            foreach (Transform childP in ScrollViewpath.transform)
             {
-                Vector2 mouse_world_position_icon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                //RaycastHit2D hit = Physics2D.Raycast(mouse_world_position_bucket, Vector2.zero);
-                Collider2D hit = Physics2D.OverlapPoint(mouse_world_position_icon, Drawing_Layers.value);
-
-                if (!hit)
+                if (childP.GetComponent<SelectedPath>().isSelected == true && is_bool == true)
                 {
-                    return;
+                    a++;
+                    Style_paint = Paint_style.is_paste_icon;
+                }
+            } if (a != 0)
+            {
+                if (Input.GetMouseButton(0) && Style_paint == Paint_style.is_paste_icon)
+                {
+                   
+                    if (icounter == 1)
+                    {
+                        Vector2 mouse_world_position_icon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        //RaycastHit2D hit = Physics2D.Raycast(mouse_world_position_bucket, Vector2.zero);
+                        Collider2D hit = Physics2D.OverlapPoint(mouse_world_position_icon, Drawing_Layers.value);
+
+                        if (!hit)
+                        {
+                            return;
+                        }
+
+                        SpriteRenderer rend = hit.transform.GetComponent<SpriteRenderer>();
+                        BoxCollider2D meshCollider = hit as BoxCollider2D;
+
+                        if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
+                        {
+                            return;
+                        }
+
+                        Texture2D tex = rend.material.mainTexture as Texture2D;
+                        Vector2 pixelUV = WorldToPixelCoordinates(mouse_world_position_icon);
+                        //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Pen_Colour);
+                        int num_X = (int)pixelUV.x;
+                        int num_Y = (int)pixelUV.y;
+
+                        int w_pointer = icon.width;
+                        int h_pointer = icon.height;
+                        int x_pointer = num_X - (w_pointer / 2);
+                        int y_pointer = num_Y - (h_pointer / 2);
+
+                        int default_x_point = x_pointer;
+
+                        int w_counter = 1;
+
+                        Color[] icon_list = icon.GetPixels();
+
+                        for (int i = 0; i < icon_list.Length; i++)
+                        {
+                            if (icon_list[i].a != 0)
+                            {
+                                tex.SetPixel(x_pointer, y_pointer, icon_list[i]);
+                            }
+
+                            if (w_counter == w_pointer)
+                            {
+                                x_pointer = default_x_point;
+                                y_pointer++;
+                                w_counter = 1;
+                            }
+                            else if (w_counter != w_pointer)
+                            {
+                                x_pointer++;
+                                w_counter++;
+                            }
+
+                        }
+
+                        tex.Apply();
+
+                        GetComponent<Renderer>().material.mainTexture = tex;
+                        icounter++;
+                    }
                 }
 
-                SpriteRenderer rend = hit.transform.GetComponent<SpriteRenderer>();
-                BoxCollider2D meshCollider = hit as BoxCollider2D;
-
-                if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
-                {
-                    return;
-                }
-
-                Texture2D tex = rend.material.mainTexture as Texture2D;
-                Vector2 pixelUV = WorldToPixelCoordinates(mouse_world_position_icon);
-                //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Pen_Colour);
-                int num_X = (int)pixelUV.x;
-                int num_Y = (int)pixelUV.y;
-
-                int w_pointer = icon.width;
-                int h_pointer = icon.height;
-                int x_pointer = num_X - (w_pointer / 2);
-                int y_pointer = num_Y - (h_pointer / 2);
-
-                int default_x_point = x_pointer;
-
-                int w_counter = 1;
-
-                Color[] icon_list = icon.GetPixels();
-
-                for (int i = 0; i < icon_list.Length; i++)
-                {
-                    if (icon_list[i].a != 0)
-                    {
-                        tex.SetPixel(x_pointer, y_pointer, icon_list[i]);
-                    }
-
-                    if (w_counter == w_pointer)
-                    {
-                        x_pointer = default_x_point;
-                        y_pointer++;
-                        w_counter = 1;
-                    }
-                    else if (w_counter != w_pointer)
-                    {
-                        x_pointer++;
-                        w_counter++;
-                    }
-
-                }
-
-                tex.Apply();
-
-                GetComponent<Renderer>().material.mainTexture = tex;
             }
         }
 
         public void Bucket_change()
         {
+
+            is_bool = false;
             Style_paint = Paint_style.is_bucket;
+
         }
 
         public void Brush_change()
         {
+            is_bool = false;
+
             Style_paint = Paint_style.is_brush;
         }
 
@@ -430,14 +461,23 @@ namespace FreeDraw
             drawable = this;
             // DEFAULT BRUSH SET HERE
             current_brush = PenBrush;
+            //load picture
             LoadPicture = Resources.LoadAll<Texture2D>("Paint/");
             for (int i = 0; i < LoadPicture.Length; i++)
             {
                 var picture = Instantiate(SVimage,ScrollView.transform);
                 picture.GetComponent<Selected>().selectedTxture = LoadPicture[i];
-                picture.GetComponent<RawImage>().texture = LoadPicture[i];
+                picture.transform.GetChild(0).GetComponent<RawImage>().texture = LoadPicture[i];
             }
-
+            //load path
+            LoadPath= Resources.LoadAll<Texture2D>("PathPaint/");
+            for (int j = 0; j < LoadPath.Length; j++)
+            {
+                var picture1 = Instantiate(SVimagePath, ScrollViewpath.transform);
+                picture1.GetComponent<SelectedPath>().selectedTxture = LoadPath[j];
+                picture1.transform.GetChild(0).GetComponent<RawImage>().texture = LoadPath[j];
+            }
+            //
             drawable_sprite = this.GetComponent<SpriteRenderer>().sprite;
             drawable_texture = drawable_sprite.texture;
 

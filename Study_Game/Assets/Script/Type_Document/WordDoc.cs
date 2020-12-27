@@ -49,8 +49,8 @@ public class WordDoc : MonoBehaviour
     public TMP_InputField text_name;
     public TMP_Dropdown txt_class;
     List<string> option_class = new List<string> { };
-    string str_name;
-    string str_class;
+    public string str_name;
+    public string str_class;
 
 
     // Start is called before the first frame update
@@ -65,7 +65,7 @@ public class WordDoc : MonoBehaviour
         }
         if(MenuTypeDoc.i == 2)
         {
-            wordListcb = catList(WordList, wordListcb, Random.Range(1,10));
+            wordListcb = catList(WordList, wordListcb, Random.Range(1,11));
         }
         //IPWord.Select();
         getList();
@@ -171,6 +171,7 @@ public class WordDoc : MonoBehaviour
         if (text_name.text != null)
         {
             str_name = text_name.text;
+            Time.timeScale = 1;
             Menu.SetActiveMenuFalse(total,name) ;
         }
     }
