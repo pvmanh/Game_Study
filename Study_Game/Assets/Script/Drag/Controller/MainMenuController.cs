@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class MainMenuController : MonoBehaviour
 {
     [Header("Main Menu Setting")]
@@ -11,9 +10,11 @@ public class MainMenuController : MonoBehaviour
     public GameObject Sub_Menu;
     public GameObject Option_Menu;
     public GameObject Rank_Menu;
+    public GameObject Info;
     Animator ZoomIn_Main;
     Animator ZoomIn_Sub;
     Animator ZoomIn_Option;
+    Animator ZoomIn_Info;
     Animator ZoomIn_Rank;
     float timeDelay = 1f;
     public Sprite SprSelected;
@@ -33,6 +34,7 @@ public class MainMenuController : MonoBehaviour
         ZoomIn_Main = Main_Menu.GetComponent<Animator>();
         ZoomIn_Sub = Sub_Menu.GetComponent<Animator>();
         ZoomIn_Option = Option_Menu.GetComponent<Animator>();
+        ZoomIn_Info = Info.GetComponent<Animator>();
         ZoomIn_Rank = Rank_Menu.GetComponent<Animator>();
 
         Menu_Title_Selected = Menu.AddMenuTitle(Parent_Menu_Title);
@@ -63,6 +65,14 @@ public class MainMenuController : MonoBehaviour
 
         Option_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Option, Option_Menu, "ZoomOut", timeDelay, 1, true));
+    }
+    //vao infomation
+    public void EnterInfo()
+    {
+        Main_Menu.SetActive(false);
+
+        Info.SetActive(true);
+        StartCoroutine(Menu.WaitAnimation(ZoomIn_Info, Info, "ZoomOut", timeDelay, 1, true));
     }
     //Xem BXH
     public void EnterRank()
@@ -111,6 +121,14 @@ public class MainMenuController : MonoBehaviour
     public void ReturnOutRank()
     {
         Rank_Menu.SetActive(false);
+
+        Main_Menu.SetActive(true);
+        StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
+    }
+    //tat infomation
+    public void ReturnOutInfo()
+    {
+        Info.SetActive(false);
 
         Main_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
