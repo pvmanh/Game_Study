@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -53,7 +53,12 @@ namespace FreeDraw
         public GameObject SVimagePath;
         public bool is_bool= true;
         int icounter = 1;
-
+        public Texture2D[] Undo;
+        public bool id_undo = false;
+        public int i_undo = 0;
+        public int tam_undo =0;
+        public int f_undo=0;
+  
 
         //public bool no_drawing_on_current_drag = false;
 
@@ -163,7 +168,9 @@ namespace FreeDraw
         void Update()
         {
             // Is the user holding down the left mouse button?
-            bool mouse_held_down = Input.GetMouseButton(0); 
+            bool mouse_held_down = Input.GetMouseButton(0);
+           
+           // bool mouse_held_up = Input.GetMouseButtonUp(0);
             if (mouse_held_down && Style_paint == Paint_style.is_brush)
             {
                 // Convert mouse coordinates to world coordinates
@@ -176,12 +183,14 @@ namespace FreeDraw
                     // We're over the texture we're drawing on!
                     // Use whatever function the current brush is
                     current_brush(mouse_world_position);
+                    
                 }
 
                 else
                 {
                     // We're not over our destination texture
                     previous_drag_position = Vector2.zero;
+                   
                     if (!mouse_was_previously_held_down)
                     {
                         // This is a new drag where the user is left clicking off the canvas
@@ -189,16 +198,19 @@ namespace FreeDraw
                         //no_drawing_on_current_drag = true;
                     }
                 }
+                
+
             }
             // Mouse is released
             else if (!mouse_held_down)
             {
                 previous_drag_position = Vector2.zero;
                 //no_drawing_on_current_drag = false;
+
             }
            mouse_was_previously_held_down = mouse_held_down;
 
-            //Tô màu 
+            //TÃ´ mÃ u 
             if(Input.GetMouseButton(0) && Style_paint == Paint_style.is_bucket)
             {
                 Vector2 mouse_world_position_bucket = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -226,7 +238,8 @@ namespace FreeDraw
                 ImageUtils.FloodFillArea(tex, num_X, num_Y, Pen_Colour);
                 tex.Apply();
 
-                
+               
+
             }
             if (Style_paint == Paint_style.is_load)
             {
@@ -245,11 +258,53 @@ namespace FreeDraw
             {
                 icounter = 1;
             }
+            
+            if (Input.GetMouseButtonUp(0) && id_undo == true )
+            {
+               i_undo = tam_undo;
+                if(i_undo >Undo.Length-1)
+                {
+                    i_undo = 0;
+                }
+                if (i_undo == 0)
+                {
+
+                    Undo[0].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
+                    Undo[0].Apply();
+                    i_undo++;
+                }
+                else if (i_undo == 1)
+                {
+
+                    Undo[1].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
+                    Undo[1].Apply();
+                    i_undo++;
+
+                }
+                else if (i_undo == 2)
+                {
+
+                    Undo[2].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
+                    Undo[2].Apply();
+                    i_undo++;
+                }
+
+                else if (i_undo == 3)
+                {
+
+                    Undo[3].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
+                    Undo[3].Apply();
+                    i_undo++;
+                }
+                tam_undo = i_undo;
+                f_undo = 1;
+            }
         }
 
         private void FixedUpdate()
         {
-             int a = 0;
+           
+            int a = 0;
             foreach (Transform childP in ScrollViewpath.transform)
             {
                 if (childP.GetComponent<SelectedPath>().isSelected == true && is_bool == true)
@@ -323,6 +378,7 @@ namespace FreeDraw
 
                         GetComponent<Renderer>().material.mainTexture = tex;
                         icounter++;
+                        
                     }
                 }
 
@@ -480,6 +536,7 @@ namespace FreeDraw
             //
             drawable_sprite = this.GetComponent<SpriteRenderer>().sprite;
             drawable_texture = drawable_sprite.texture;
+           // Undo[0] = drawable_texture;
 
             // Initialize clean pixels to use
             clean_colours_array = new Color[(int)drawable_sprite.rect.width * (int)drawable_sprite.rect.height];
@@ -489,8 +546,12 @@ namespace FreeDraw
             // Should we reset our canvas image when we hit play in the editor?
             if (Reset_Canvas_On_Play)
                 ResetCanvas();
+            for (int i = 0;i< Undo.Length ; i++)
+            {
+                Undo[i].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
+                Undo[i].Apply();
+            }
 
-            
         }
         public void LoadImage()
         {
@@ -511,6 +572,48 @@ namespace FreeDraw
                 GetComponent<Renderer>().material.mainTexture = drawable_texture;
                 GameObject.Find("Select-menu").SetActive(false);
             }
+        }
+        public void UndoTexture()
+        {
+
+
+            if(f_undo <= 3)
+            {
+                i_undo--;
+                if (i_undo < 0)
+                {
+                    i_undo = Undo.Length-1 ;
+                   
+                }
+                if (i_undo == 0)
+                {
+
+                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[3].GetPixels());
+                    drawable_texture.Apply();
+                }
+                if (i_undo == 1)
+                {
+
+                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[0].GetPixels());
+                    drawable_texture.Apply();
+                }
+                if (i_undo == 2)
+                {
+
+                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[1].GetPixels());
+                    drawable_texture.Apply();
+                }
+                if (i_undo == 3)
+                {
+
+                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[2].GetPixels());
+                    drawable_texture.Apply();
+                }
+
+           }
+        //
+            f_undo ++;
+           /// Debug.Log(f_undo);
         }
     }
 }

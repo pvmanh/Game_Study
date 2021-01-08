@@ -11,7 +11,7 @@ public class ImageUtils
         public Point(short _x, short _y) { x = _x; y = _y; }
         public Point(int _x, int _y) : this((short)_x, (short)_y) { }
     }
-
+    
     public static void FloodFillArea(Texture2D _Texture, int _x, int _y, Color ColorToFill)
     {   
         int Width = _Texture.width;
@@ -26,39 +26,86 @@ public class ImageUtils
             for (int i = current.x; i < Width; i++)
             {
                 Color currentColor = colors[i + current.y * Width];
-                if (currentColor != ClickedColor || currentColor == ColorToFill)
-                    break;
-                colors[i + current.y * Width] = ColorToFill;
-                if (current.y + 1 < Height)
+
+                if(currentColor.r >= 0.8f && currentColor.r <= 1f && currentColor.b >= 0.8f && currentColor.b <= 1f 
+                    && currentColor.g >= 0.8f && currentColor.g <= 1f)
                 {
-                    currentColor = colors[i + current.y * Width + Width];
-                    if (currentColor == ClickedColor && currentColor != ColorToFill)
-                        Points.Enqueue(new Point(i, current.y + 1));
+                    if (currentColor == ColorToFill || currentColor.r < 0.8f && currentColor.b < 0.8f && currentColor.g < 0.8f)
+                        break;
+                    colors[i + current.y * Width] = ColorToFill;
+                    if (current.y + 1 < Height)
+                    {
+                        currentColor = colors[i + current.y * Width + Width];
+                        if (currentColor.r >= 0.8f && currentColor.r <= 1f && currentColor.b >= 0.8f && currentColor.b <= 1f 
+                        && currentColor.g >= 0.8f && currentColor.g <= 1f)
+                            Points.Enqueue(new Point(i, current.y + 1));
+                    }
+                    if (current.y - 1 >= 0)
+                    {
+                        currentColor = colors[i + current.y * Width - Width];
+                        if (currentColor.r >= 0.8f && currentColor.r <= 1f && currentColor.b >= 0.8f && currentColor.b <= 1f 
+                        && currentColor.g >= 0.8f && currentColor.g <= 1f)
+                            Points.Enqueue(new Point(i, current.y - 1));
+                    }
                 }
-                if (current.y - 1 >= 0)
+                else
                 {
-                    currentColor = colors[i + current.y * Width - Width];
-                    if (currentColor == ClickedColor && currentColor != ColorToFill)
-                        Points.Enqueue(new Point(i, current.y - 1));
+                    if (currentColor != ClickedColor || currentColor == ColorToFill)
+                        break;
+                    colors[i + current.y * Width] = ColorToFill;
+                    if (current.y + 1 < Height)
+                    {
+                        currentColor = colors[i + current.y * Width + Width];
+                        if (currentColor == ClickedColor && currentColor != ColorToFill)
+                            Points.Enqueue(new Point(i, current.y + 1));
+                    }
+                    if (current.y - 1 >= 0)
+                    {
+                        currentColor = colors[i + current.y * Width - Width];
+                        if (currentColor == ClickedColor && currentColor != ColorToFill)
+                            Points.Enqueue(new Point(i, current.y - 1));
+                    }
                 }
             }
             for (int i = current.x - 1; i >= 0; i--)
             {
                 Color C = colors[i + current.y * Width];
-                if (C != ClickedColor || C == ColorToFill)
-                    break;
-                colors[i + current.y * Width] = ColorToFill;
-                if (current.y + 1 < Height)
+
+                if (C.r >= 0.8f && C.r <= 1f && C.b >= 0.8f && C.b <= 1f && C.g >= 0.8f && C.g <= 1f)
                 {
-                    C = colors[i + current.y * Width + Width];
-                    if (C == ClickedColor && C != ColorToFill)
-                        Points.Enqueue(new Point(i, current.y + 1));
+                    if (C == ColorToFill || C.r < 0.8f && C.b < 0.8f && C.g < 0.8f)
+                        break;
+                    colors[i + current.y * Width] = ColorToFill;
+                    if (current.y + 1 < Height)
+                    {
+                        C = colors[i + current.y * Width + Width];
+                        if (C.r >= 0.8f && C.r <= 1f && C.b >= 0.8f && C.b <= 1f && C.g >= 0.8f && C.g <= 1f)
+                            Points.Enqueue(new Point(i, current.y + 1));
+                    }
+                    if (current.y - 1 >= 0)
+                    {
+                        C = colors[i + current.y * Width - Width];
+                        if (C.r >= 0.8f && C.r <= 1f && C.b >= 0.8f && C.b <= 1f && C.g >= 0.8f && C.g <= 1f)
+                            Points.Enqueue(new Point(i, current.y - 1));
+                    }
                 }
-                if (current.y - 1 >= 0)
+                else
                 {
-                    C = colors[i + current.y * Width - Width];
-                    if (C == ClickedColor && C != ColorToFill)
-                        Points.Enqueue(new Point(i, current.y - 1));
+                    if (C != ClickedColor || C == ColorToFill)
+                        break;
+                    colors[i + current.y * Width] = ColorToFill;
+                    if (current.y + 1 < Height)
+                    {
+                        C = colors[i + current.y * Width + Width];
+                        if (C == ClickedColor && C != ColorToFill)
+                            Points.Enqueue(new Point(i, current.y + 1));
+                    }
+                    if (current.y - 1 >= 0)
+                    {
+                        C = colors[i + current.y * Width - Width];
+                        if (C == ClickedColor && C != ColorToFill)
+                            Points.Enqueue(new Point(i, current.y - 1));
+                    }
                 }
             }
         }
