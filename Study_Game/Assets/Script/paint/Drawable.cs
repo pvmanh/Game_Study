@@ -54,14 +54,12 @@ namespace FreeDraw
         public bool is_bool= true;
         int icounter = 1;
         public Texture2D[] Undo;
-        public bool id_undo = false;
+        public int count_undo = 0;
         public int i_undo = 0;
         public int tam_undo =0;
-        public int f_undo=0;
-  
-
-        //public bool no_drawing_on_current_drag = false;
-
+        public GameObject menu;
+        Texture2D biendao;
+        Texture2D biendao2;
         //public bool is_bucket_point = false;
 
 
@@ -258,47 +256,43 @@ namespace FreeDraw
             {
                 icounter = 1;
             }
-            
-            if (Input.GetMouseButtonUp(0) && id_undo == true )
+            Vector2 Undopoisition = WorldToPixelCoordinates(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+            if ( menu.activeSelf == false)
             {
-               i_undo = tam_undo;
-                if(i_undo >Undo.Length-1)
+                if (Input.GetMouseButtonUp(0) && Undopoisition.x >= 0 && Undopoisition.x <= drawable_texture.width && Undopoisition.y >= 0 && Undopoisition.y <= drawable_texture.height)
                 {
-                    i_undo = 0;
-                }
-                if (i_undo == 0)
-                {
-
-                    Undo[0].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
-                    Undo[0].Apply();
-                    i_undo++;
-                }
-                else if (i_undo == 1)
-                {
-
+                    if (count_undo < 3)
+                    {
+                        count_undo++;
+                    }
                     Undo[1].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
                     Undo[1].Apply();
-                    i_undo++;
+                    for (int i = 0; i < Undo.Length; i++)
+                    {
+
+
+                        if (i == 0)
+                        {
+                            biendao = Undo[i];
+                            Undo[i] = Undo[i + 1];
+                        }
+                        else if (i == Undo.Length - 1)
+                        {
+                            Undo[i] = biendao;
+
+                        }
+                        else
+                        {
+                            Undo[i] = Undo[i + 1];
+                        }
+
+                    }
+
 
                 }
-                else if (i_undo == 2)
-                {
-
-                    Undo[2].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
-                    Undo[2].Apply();
-                    i_undo++;
-                }
-
-                else if (i_undo == 3)
-                {
-
-                    Undo[3].SetPixels(0, 0, 1000, 750, drawable_texture.GetPixels());
-                    Undo[3].Apply();
-                    i_undo++;
-                }
-                tam_undo = i_undo;
-                f_undo = 1;
             }
+            
         }
 
         private void FixedUpdate()
@@ -573,47 +567,36 @@ namespace FreeDraw
                 GameObject.Find("Select-menu").SetActive(false);
             }
         }
+
+       
         public void UndoTexture()
         {
-
-
-            if(f_undo <= 3)
+            if (count_undo > 0)
             {
-                i_undo--;
-                if (i_undo < 0)
-                {
-                    i_undo = Undo.Length-1 ;
-                   
-                }
-                if (i_undo == 0)
+                drawable_texture.SetPixels(0, 0, 1000, 750, Undo[Undo.Length - 1].GetPixels());
+                drawable_texture.Apply();
+                for (int i = 0; i < Undo.Length; i++)
                 {
 
-                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[3].GetPixels());
-                    drawable_texture.Apply();
-                }
-                if (i_undo == 1)
-                {
 
-                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[0].GetPixels());
-                    drawable_texture.Apply();
-                }
-                if (i_undo == 2)
-                {
+                    if (i == 0)
+                    {
+                        biendao = Undo[i];
+                        Undo[i] = Undo[Undo.Length - 1];
+                    }
+                    else
+                    {
+                        biendao2 = Undo[i];
+                        Undo[i] = biendao;
+                        biendao = biendao2;
 
-                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[1].GetPixels());
-                    drawable_texture.Apply();
-                }
-                if (i_undo == 3)
-                {
+                    }
 
-                    drawable_texture.SetPixels(0, 0, 1000, 750, Undo[2].GetPixels());
-                    drawable_texture.Apply();
                 }
+                count_undo--;
+            }
 
-           }
-        //
-            f_undo ++;
-           /// Debug.Log(f_undo);
+           
         }
     }
 }
