@@ -79,7 +79,7 @@ public class WordDoc : MonoBehaviour
 
     }
 
-
+    
 
     public static string[] catList(List<string> List, string[] StringList, int i)
     {

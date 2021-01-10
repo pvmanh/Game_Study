@@ -25,6 +25,10 @@ public class MenuTypeDoc : MonoBehaviour
     {
         
     }
+    public void HDexit()
+    {
+        GameObject.Find("HuongDan").SetActive(false);
+    }
 
     private void GetLevel(Button btn)
     {
