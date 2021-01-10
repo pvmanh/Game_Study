@@ -22,4 +22,12 @@ public class LoadingScene : MonoBehaviour
         Debug.Log("Save Rank.");
         StartCoroutine(Menu.LoadAsynchronously(sceneIndex, loadinggScreen, slider, progressText));
     }
+    public void Disable_Gameobject(GameObject gobj)
+    {
+        gobj.SetActive(false);
+    }
+    public void Enable_Gameobject(GameObject gobj)
+    {
+        gobj.SetActive(true);
+    }
 }
