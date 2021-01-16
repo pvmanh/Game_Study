@@ -2592,7 +2592,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Study Game
+  m_text: <color=red>S</color><color=orange>t</color><color=yellow>u</color><color=green>d</color><color=blue>y</color>
+    <color=green>G</color><color=yellow>a</color><color=orange>m</color><color=red>e</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc9b70ce5e7eeb94abba90bc8775f10f, type: 2}
   m_sharedMaterial: {fileID: -3969271340958260586, guid: dc9b70ce5e7eeb94abba90bc8775f10f, type: 2}
@@ -2676,7 +2677,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219804442}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ed57967c52645d390a89dcf8f61ba73, type: 3}
   m_Name: 
@@ -2691,7 +2692,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219804442}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91b8ba3d52e041fab2d0e0f169855539, type: 3}
   m_Name: 
@@ -9837,7 +9838,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u1EE8ng d\u1EE5ng h\u1ECDc t\u1EADp"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc9b70ce5e7eeb94abba90bc8775f10f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dceae4caf8d2fa34297c4b49ef6eac64, type: 2}
   m_sharedMaterial: {fileID: -1163759330133325868, guid: dedca3b5aeafa6545a80e66b0a096449, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
