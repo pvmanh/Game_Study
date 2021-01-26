@@ -29,6 +29,10 @@ public class GUIPlayerGridGame : MonoBehaviour
     public GameObject Number_Blox;
     public GameObject Hole_Blox;
     public List<GameObject> List_Tool_Has;
+
+    public int A_min = 0;
+    public int B_max = 1000;
+
     List<int> Container_List_Grid_Blox = new List<int>{};
     int iR;
     int Number_rand;
@@ -217,12 +221,13 @@ public class GUIPlayerGridGame : MonoBehaviour
     //tao ngau nhien bai toan
     void Random_Operator_Math(string Operator_Math)
     {
+        iR = 3;
         switch(Operator_Math)
         {
             case "+":
             {
-                iR = Random.Range(1,3);
-                if(iR == 1)
+                //iR = Random.Range(1,3);
+                /*if(iR == 1)
                 {
                     List_Number_Operator.Number_First = "?";
                     List_Number_Operator.Number_Second = Random.Range(0, 101).ToString();
@@ -234,17 +239,22 @@ public class GUIPlayerGridGame : MonoBehaviour
                     List_Number_Operator.Number_Second = "?";
                     List_Number_Operator.Number_Result = Random.Range(int.Parse(List_Number_Operator.Number_First), 101).ToString();
                 }
-                else if(iR == 3)
+                else*/ if(iR == 3)
                 {
-                    List_Number_Operator.Number_First = Random.Range(0, 101).ToString();
-                    List_Number_Operator.Number_Second = Random.Range(0, 101).ToString();
+                    //List_Number_Operator.Number_First = Random.Range(0, 101).ToString();
+                    //List_Number_Operator.Number_Second = Random.Range(0, 101).ToString();
+                    //List_Number_Operator.Number_Result = "?";
+                    Number_rand = Random.Range(A_min, B_max);
+                    List_Number_Operator.Number_First = Random.Range(A_min, Number_rand).ToString();
+                    List_Number_Operator.Number_Second = (Number_rand - int.Parse(List_Number_Operator.Number_First)).ToString();
                     List_Number_Operator.Number_Result = "?";
                 }
+                
                 break;
             }  
             case "-":
             {    
-                iR = Random.Range(1,3);
+                //iR = Random.Range(1,3);
                 if(iR == 1)
                 {
                     List_Number_Operator.Number_First = "?";
@@ -259,15 +269,18 @@ public class GUIPlayerGridGame : MonoBehaviour
                 }
                 else if(iR == 3)
                 {
-                    List_Number_Operator.Number_First = Random.Range(0, 101).ToString();
-                    List_Number_Operator.Number_Second = Random.Range(0, int.Parse(List_Number_Operator.Number_First)).ToString();
+                    //List_Number_Operator.Number_First = Random.Range(0, 101).ToString();
+                    //List_Number_Operator.Number_Second = Random.Range(0, int.Parse(List_Number_Operator.Number_First)).ToString();
+                    //List_Number_Operator.Number_Result = "?";
+                    List_Number_Operator.Number_First = Random.Range(A_min, B_max).ToString();
+                    List_Number_Operator.Number_Second = Random.Range(A_min, int.Parse(List_Number_Operator.Number_First)).ToString();
                     List_Number_Operator.Number_Result = "?";
                 }
                 break;
             }
             case "*":
             {    
-                iR = Random.Range(1,3);
+                //iR = Random.Range(1,3);
                 if(iR == 1)
                 {
                     Number_rand = Random.Range(0, 11);
@@ -438,7 +451,7 @@ public class GUIPlayerGridGame : MonoBehaviour
 
                 for(int i = 0; i < 4; i++)
                 {
-                    Create_Random_Number_Box(Random.Range(0, 99));
+                    Create_Random_Number_Box(Random.Range(A_min, Number_rand));
                 }
 
                 break;
@@ -461,7 +474,7 @@ public class GUIPlayerGridGame : MonoBehaviour
 
                 for(int i = 0; i < 4; i++)
                 {
-                    Create_Random_Number_Box(Random.Range(0, 99));
+                    Create_Random_Number_Box(Random.Range(A_min, Number_rand));
                 }
 
                 break;
