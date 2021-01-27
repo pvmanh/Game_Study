@@ -140,30 +140,30 @@ public class FunctionCenter : MonoBehaviour
             if(Player_side == Player_Side.Up)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[1];
-                Player_side = Player_Side.Right;
-                Player_Animator.SetFloat("Hor", 1f);
+                Player_side = Player_Side.Left;
+                Player_Animator.SetFloat("Hor", -1f);
                 Player_Animator.SetFloat("Ver", 0f);
             }
             else if(Player_side == Player_Side.Right)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[2];
-                Player_side = Player_Side.Down;
+                Player_side = Player_Side.Up;
                 Player_Animator.SetFloat("Hor", 0f);
-                Player_Animator.SetFloat("Ver", -1f);
+                Player_Animator.SetFloat("Ver", 1f);
             }
             else if(Player_side == Player_Side.Down)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[3];
-                Player_side = Player_Side.Left;
-                Player_Animator.SetFloat("Hor", -1f);
+                Player_side = Player_Side.Right;
+                Player_Animator.SetFloat("Hor", 1f);
                 Player_Animator.SetFloat("Ver", 0f);
             }
             else if(Player_side == Player_Side.Left)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[0];
-                Player_side = Player_Side.Up;
+                Player_side = Player_Side.Down;
                 Player_Animator.SetFloat("Hor", 0f);
-                Player_Animator.SetFloat("Ver", 1f);
+                Player_Animator.SetFloat("Ver", -1f);
             }
         }
         else if(direction == 1)
@@ -171,30 +171,30 @@ public class FunctionCenter : MonoBehaviour
             if(Player_side == Player_Side.Up)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[3];
-                Player_side = Player_Side.Left;
-                Player_Animator.SetFloat("Hor", -1f);
+                Player_side = Player_Side.Right;
+                Player_Animator.SetFloat("Hor", 1f);
                 Player_Animator.SetFloat("Ver", 0f);
             }
             else if(Player_side == Player_Side.Right)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[0];
-                Player_side = Player_Side.Up;
+                Player_side = Player_Side.Down;
                 Player_Animator.SetFloat("Hor", 0f);
-                Player_Animator.SetFloat("Ver", 1f);
+                Player_Animator.SetFloat("Ver", -1f);
             }
             else if(Player_side == Player_Side.Down)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[1];
-                Player_side = Player_Side.Right;
-                Player_Animator.SetFloat("Hor", 1f);
+                Player_side = Player_Side.Left;
+                Player_Animator.SetFloat("Hor", -1f);
                 Player_Animator.SetFloat("Ver", 0f);
             }
             else if(Player_side == Player_Side.Left)
             {
                 //GetComponent<SpriteRenderer>().sprite = Arrow_Player[2];
-                Player_side = Player_Side.Down;
+                Player_side = Player_Side.Up;
                 Player_Animator.SetFloat("Hor", 0f);
-                Player_Animator.SetFloat("Ver", -1f);
+                Player_Animator.SetFloat("Ver", 1f);
             }
         }
         yield return new WaitForSeconds(0.2f);

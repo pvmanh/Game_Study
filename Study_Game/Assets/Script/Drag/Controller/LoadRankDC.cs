@@ -130,7 +130,50 @@ public class LoadRankDC : MonoBehaviour
             isLoaded = false;
         }
 
+
         if(isCut == true)
+        {
+            StartCoroutine(ShowDataRankStartCoroutine());
+            /*
+            if(isDrag_class == true)
+            {
+                data_Drag_Rank = new SaveRankData[data_rank_uncut.Count];
+                data_Drag_Rank = CutDataRank(data_Drag_Rank, data_rank_uncut);
+                AddRankDataToGUI(data_Drag_Rank, Info_rank, Drag_Content);
+                isDrag_class = false;
+            }
+
+            if(isClick_class == true)
+            {
+                data_Click_Rank = new SaveRankData[data_click_uncut.Count];
+                data_Click_Rank = CutDataRank(data_Click_Rank, data_click_uncut);
+                AddRankDataToGUI(data_Click_Rank, Info_rank, Click_Content);
+                isClick_class = false;
+            }
+
+            if (isType_class == true)
+            {
+                data_Type_Rank = new TypeData[data_type_uncut.Count];
+                data_Type_Rank = CutDataTypeRank(data_Type_Rank, data_type_uncut);
+                AddRankDataToGUIType(data_Type_Rank, InfoType_rank, Type_Content,dropdown_level_type);
+                isType_class = false;
+            }
+
+            if (isTypeDoc_class == true)
+            {
+                data_TypeDoc_Rank = new TypeData[data_typedoc_uncut.Count];
+                data_TypeDoc_Rank = CutDataTypeRank(data_TypeDoc_Rank, data_typedoc_uncut);
+                AddRankDataToGUIType(data_TypeDoc_Rank, InfoTypeDoc_rank, TypeDoc_Content,dropdown_level_typedoc);
+                isTypeDoc_class = false;
+            }
+
+            isCut = false;*/
+        }
+    }
+    //Hàm delay 0.1 giây sau khi load lớp.
+    public IEnumerator ShowDataRankStartCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
         {
             if(isDrag_class == true)
             {
@@ -167,6 +210,7 @@ public class LoadRankDC : MonoBehaviour
             isCut = false;
         }
     }
+    
     //class changed event
     public void ClassChanged(TMP_Dropdown class_dropdown)
     {

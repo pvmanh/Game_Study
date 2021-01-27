@@ -32,7 +32,8 @@ public class GUIPlayerGridGame : MonoBehaviour
 
     public int A_min = 0;
     public int B_max = 1000;
-
+    public Button B_max_1000;
+    public Button B_max_100;
     List<int> Container_List_Grid_Blox = new List<int>{};
     int iR;
     int Number_rand;
@@ -49,13 +50,13 @@ public class GUIPlayerGridGame : MonoBehaviour
     int number_hole;
     int number_success;
     private void Start() 
-    {
+    {   
         Time.timeScale = 0;
         Player.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
     // Update is called once per frame
     void Update()
-    {
+    {   
         if(Math_Menu.activeSelf == true)
         {
             Menu_Data.GetComponent<MenuDragController>().menuData.isMenuActive = true;
@@ -82,6 +83,25 @@ public class GUIPlayerGridGame : MonoBehaviour
             SpawnPoint = Player.transform.localPosition;
             LastVectorPoint = Player.GetComponent<FunctionCenter>().Player_side.ToString(); 
         } 
+    }
+    public void ShowRangePlusMinusSelect(string Operator_Math_txt)
+    {
+        B_max_1000.gameObject.SetActive(true);
+        B_max_100.gameObject.SetActive(true);
+
+        B_max_1000.onClick.AddListener(delegate{Select_Operator_Math(Operator_Math_txt);});
+        B_max_100.onClick.AddListener(delegate{Select_Operator_Math(Operator_Math_txt);});
+
+        Math_Menu.SetActive(false);
+    }
+    public void OffRangePlusMinusSelect()
+    {
+        B_max_1000.gameObject.SetActive(false);
+        B_max_100.gameObject.SetActive(false);
+    }
+    public void MaxPlusMinusRange(int maxPlusMinus)
+    {
+        B_max = maxPlusMinus;
     }
     //Btn menu chon phep toan
     public void Select_Operator_Math(string Operator_Math_txt)
@@ -283,23 +303,23 @@ public class GUIPlayerGridGame : MonoBehaviour
                 //iR = Random.Range(1,3);
                 if(iR == 1)
                 {
-                    Number_rand = Random.Range(0, 11);
+                    Number_rand = Random.Range(0, 10);
                     List_Number_Operator.Number_First = "?";
-                    List_Number_Operator.Number_Second = Random.Range(0, 11).ToString();
+                    List_Number_Operator.Number_Second = Random.Range(0, 10).ToString();
                     List_Number_Operator.Number_Result = (int.Parse(List_Number_Operator.Number_Second) * Number_rand).ToString();
                 }
                 else if(iR == 2)
                 {
-                    Number_rand = Random.Range(0, 11);
-                    List_Number_Operator.Number_First = Random.Range(0, 11).ToString();
+                    Number_rand = Random.Range(0, 10);
+                    List_Number_Operator.Number_First = Random.Range(0, 10).ToString();
                     List_Number_Operator.Number_Second = "?";
                     List_Number_Operator.Number_Result = (int.Parse(List_Number_Operator.Number_First) * Number_rand).ToString();
                 }
                 else if(iR == 3)
                 {
 
-                    List_Number_Operator.Number_First = Random.Range(0, 11).ToString();
-                    List_Number_Operator.Number_Second = Random.Range(0, 11).ToString();
+                    List_Number_Operator.Number_First = Random.Range(0, 10).ToString();
+                    List_Number_Operator.Number_Second = Random.Range(0, 10).ToString();
                     List_Number_Operator.Number_Result = "?";
                 }
                 break;
@@ -310,20 +330,20 @@ public class GUIPlayerGridGame : MonoBehaviour
                 if(iR == 1)
                 {
                     List_Number_Operator.Number_First = "?";
-                    List_Number_Operator.Number_Second = Random.Range(1, 11).ToString();
-                    List_Number_Operator.Number_Result = Random.Range(0, 11).ToString();
+                    List_Number_Operator.Number_Second = Random.Range(1, 10).ToString();
+                    List_Number_Operator.Number_Result = Random.Range(0, 10).ToString();
                 }
                 else if(iR == 2)
                 {
-                    Number_rand = Random.Range(1, 11);
+                    Number_rand = Random.Range(1, 10);
                     List_Number_Operator.Number_Second = "?";
-                    List_Number_Operator.Number_Result = Random.Range(0, 11).ToString();
+                    List_Number_Operator.Number_Result = Random.Range(0, 10).ToString();
                     List_Number_Operator.Number_First = (int.Parse(List_Number_Operator.Number_Result) * Number_rand).ToString();
                 }
                 else if(iR == 3)
                 {
-                    Number_rand = Random.Range(0, 11);
-                    List_Number_Operator.Number_Second = Random.Range(1, 11).ToString();
+                    Number_rand = Random.Range(0, 10);
+                    List_Number_Operator.Number_Second = Random.Range(1, 10).ToString();
                     List_Number_Operator.Number_Result = "?";
                     List_Number_Operator.Number_First = (int.Parse(List_Number_Operator.Number_Result) * Number_rand).ToString();
                 }
@@ -488,7 +508,7 @@ public class GUIPlayerGridGame : MonoBehaviour
                 }
                 for(int i = 0; i < 4; i++)
                 {
-                    Create_Random_Number_Box(Random.Range(0, 50));
+                    Create_Random_Number_Box(Random.Range(0, 100));
                 }
                 break;
             }
@@ -501,7 +521,7 @@ public class GUIPlayerGridGame : MonoBehaviour
                 }
                 for(int i = 0; i < 4; i++)
                 {
-                    Create_Random_Number_Box(Random.Range(0, 50));
+                    Create_Random_Number_Box(Random.Range(0, 10));
                 }
                 break;
             }
