@@ -111,21 +111,24 @@ public class BlockDragging : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		Block_Dragging_Hover_ID = 0;
 		GetComponent<CanvasGroup>().blocksRaycasts = true; //tra ray cho phep keo tha dc
 
-		if(eventData.pointerEnter.gameObject.name == "Top")
+		if(eventData.pointerEnter != null)
 		{
-			transform.SetParent(eventData.pointerEnter.gameObject.transform.parent.transform.parent);
-			int index_block = eventData.pointerEnter.gameObject.transform.parent.GetSiblingIndex();
-			transform.SetSiblingIndex(index_block);
-		}
-		else if(eventData.pointerEnter.gameObject.name == "Bot")
-		{
-			transform.SetParent(eventData.pointerEnter.gameObject.transform.parent.transform.parent);
-			int index_block = eventData.pointerEnter.gameObject.transform.parent.GetSiblingIndex();
-			transform.SetSiblingIndex(index_block + 1);
-		}
-		else if(eventData.pointerEnter.gameObject.name == "Mid")
-		{
-			transform.SetParent(eventData.pointerEnter.gameObject.transform);
+			if(eventData.pointerEnter.gameObject.name == "Top")
+			{
+				transform.SetParent(eventData.pointerEnter.gameObject.transform.parent.transform.parent);
+				int index_block = eventData.pointerEnter.gameObject.transform.parent.GetSiblingIndex();
+				transform.SetSiblingIndex(index_block);
+			}
+			else if(eventData.pointerEnter.gameObject.name == "Bot")
+			{
+				transform.SetParent(eventData.pointerEnter.gameObject.transform.parent.transform.parent);
+				int index_block = eventData.pointerEnter.gameObject.transform.parent.GetSiblingIndex();
+				transform.SetSiblingIndex(index_block + 1);
+			}
+			else if(eventData.pointerEnter.gameObject.name == "Mid")
+			{
+				transform.SetParent(eventData.pointerEnter.gameObject.transform);
+			}
 		}
 
 		GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x ,GetComponent<RectTransform>().localPosition.y , 0);

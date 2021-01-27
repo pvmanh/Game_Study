@@ -326,7 +326,7 @@ public class GUIPlayerGridGame : MonoBehaviour
             }
             case "/":
             {
-                iR = Random.Range(1,3);
+                //iR = Random.Range(1,3);
                 if(iR == 1)
                 {
                     List_Number_Operator.Number_First = "?";
@@ -345,7 +345,7 @@ public class GUIPlayerGridGame : MonoBehaviour
                     Number_rand = Random.Range(0, 10);
                     List_Number_Operator.Number_Second = Random.Range(1, 10).ToString();
                     List_Number_Operator.Number_Result = "?";
-                    List_Number_Operator.Number_First = (int.Parse(List_Number_Operator.Number_Result) * Number_rand).ToString();
+                    List_Number_Operator.Number_First = (int.Parse(List_Number_Operator.Number_Second) * Number_rand).ToString();
                 }
                 break;
             }
