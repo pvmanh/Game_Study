@@ -32,8 +32,10 @@ public class GUIPlayerGridGame : MonoBehaviour
 
     public int A_min = 0;
     public int B_max = 1000;
+    public GameObject LimitMenu;
     public Button B_max_1000;
     public Button B_max_100;
+    public GameObject Help_Menu;
     List<int> Container_List_Grid_Blox = new List<int>{};
     int iR;
     int Number_rand;
@@ -84,21 +86,27 @@ public class GUIPlayerGridGame : MonoBehaviour
             LastVectorPoint = Player.GetComponent<FunctionCenter>().Player_side.ToString(); 
         } 
     }
+    //Hien bang gioi han phep cong tru
     public void ShowRangePlusMinusSelect(string Operator_Math_txt)
     {
-        B_max_1000.gameObject.SetActive(true);
-        B_max_100.gameObject.SetActive(true);
+        //B_max_1000.gameObject.SetActive(true);
+        //B_max_100.gameObject.SetActive(true);
+        LimitMenu.gameObject.SetActive(true);
 
         B_max_1000.onClick.AddListener(delegate{Select_Operator_Math(Operator_Math_txt);});
         B_max_100.onClick.AddListener(delegate{Select_Operator_Math(Operator_Math_txt);});
 
         Math_Menu.SetActive(false);
     }
+    //Tat bang gioi han phep cong tru
     public void OffRangePlusMinusSelect()
     {
-        B_max_1000.gameObject.SetActive(false);
-        B_max_100.gameObject.SetActive(false);
+        //B_max_1000.gameObject.SetActive(false);
+        //B_max_100.gameObject.SetActive(false);
+        LimitMenu.gameObject.SetActive(false);
+        Help_Menu.SetActive(true);
     }
+    //set max value
     public void MaxPlusMinusRange(int maxPlusMinus)
     {
         B_max = maxPlusMinus;
@@ -122,9 +130,27 @@ public class GUIPlayerGridGame : MonoBehaviour
         LastVectorPoint = Player.GetComponent<FunctionCenter>().Player_side.ToString();
 
         Math_Menu.SetActive(false);
-        backgroundNotForClick.SetActive(false);
-        Player.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        //backgroundNotForClick.SetActive(false);
+        //Player.GetComponent<SpriteRenderer>().sortingOrder = 1;
         Menu_Data.GetComponent<MenuDragController>().menuData.isMenuActive = false;
+    }
+    public void ShowHelpMathGameButton()
+    {
+        Sorting_Order_GameObject_To_Zero();
+        backgroundNotForClick.SetActive(true);
+        Help_Menu.SetActive(true);
+    }
+    //Hien huong dan (neu chon nhan chia)
+    public void ShowHelpMathGame()
+    {
+        Help_Menu.SetActive(true);
+    }
+    //tat huong dan
+    public void CloseHelpMathGame()
+    {
+        Help_Menu.SetActive(false);
+        backgroundNotForClick.SetActive(false);
+        Sorting_Order_GameObject_To_One();
     }
     public void Sorting_Order_GameObject_To_Zero()
     {

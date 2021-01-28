@@ -15,6 +15,7 @@ public class PlayMath : MonoBehaviour
     FunctionCenter Script_Player;
     public List<GameObject> ListActive = new List<GameObject>{};
     int i;
+    float last_press_button;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,9 @@ public class PlayMath : MonoBehaviour
     }
     public void Play_btn()
     {
+        if(last_press_button > (Time.time - 0.5f)) 
+            return;
+        last_press_button = Time.time;
         ListActive.Clear();
         Area_Block.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
@@ -38,8 +42,13 @@ public class PlayMath : MonoBehaviour
         StartCoroutine(Do_Play_Button());
     }
     public void Restart_btn()
-    {  
+    {   
+        if(last_press_button > (Time.time - 1f)) 
+            return;
+        last_press_button = Time.time;
+        
         StopAllCoroutines();
+
         Restart.SetActive(false);
         GetComponent<CanvasGroup>().alpha = 1;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
