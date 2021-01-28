@@ -28,7 +28,8 @@ public class MainMenuController : MonoBehaviour
     public List<GameObject> Menu_Sub_Child_Selected;
     //Xu ly thong tin lan dau
     public void Awake()
-    {
+    {   
+        Time.timeScale = 1;
         iLoading = LoadingSceneObj.GetComponent<LoadingScene>();
 
         ZoomIn_Main = Main_Menu.GetComponent<Animator>();

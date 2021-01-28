@@ -108,6 +108,8 @@ public class LoadPuzzle : MonoBehaviour
         //hien bang nhap nen neu ten rong
         if(puzzleData.str_name == "")
         {
+            Time.timeScale = 0;
+            MenuData.GetComponent<MenuDragController>().menuData.isMenuActive = true;
             MenuDragController iDrag = MenuData.GetComponent<MenuDragController>();
             Menu.SetActiveMenuTrue(iDrag.menuData.hide_puzzle, iDrag.menuData.info_surrender);
             StartCoroutine(Menu.WaitAnimation(iDrag.menuData.ZoomIn_alert_end, iDrag.menuData.info_surrender, "isAlert", iDrag.menuData.timeDelay, 1, true)); 
@@ -172,7 +174,9 @@ public class LoadPuzzle : MonoBehaviour
         {
             puzzleData.str_name = text_name.text;
             MenuDragController iDrag = MenuData.GetComponent<MenuDragController>();
-            Menu.SetActiveMenuFalse(iDrag.menuData.hide_puzzle, iDrag.menuData.info_surrender);
+            iDrag.menuData.hide_puzzle.SetActive(false);
+            iDrag.menuData.info_surrender.SetActive(false);
+            //Menu.SetActiveMenuFalse(iDrag.menuData.hide_puzzle, iDrag.menuData.info_surrender);
         }
     }
     //Xu ly gan id class = dropdown changed
