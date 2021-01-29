@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 public class MenuDragController : MonoBehaviour
 {
     public MenuModel menuData;
+    public GameObject Option_btn;
+    public GameObject pre_btn;
+    public GameObject pre_btn_timeScale;
     //hien bang nhap ten khi ten rong
     void Start()
     {
@@ -57,16 +60,45 @@ public class MenuDragController : MonoBehaviour
     {
         Menu.SetActiveMenuFalse(menuData.hide_puzzle, menuData.menu_drag);
         menuData.isMenuActive = false;
-
+    }
+    //vao cai dat with timescale
+    public void ButtonMenuOptionTimeScale()
+    {
+        Time.timeScale = 0;
+        menuData.hide_puzzle.SetActive(true);
+        menuData.OptionMenu.SetActive(true);
+        pre_btn_timeScale.SetActive(true);
+        menuData.isMenuActive = true;
+        Option_btn.SetActive(false);
+    }
+    public void InputNameShowOption(TMP_InputField text_name)
+    {
+        if(text_name.text != "")
+        {
+            Option_btn.SetActive(true);
+        }
+    }
+    //thoat cai dat with timescale
+    public void ButtonExitMenuOptionTimeScale()
+    {
+        Time.timeScale = 1;
+        
+        menuData.hide_puzzle.SetActive(false);
+        menuData.OptionMenu.SetActive(false);
+        pre_btn_timeScale.SetActive(false);
+        menuData.isMenuActive = false;
+        Option_btn.SetActive(true);
     }
     //vao cai dat
     public void ButtonMenuOption()
     {
+        pre_btn.SetActive(true);
         menuData.OptionMenu.SetActive(true);
     }
     //thoat cai dat
     public void ButtonExitMenuOption()
     {
+        pre_btn.SetActive(false);
         menuData.OptionMenu.SetActive(false);
     }
     //Xu ly nut thoat quay ve menu chinh
