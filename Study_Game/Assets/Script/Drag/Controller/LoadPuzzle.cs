@@ -7,6 +7,10 @@ using TMPro;
 
 public class LoadPuzzle : MonoBehaviour
 {
+    private static readonly string FirstPlay_Name_Box = "FirstPlay_Name_Box";
+    private static readonly string Student_Name = "Student_Name";
+    private static readonly string Student_Class = "Student_Class";
+    private int firstPlayInt;
     public PuzzleModel puzzleData;
     public TextureModel textureData;
     public TimeModel timeData;
@@ -41,6 +45,13 @@ public class LoadPuzzle : MonoBehaviour
         isSave = false;
 
         puzzleData.SFX = GameObject.Find("SFX");
+
+        firstPlayInt = PlayerPrefs.GetInt(FirstPlay_Name_Box);
+
+        if(firstPlayInt == -1)
+        {
+            GetNamePlayerPrefs();
+        }
 
         Puzzle.isWin = true;
         //Load hinh puzzle tu thu muc Puzzle
@@ -138,6 +149,12 @@ public class LoadPuzzle : MonoBehaviour
     void FixedUpdate()
     {
         Timer.TimeClock(timeData);
+    }
+    //Lay ten va lop hoc sinh
+    public void GetNamePlayerPrefs()
+    {
+        puzzleData.str_name = PlayerPrefs.GetString(Student_Name);
+        puzzleData.str_class = PlayerPrefs.GetString(Student_Class);
     }
     // hoan doi vi tri puzzle
     public void ButtonRandom()

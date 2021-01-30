@@ -6,7 +6,10 @@ using TMPro;
 using UnityEngine.Networking;
 public class WordDoc : MonoBehaviour
 {
- 
+    private static readonly string FirstPlay_Name_Box = "FirstPlay_Name_Box";
+    private static readonly string Student_Name = "Student_Name";
+    private static readonly string Student_Class = "Student_Class";
+    private int firstPlayInt;
     string A;
     string Final;
     string stringgoc;
@@ -58,6 +61,15 @@ public class WordDoc : MonoBehaviour
     {
         Time.timeScale = 0;
         StartCoroutine(SelectClassAddDropdownlist(URL_1));
+
+        firstPlayInt = PlayerPrefs.GetInt(FirstPlay_Name_Box);
+
+        if(firstPlayInt == -1)
+        {
+            GetNamePlayerPrefs();
+            Time.timeScale = 1;
+        }
+
         timeData.timegget = timeData.txt_time.text;
         if (MenuTypeDoc.i == 1)
         { 
@@ -79,7 +91,12 @@ public class WordDoc : MonoBehaviour
 
     }
 
-    
+    //Lay ten va lop hoc sinh
+    public void GetNamePlayerPrefs()
+    {
+        str_name = PlayerPrefs.GetString(Student_Name);
+        str_class = PlayerPrefs.GetString(Student_Class);
+    }
 
     public static string[] catList(List<string> List, string[] StringList, int i)
     {

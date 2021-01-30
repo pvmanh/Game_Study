@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 public class MainMenuController : MonoBehaviour
 {
+    private static readonly string FirstPlay_Name_Box = "FirstPlay_Name_Box";
+    public TMP_InputField Name_input;
+    public GameObject Title_Game;
     [Header("Main Menu Setting")]
     public GameObject Main_Menu;
+    public GameObject Name_Box;
     public GameObject Sub_Menu;
     public GameObject Option_Menu;
     public GameObject Rank_Menu;
     public GameObject Info;
     Animator ZoomIn_Main;
+    Animator ZoomIn_Name_Box;
     Animator ZoomIn_Sub;
     Animator ZoomIn_Option;
     Animator ZoomIn_Info;
@@ -33,6 +39,7 @@ public class MainMenuController : MonoBehaviour
         iLoading = LoadingSceneObj.GetComponent<LoadingScene>();
 
         ZoomIn_Main = Main_Menu.GetComponent<Animator>();
+        ZoomIn_Name_Box = Name_Box.GetComponent<Animator>();
         ZoomIn_Sub = Sub_Menu.GetComponent<Animator>();
         ZoomIn_Option = Option_Menu.GetComponent<Animator>();
         ZoomIn_Info = Info.GetComponent<Animator>();
@@ -58,6 +65,14 @@ public class MainMenuController : MonoBehaviour
 
         Sub_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Sub, Sub_Menu, "ZoomOut", timeDelay, 1, true));
+    }
+    //Vao chon nhap ten lai
+    public void EnterNameBox()
+    {
+        Main_Menu.SetActive(false);
+
+        Name_Box.SetActive(true);
+        StartCoroutine(Menu.WaitAnimation(ZoomIn_Name_Box, Name_Box, "isAlert", timeDelay, 1, true));
     }
     //vao cai dat
     public void EnterOption()
@@ -86,6 +101,7 @@ public class MainMenuController : MonoBehaviour
     //Thoat game
     public void EnterExit()
     {
+        PlayerPrefs.SetInt(FirstPlay_Name_Box, 0);
         Application.Quit();
     }
     //Thoat menu chon tro choi ve menu chinh
@@ -109,6 +125,28 @@ public class MainMenuController : MonoBehaviour
 
         Main_Menu.SetActive(true);
         StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
+    }
+    //Tat doi ten
+    public void ReturnOutNameBox(int index_number)
+    {
+        if(index_number == 0)
+        {
+            Name_Box.SetActive(false);
+
+            Main_Menu.SetActive(true);
+            StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
+        }
+        else if(index_number == 1)
+        {
+            if(Name_input.text != "")
+            {
+                Name_Box.SetActive(false);
+
+                Main_Menu.SetActive(true);
+                StartCoroutine(Menu.WaitAnimation(ZoomIn_Main, Main_Menu, "ZoomOut", timeDelay, 1, true));
+                Title_Game.SetActive(true);
+            }
+        }
     }
     //Tat cai dat
     public void ReturnOutOption()

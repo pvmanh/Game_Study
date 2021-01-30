@@ -5,7 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 public class Typer : MonoBehaviour
-{ //Ngân Hàng Từ
+{ 
+    private static readonly string FirstPlay_Name_Box = "FirstPlay_Name_Box";
+    private static readonly string Student_Name = "Student_Name";
+    private static readonly string Student_Class = "Student_Class";
+    private int firstPlayInt;
+    //Ngân Hàng Từ
     public WordBank wordBank =null;
     public TextMeshProUGUI wordOutput = null;
 
@@ -168,6 +173,15 @@ public class Typer : MonoBehaviour
         //total.SetActive(true);
         StartCoroutine(SelectClassAddDropdownlist(URL_1));
         SetCurrentWord();
+
+        firstPlayInt = PlayerPrefs.GetInt(FirstPlay_Name_Box);
+
+        if(firstPlayInt == -1)
+        {
+            GetNamePlayerPrefs();
+            iname = true;
+        }
+
         Time.timeScale = 0;
        textTime.text = timeStart.ToString();
         textAccurary.text = "0";
@@ -196,7 +210,12 @@ public class Typer : MonoBehaviour
 
         Debug.Log(str_level);
     }
-
+    //Lay ten va lop hoc sinh
+    public void GetNamePlayerPrefs()
+    {
+        str_name = PlayerPrefs.GetString(Student_Name);
+        str_class = PlayerPrefs.GetString(Student_Class);
+    }
     private void SetCurrentWord()
     {
         int j;
@@ -233,6 +252,7 @@ public class Typer : MonoBehaviour
 
         }else
         {
+            Time.timeScale = 1;
             if (timeStart >= 0)
             {
                 timeStart -= Time.deltaTime;

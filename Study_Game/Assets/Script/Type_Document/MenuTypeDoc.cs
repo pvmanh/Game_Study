@@ -43,7 +43,6 @@ public class MenuTypeDoc : MonoBehaviour
             btnVB.gameObject.SetActive(false);
             i = 1;
             typedoc.gameObject.SetActive(true);
-
         }
         if (btn.name == "btnvanban")
         {

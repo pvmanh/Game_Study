@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuDragController : MonoBehaviour
 {
+    private static readonly string FirstPlay_Name_Box = "FirstPlay_Name_Box";
+    private static readonly string Student_Name = "Student_Name";
+    private static readonly string Student_Class = "Student_Class";
+    private int firstPlayInt;
+    public GameObject Game_Data_Main;
     public MenuModel menuData;
     public GameObject Option_btn;
     public GameObject pre_btn;
@@ -30,6 +35,71 @@ public class MenuDragController : MonoBehaviour
             {
                 ButtonMenuDrag();
                 menuData.isMenuActive = true;
+            }
+        }
+    }
+    //Luu ten va lop hoc sinh
+    public void SetNamePlayerPrefs()
+    {
+        firstPlayInt = PlayerPrefs.GetInt(FirstPlay_Name_Box);
+        if(Game_Data_Main.GetComponent<ObjectArea>() != null)
+        {
+            if(firstPlayInt == 0)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<ObjectArea>().objectData.str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<ObjectArea>().objectData.str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            } 
+            else if(firstPlayInt == -1)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<ObjectArea>().objectData.str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<ObjectArea>().objectData.str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            }
+        }
+        else if(Game_Data_Main.GetComponent<LoadPuzzle>() != null)
+        {
+            if(firstPlayInt == 0)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<LoadPuzzle>().puzzleData.str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<LoadPuzzle>().puzzleData.str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            } 
+            else if(firstPlayInt == -1)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<LoadPuzzle>().puzzleData.str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<LoadPuzzle>().puzzleData.str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            }
+        }
+        else if(Game_Data_Main.GetComponent<Typer>() != null)
+        {
+            if(firstPlayInt == 0)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<Typer>().str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<Typer>().str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            } 
+            else if(firstPlayInt == -1)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<Typer>().str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<Typer>().str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            }
+        }
+        else if(Game_Data_Main.GetComponent<WordDoc>() != null)
+        {
+            if(firstPlayInt == 0)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<WordDoc>().str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<WordDoc>().str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
+            } 
+            else if(firstPlayInt == -1)
+            {
+                PlayerPrefs.SetString(Student_Name, Game_Data_Main.GetComponent<WordDoc>().str_name);
+                PlayerPrefs.SetString(Student_Class, Game_Data_Main.GetComponent<WordDoc>().str_class);
+                PlayerPrefs.SetInt(FirstPlay_Name_Box, -1);
             }
         }
     }
@@ -60,6 +130,14 @@ public class MenuDragController : MonoBehaviour
     {
         Menu.SetActiveMenuFalse(menuData.hide_puzzle, menuData.menu_drag);
         menuData.isMenuActive = false;
+    }
+    public void ShowEscButton()
+    {
+        if(menuData.isMenuActive == false)
+        {
+            ButtonMenuDrag();
+            menuData.isMenuActive = true;
+        }
     }
     //vao cai dat with timescale
     public void ButtonMenuOptionTimeScale()

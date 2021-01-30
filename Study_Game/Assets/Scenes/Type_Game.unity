@@ -4594,6 +4594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6dc6e7ffe432d4e803db2d0f8e1a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Game_Data_Main: {fileID: 5434778475604472633}
   menuData:
     menu_drag: {fileID: 5112449752026824847}
     hide_puzzle: {fileID: 22017877}
@@ -9927,6 +9928,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 578311699}
+        m_TargetAssemblyTypeName: MenuDragController, Assembly-CSharp
+        m_MethodName: SetNamePlayerPrefs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1750087362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12292,7 +12305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 15c763ef71e34a044933912d647cc1f9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec694ac45cee4c34a93f4caf3ab4f155, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12375,7 +12388,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 578311699}
         m_TargetAssemblyTypeName: MenuDragController, Assembly-CSharp
-        m_MethodName: ButtonMenuOptionTimeScale
+        m_MethodName: ShowEscButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15480,7 +15493,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 150}
+  m_SizeDelta: {x: 200, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5112449752026824847
 GameObject:

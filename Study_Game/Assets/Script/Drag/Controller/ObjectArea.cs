@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 
 public class ObjectArea : MonoBehaviour
 {
+    private static readonly string FirstPlay_Name_Box = "FirstPlay_Name_Box";
+    private static readonly string Student_Name = "Student_Name";
+    private static readonly string Student_Class = "Student_Class";
+    private int firstPlayInt;
     public ObjectModel objectData;
     public GameObject gridObject;
     public TextMeshProUGUI text_Level;
@@ -64,6 +68,13 @@ public class ObjectArea : MonoBehaviour
 
         HelpActive(Help, Help_1);
 
+        firstPlayInt = PlayerPrefs.GetInt(FirstPlay_Name_Box);
+
+        if(firstPlayInt == -1)
+        {
+            GetNamePlayerPrefs();
+        }
+
         rect_min = new Vector2(0f, 0f);
         rect_max = new Vector2(1f, 1f);
 
@@ -96,6 +107,12 @@ public class ObjectArea : MonoBehaviour
     {
         Object_Main_Game();
         zoom_in_icon_click();
+    }
+    //Lay ten va lop hoc sinh
+    public void GetNamePlayerPrefs()
+    {
+        objectData.str_name = PlayerPrefs.GetString(Student_Name);
+        objectData.str_class = PlayerPrefs.GetString(Student_Class);
     }
     //thu nho vung click khi click dc 1 lan
     void zoom_in_icon_click()
