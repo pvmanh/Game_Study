@@ -375,8 +375,10 @@ public class Typer : MonoBehaviour
                 EnterLetter(keysPressed);
 
             }
-           
+            if (tudung != 0 || tusai != 0)
+            {
                 accurary = (tudung / (tusai + tudung)) * 100;
+            }
                 Debug.Log(tudung);
                 Debug.Log(tusai);
                 Debug.Log(accurary);
