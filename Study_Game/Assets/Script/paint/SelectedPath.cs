@@ -31,6 +31,7 @@ public class SelectedPath : MonoBehaviour, IPointerClickHandler
             }
 
             parent_App_Click.GetComponent<Drawable>().icon = selectedTxture;
+            parent_App_Click.GetComponent<Drawable>().iconselected = gameObject;
             GetComponent<RawImage>().color = Color.red;
             isSelected = true;
         }

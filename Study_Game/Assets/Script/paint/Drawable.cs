@@ -58,6 +58,8 @@ namespace FreeDraw
         public int i_undo = 0;
         public int tam_undo =0;
         public GameObject menu;
+        public GameObject iconparentmove;
+        public GameObject iconselected;
         Texture2D biendao;
         Texture2D biendao2;
         //public bool is_bucket_point = false;
@@ -375,8 +377,10 @@ namespace FreeDraw
                         
                     }
                 }
+                //var iconmove = Instantiate(iconselected, iconparentmove.transform);
 
             }
+
         }
 
         public void Bucket_change()
