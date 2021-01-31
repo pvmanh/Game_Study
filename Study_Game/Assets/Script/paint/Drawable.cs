@@ -377,10 +377,17 @@ namespace FreeDraw
                         
                     }
                 }
-                //var iconmove = Instantiate(iconselected, iconparentmove.transform);
-
+                if(Style_paint == Paint_style.is_paste_icon)
+                {
+                    //di chuyen theo chuot
+                    iconselected.transform.position = Input.mousePosition;
+                }
             }
-
+            if(Style_paint != Paint_style.is_paste_icon)
+            {
+                //alpha = 0 khi bam nut
+                iconselected.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+            }
         }
 
         public void Bucket_change()

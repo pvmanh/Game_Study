@@ -27,11 +27,14 @@ public class SelectedPath : MonoBehaviour, IPointerClickHandler
             {
                 child.gameObject.GetComponent<RawImage>().color = Color.white;
                 child.gameObject.GetComponent<SelectedPath>().isSelected = false;
-               
             }
-
+            
             parent_App_Click.GetComponent<Drawable>().icon = selectedTxture;
-            parent_App_Click.GetComponent<Drawable>().iconselected = gameObject;
+            //Lay size hinh
+            parent_App_Click.GetComponent<Drawable>().iconselected.GetComponent<RectTransform>().sizeDelta = new Vector2(selectedTxture.width, selectedTxture.height);
+            //tao sprite moi va gan vao icon
+            parent_App_Click.GetComponent<Drawable>().iconselected.GetComponent<Image>().sprite = Sprite.Create(selectedTxture, new Rect(0.0f, 0.0f, selectedTxture.width, selectedTxture.height), new Vector2(0.5f, 0.5f), 100.0f);
+            parent_App_Click.GetComponent<Drawable>().iconselected.GetComponent<Image>().color = new Color32(255, 255, 255, 150);
             GetComponent<RawImage>().color = Color.red;
             isSelected = true;
         }
